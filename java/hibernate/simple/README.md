@@ -24,4 +24,4 @@ This brings up a database on `127.0.0.1:3306`.
 
 ## Inserting test users
 
-Run `mvn exec:java -Dexec.mainClass="com.javawebtutor.TestUserInserter"`.
+Run `mvn exec:java -Dexec.mainClass="com.javawebtutor.TestUserInserter"` at this project's root directory.
