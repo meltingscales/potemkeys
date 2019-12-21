@@ -20,6 +20,8 @@ Install [docker-compose](https://docs.docker.com/compose/install/).
 
 `docker-compose up -d`
 
+This brings up a database on `127.0.0.1:3306`.
+
 ## Inserting a test user
 
 Run `mvn exec:java -Dexec.mainClass="com.javawebtutor.TestDataInserter"`.
