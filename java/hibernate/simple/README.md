@@ -14,6 +14,8 @@ The password is `potato123` and the username is `root`, and the host is `jdbc:my
 
 ### Using docker-compose
 
+Install [docker-compose](https://docs.docker.com/compose/install/).
+
 `cd docker-database`
 
 `docker-compose up -d`
