@@ -3,8 +3,11 @@ package com.javawebtutor;
 import java.util.Date;
  
 import org.hibernate.Session;
- 
-public class TestDataInserter {
+
+/***
+ * This class inserts test Users.
+ */
+public class TestUserInserter {
     public static void main(String[] args) {
         Session session = HibernateUtil.getSessionFactory().openSession();
  
