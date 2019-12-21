@@ -8,6 +8,13 @@ public class User {
     private String createdBy;
     private Date createdDate;
 
+    public User(String username, String createdBy, Date createdDate, int userId) {
+        this.username = username;
+        this.createdBy = createdBy;
+        this.createdDate = createdDate;
+        this.userId = userId;
+    }
+
     public String getUsername() {
         return username;
     }
