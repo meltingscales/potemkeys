@@ -22,6 +22,12 @@ Install [docker-compose](https://docs.docker.com/compose/install/).
 
 This brings up a database on `127.0.0.1:3306`.
 
+#### Deleting docker database
+
+`cd docker-database`
+
+`sudo docker-compose stop; sudo docker-compose rm -f`
+
 ## Inserting test users
 
 Run `mvn install; mvn exec:java -Dexec.mainClass="com.example.main.TestUserInserter"`
