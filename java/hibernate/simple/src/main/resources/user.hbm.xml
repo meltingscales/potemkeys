@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.javawebtutor.User" table="USER">
+    <class name="com.example.User" table="USER">
         <id name="userId" type="int" column="USER_ID">
             <generator class="assigned"/>
         </id>

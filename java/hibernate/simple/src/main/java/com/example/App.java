@@ -1,4 +1,4 @@
-package com.javawebtutor;
+package com.example;
 
 /**
  * Hello world!

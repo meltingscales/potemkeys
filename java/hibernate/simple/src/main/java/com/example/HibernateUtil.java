@@ -1,4 +1,4 @@
-package com.javawebtutor;
+package com.example;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
