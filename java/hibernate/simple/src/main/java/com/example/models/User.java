@@ -1,4 +1,4 @@
-package com.example;
+package com.example.models;
 
 import java.util.Date;
 
@@ -7,6 +7,10 @@ public class User {
     private String username;
     private String createdBy;
     private Date createdDate;
+
+    public User() {
+
+    }
 
     public User(String username, String createdBy, Date createdDate, int userId) {
         this.username = username;

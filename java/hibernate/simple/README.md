@@ -24,5 +24,5 @@ This brings up a database on `127.0.0.1:3306`.
 
 ## Inserting test users
 
-Run `mvn install; mvn exec:java -Dexec.mainClass="com.example.TestUserInserter"`
+Run `mvn install; mvn exec:java -Dexec.mainClass="com.example.main.TestUserInserter"`
 at this project's root directory.
