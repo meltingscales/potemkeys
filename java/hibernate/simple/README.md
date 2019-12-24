@@ -18,7 +18,7 @@ Install [docker-compose](https://docs.docker.com/compose/install/).
 
 `cd docker-database`
 
-`docker-compose up -d`
+`sudo docker-compose up -d`
 
 This brings up a database on `127.0.0.1:3306`.
 
