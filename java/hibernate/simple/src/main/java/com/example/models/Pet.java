@@ -16,14 +16,27 @@ public class Pet {
     @Column(name = "name")
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "pet_type")
+    private PetType petType;
+
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "petID=" + petID +
+                ", name='" + name + '\'' +
+                ", petType=" + petType +
+                '}';
+    }
+
     public Pet() {
     }
 
-    public Pet(String name, int id) {
+    public Pet(String name, int petId, PetType petType) {
         this.name = name;
-        this.petID = id;
+        this.petID = petId;
+        this.petType = petType;
     }
-
 
     public int getPetID() {
         return petID;
@@ -39,5 +52,13 @@ public class Pet {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public PetType getPetType() {
+        return petType;
+    }
+
+    public void setPetType(PetType petType) {
+        this.petType = petType;
     }
 }

@@ -28,7 +28,12 @@ This brings up a database on `127.0.0.1:3306`.
 
 `sudo docker-compose stop; sudo docker-compose rm -f`
 
-## Inserting test users
+## Inserting test users and pets
 
 Run `mvn install; mvn exec:java -Dexec.mainClass="com.example.main.TestUserInserter"`
+at this project's root directory.
+
+## Retrieving some users and pets
+
+Run `mvn install; mvn exec:java -Dexec.mainClass="com.example.main.TestUserRetriever"`
 at this project's root directory.

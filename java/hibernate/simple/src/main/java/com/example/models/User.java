@@ -34,6 +34,17 @@ public class User {
 
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", pets=" + "(...)" +
+                ", username='" + username + '\'' +
+                ", createdBy='" + createdBy + '\'' +
+                ", createdDate=" + createdDate +
+                '}';
+    }
+
     public User(String username, String createdBy, Date createdDate, int userId, Set<Pet> pets) {
         this.username = username;
         this.createdBy = createdBy;
