@@ -3,9 +3,7 @@ package com.example.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Pet", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "pet_id")
-})
+@Table(name = "Pet")
 public class Pet {
 
     @Id
