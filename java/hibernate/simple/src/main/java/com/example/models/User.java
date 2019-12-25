@@ -1,16 +1,24 @@
 package com.example.models;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.*;
 
 @Entity
-@Table(name = "User")
+@Table(name = "User", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username")
+})
 public class User {
 
     @Id
     @GeneratedValue
-    @Column(name = "userid")
+    @Column(name = "user_id")
     private int userId;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Pet> pets;
 
     @Column(name = "username")
     private String username;
@@ -21,8 +29,17 @@ public class User {
     @Column(name = "created_date")
     private Date createdDate;
 
+
     public User() {
 
+    }
+
+    public User(String username, String createdBy, Date createdDate, int userId, Set<Pet> pets) {
+        this.username = username;
+        this.createdBy = createdBy;
+        this.createdDate = createdDate;
+        this.userId = userId;
+        this.pets = pets;
     }
 
     public User(String username, String createdBy, Date createdDate, int userId) {
@@ -64,4 +81,18 @@ public class User {
         this.userId = userId;
     }
 
+    public Set<Pet> getPets() {
+        if (this.pets == null) {
+            this.pets = new HashSet<Pet>();
+        }
+        return pets;
+    }
+
+    public void setPets(Set<Pet> pets) {
+        this.pets = pets;
+    }
+
+    public void addPet(Pet pet) {
+        this.getPets().add(pet);
+    }
 }
