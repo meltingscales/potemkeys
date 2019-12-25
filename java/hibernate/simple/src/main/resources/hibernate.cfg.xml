@@ -5,7 +5,8 @@
     <session-factory>
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/hibernate_db?createDatabaseIfNotExist=true</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/hibernate_db?createDatabaseIfNotExist=true
+        </property>
         <property name="connection.username">root</property>
         <property name="connection.password">potato123</property>
         <property name="default_schema">hibernate_db</property>
@@ -25,6 +26,6 @@
         <property name="hibernate.dbcp.maxIdle">10</property>
         <property name="hibernate.dbcp.minIdle">5</property>
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
-        <mapping resource="user.hbm.xml"/>
+        <mapping class="com.example.models.User"/>
     </session-factory>
 </hibernate-configuration>

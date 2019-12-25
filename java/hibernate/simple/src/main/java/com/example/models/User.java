@@ -1,11 +1,24 @@
 package com.example.models;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "User")
 public class User {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "userid")
     private int userId;
+
+    @Column(name = "username")
     private String username;
+
+    @Column(name = "created_by")
     private String createdBy;
+
+    @Column(name = "created_date")
     private Date createdDate;
 
     public User() {
