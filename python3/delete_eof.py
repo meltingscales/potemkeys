@@ -39,10 +39,15 @@ with open(output_file, 'wb') as of:  # output file.
                 if inputByte is EOF:
                     print("The last byte is 26, AKA EOF. Not writing it.")
                 else:
-                    print(f"The last byte is {(inputByte):4d}, aka '{chr(inputByte)}'. Writing it.")
+                    print(
+                        f"The last byte is {(inputByte):4d}, aka '{chr(inputByte)}'. Writing it."
+                        f"There is NO trailing EOF in this file.")
+
                     of.write(chr(inputByte).encode())
 
             else:  # not at the end. write byte.
                 of.write(chr(inputByte).encode())
 
             i += 1
+
+print("Done. Your file without a trailing EOF can be viewed at " + output_file)
