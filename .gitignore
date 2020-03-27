@@ -3,6 +3,9 @@
 *.db
 *.log
 secret.json
+*.out.txt
+*.out.pdf
+*.out.zip
 
 /java/**/out/
 
