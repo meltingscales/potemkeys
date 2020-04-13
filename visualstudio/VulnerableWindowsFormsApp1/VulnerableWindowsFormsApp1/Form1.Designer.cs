@@ -97,7 +97,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(196, 170);
             this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "calc\ncmd.exe\nC:\niexplore.exe\nexplorer.exe\nhttp://henryfbp.me/";
+            this.richTextBox1.Text = "cmd.exe\npowershell\nhttp://henryfbp.me/";
             // 
             // panel3
             // 
