@@ -1,35 +1,43 @@
 #!/usr/bin/env python2
-import os
-import time
-from typing import Any
-
-from ping3 import ping, verbose_ping
-import datetime
-
 import argparse
+import datetime
+import time
+from typing import Tuple
+
+from ping3 import ping
 
 
 class PingEvent:
+
+    @staticmethod
+    def get_rows() -> Tuple[str, str, str]:
+        return 'host', 'time', 'ping_time'
+
     def __init__(self, host: str, time: datetime.datetime, ms: float):
         self.host = host
         self.time = time
         self.ping_time = ms
 
     def __str__(self):
-        return f"""{self.time}
-PING {args.host}
-{r * 1000:.2f}ms"""
+        return (f"{self.time}\n"
+                f"PING {args.host}\n"
+                f"{r * 1000:.2f}ms")
 
     def get_csv_value(self, column_name: str) -> str:
+
+        if column_name not in self.get_rows():
+            raise Exception(f"No column name called {column_name}!")
+
         if column_name == 'host':
             return str(self.host)
         if column_name == 'time':
             return str(self.time)
         if column_name == 'ping_time':
             return str(self.ping_time)
-        raise Exception(f"No column name called {column_name}!")
 
-    def as_csv_row(self, rows=('host', 'time', 'ping_time')):
+    def as_csv_row(self, rows=None):
+
+        rows = self.get_rows()
 
         rowValues = []
         for row in rows:
