@@ -72,6 +72,7 @@ CSV_NAME = args.csv_name
 HOST = args.host
 PING_AMOUNT = args.ping_amount
 PING_DELAY = args.ping_delay
+COMMENT = args.comment
 
 if __name__ == '__main__':
 
@@ -83,11 +84,12 @@ if __name__ == '__main__':
     info_filename = 'pingstats-' + CSV_NAME + START_TIME + '.info.txt'
 
     with open(os.path.join(OUTPUT_FOLDER, info_filename), 'w') as f:
-        f.write('STARTED ON ' + START_TIME + '\n')
-        f.write('HOST IS ' + HOST + '\n')
+        f.write(f'STARTED ON {START_TIME}\n')
+        f.write(f'HOST IS {HOST}\n')
+        f.write(f"COMMENT: {COMMENT}\n")
         f.write(
-            f'PINGING {PING_AMOUNT} TIMES, WAITING {PING_DELAY}ms BETWEEN PINGS, FOR A TOTAL OF '
-            f'{PING_AMOUNT * (PING_DELAY / 1000)} SECONDS' + "\n")
+            f'PINGING {PING_AMOUNT} TIMES, WAITING {PING_DELAY}ms BETWEEN PINGS,'
+            f' FOR A TOTAL OF {PING_AMOUNT * (PING_DELAY / 1000)} SECONDS\n')
 
     with open(os.path.join(OUTPUT_FOLDER, csv_filename), 'w') as f:
 
