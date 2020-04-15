@@ -80,7 +80,7 @@ if __name__ == '__main__':
     if not os.path.exists(OUTPUT_FOLDER):
         os.mkdir(OUTPUT_FOLDER)
 
-    START_TIME = datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
+    START_TIME = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     csv_filename = 'pingstats-' + HOST + CSV_NAME + START_TIME + '.csv'
     info_filename = 'pingstats-' + HOST + CSV_NAME + START_TIME + '.info.txt'
 
