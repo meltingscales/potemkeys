@@ -81,8 +81,8 @@ if __name__ == '__main__':
         os.mkdir(OUTPUT_FOLDER)
 
     START_TIME = datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
-    csv_filename = 'pingstats-' + CSV_NAME + START_TIME + '.csv'
-    info_filename = 'pingstats-' + CSV_NAME + START_TIME + '.info.txt'
+    csv_filename = 'pingstats-' + HOST + CSV_NAME + START_TIME + '.csv'
+    info_filename = 'pingstats-' + HOST + CSV_NAME + START_TIME + '.info.txt'
 
     with open(os.path.join(OUTPUT_FOLDER, info_filename), 'w') as f:
         f.write(f'STARTED ON {START_TIME}\n')
