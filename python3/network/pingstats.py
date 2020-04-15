@@ -13,7 +13,14 @@ class PingEvent:
 
     @staticmethod
     def ping_now(host: str):
-        return PingEvent(host, datetime.datetime.now(), (ping(args.host) * 1000))
+        ping_time_sec = ping(args.host)
+
+        if ping_time_sec is None: # fix for when ping() returns None
+            ping_time_ms = -1
+        else:
+            ping_time_ms = 1000 * ping_time_sec
+
+        return PingEvent(host, datetime.datetime.now(), ping_time_ms)
 
     @staticmethod
     def get_rows() -> Tuple[str, str, str]:
