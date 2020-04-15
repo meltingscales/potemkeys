@@ -60,7 +60,8 @@ parser = argparse.ArgumentParser(description='Conduct a ping test and save a log
 
 parser.add_argument('--host', help='Host to ping.', required=True)
 parser.add_argument('--ping_delay', help='Delay between pings in ms', default=1000.0)
-parser.add_argument('--ping_amount', help='Amount of pings to do.', default=10)  # 86400 seconds or is 1 hour
+parser.add_argument('--ping_amount', help='Amount of pings to do.', default=10)
+# 86400 seconds is 24 hours
 parser.add_argument('--csv_name', help='Name of CSV file.', default='defaultCsvName')
 parser.add_argument('--output_folder', help='Path of output folder.', default='pingstatsoutput.out')
 parser.add_argument('--comment', help='Comment for .info.txt file.', default=socket.gethostname())
@@ -70,7 +71,7 @@ args = parser.parse_args()
 OUTPUT_FOLDER = args.output_folder
 CSV_NAME = args.csv_name
 HOST = args.host
-PING_AMOUNT = args.ping_amount
+PING_AMOUNT = float(args.ping_amount)
 PING_DELAY = args.ping_delay
 COMMENT = args.comment
 
@@ -94,7 +95,7 @@ if __name__ == '__main__':
     with open(os.path.join(OUTPUT_FOLDER, csv_filename), 'w') as f:
 
         f.write(PingEvent.get_csv_rows() + '\n')
-        for i in range(0, PING_AMOUNT):
+        for i in range(0, int(PING_AMOUNT)):
             pingEvent = PingEvent.ping_now(host=HOST)
             print(pingEvent.as_csv_row())
             f.write(pingEvent.as_csv_row() + "\n")
