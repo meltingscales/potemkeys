@@ -1,9 +1,11 @@
 #!/usr/bin/env python2
 import argparse
 import datetime
+import os
+import socket
 import time
 from typing import Tuple
-
+from time import gmtime, strftime
 from ping3 import ping
 
 
@@ -16,6 +18,10 @@ class PingEvent:
     @staticmethod
     def get_rows() -> Tuple[str, str, str]:
         return 'host', 'time', 'ping_time'
+
+    @staticmethod
+    def get_csv_rows() -> str:
+        return ','.join(PingEvent.get_rows())
 
     def __init__(self, host: str, time: datetime.datetime, ms: float):
         self.host = host
@@ -55,12 +61,39 @@ parser = argparse.ArgumentParser(description='Conduct a ping test and save a log
 parser.add_argument('--host', help='Host to ping.', required=True)
 parser.add_argument('--ping_delay', help='Delay between pings in ms', default=1000.0)
 parser.add_argument('--ping_amount', help='Amount of pings to do.', default=10)  # 86400 seconds or is 1 hour
+parser.add_argument('--csv_name', help='Name of CSV file.', default='defaultCsvName')
+parser.add_argument('--output_folder', help='Path of output folder.', default='pingstatsoutput.out')
+parser.add_argument('--comment', help='Comment for .info.txt file.', default=socket.gethostname())
 
 args = parser.parse_args()
 
+OUTPUT_FOLDER = args.output_folder
+CSV_NAME = args.csv_name
+HOST = args.host
+PING_AMOUNT = args.ping_amount
+PING_DELAY = args.ping_delay
+
 if __name__ == '__main__':
 
-    for i in range(0, args.ping_amount):
-        pingEvent = PingEvent.ping_now(host=args.host)
-        print(pingEvent.as_csv_row())
-        time.sleep(args.ping_delay / 1000.0)
+    if not os.path.exists(OUTPUT_FOLDER):
+        os.mkdir(OUTPUT_FOLDER)
+
+    START_TIME = datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
+    csv_filename = 'pingstats-' + CSV_NAME + START_TIME + '.csv'
+    info_filename = 'pingstats-' + CSV_NAME + START_TIME + '.info.txt'
+
+    with open(os.path.join(OUTPUT_FOLDER, info_filename), 'w') as f:
+        f.write('STARTED ON ' + START_TIME + '\n')
+        f.write('HOST IS ' + HOST + '\n')
+        f.write(
+            f'PINGING {PING_AMOUNT} TIMES, WAITING {PING_DELAY}ms BETWEEN PINGS, FOR A TOTAL OF '
+            f'{PING_AMOUNT * (PING_DELAY / 1000)} SECONDS' + "\n")
+
+    with open(os.path.join(OUTPUT_FOLDER, csv_filename), 'w') as f:
+
+        f.write(PingEvent.get_csv_rows() + '\n')
+        for i in range(0, PING_AMOUNT):
+            pingEvent = PingEvent.ping_now(host=HOST)
+            print(pingEvent.as_csv_row())
+            f.write(pingEvent.as_csv_row() + "\n")
+            time.sleep(PING_DELAY / 1000.0)
