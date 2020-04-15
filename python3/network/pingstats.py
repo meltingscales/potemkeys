@@ -91,6 +91,7 @@ if __name__ == '__main__':
         f.write(
             f'PINGING {PING_AMOUNT} TIMES, WAITING {PING_DELAY}ms BETWEEN PINGS,'
             f' FOR A TOTAL OF {PING_AMOUNT * (PING_DELAY / 1000)} SECONDS\n')
+        f.flush()
 
     with open(os.path.join(OUTPUT_FOLDER, csv_filename), 'w') as f:
 
