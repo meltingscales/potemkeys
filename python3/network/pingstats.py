@@ -10,6 +10,10 @@ from ping3 import ping
 class PingEvent:
 
     @staticmethod
+    def ping_now(host: str):
+        return PingEvent(host, datetime.datetime.now(), (ping(args.host) * 1000))
+
+    @staticmethod
     def get_rows() -> Tuple[str, str, str]:
         return 'host', 'time', 'ping_time'
 
@@ -57,7 +61,6 @@ args = parser.parse_args()
 if __name__ == '__main__':
 
     for i in range(0, args.ping_amount):
-        r = ping(args.host)
-        pingEvent = PingEvent(args.host, datetime.datetime.now(), (r * 1000))
+        pingEvent = PingEvent.ping_now(host=args.host)
         print(pingEvent.as_csv_row())
         time.sleep(args.ping_delay / 1000.0)
