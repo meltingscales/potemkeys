@@ -35,7 +35,7 @@ def datetimeStr_to_datetime(s: str) -> datetime.datetime:
 class PingEvent:
 
     @staticmethod
-    def ping_now(host: str):
+    def ping_now(host: str, sequence_number: int = 0):
 
         try:
             ping_time_sec = ping(args.host)
@@ -46,20 +46,21 @@ class PingEvent:
         except OSError as e:
             ping_time_ms = -abs(e.errno)
 
-        return PingEvent(host, datetime.datetime.now(), ping_time_ms)
+        return PingEvent(host, datetime.datetime.now(), ping_time_ms, sequence_number)
 
     @staticmethod
-    def get_rows() -> Tuple[str, str, str, str]:
-        return 'host', 'time', 'excel_time', 'ping_time'
+    def get_rows() -> Tuple[str, str, str, str, str]:
+        return 'sequence_number', 'host', 'time', 'excel_time', 'ping_time'
 
     @staticmethod
     def get_csv_rows() -> str:
         return ','.join(PingEvent.get_rows())
 
-    def __init__(self, host: str, time: datetime.datetime, ms: float):
+    def __init__(self, host: str, time: datetime.datetime, ms: float, sequence_number: int):
         self.host = host
         self.time = time
         self.ping_time = ms
+        self.sequence_number = sequence_number
 
     def __str__(self):
         return (f"{self.time}\n"
@@ -72,10 +73,11 @@ class PingEvent:
             raise Exception(f"No column name called {column_name}!")
 
         property_map = {
+            'sequence_number': self.sequence_number,
             'host': self.host,
             'time': self.time,
             'excel_time': self.excel_time(),
-            'ping_time': self.ping_time
+            'ping_time': self.ping_time,
         }
 
         return str(property_map[column_name])
@@ -136,7 +138,7 @@ if __name__ == '__main__':
 
         f.write(PingEvent.get_csv_rows() + '\n')
         for i in range(0, int(PING_AMOUNT)):
-            pingEvent = PingEvent.ping_now(host=HOST)
+            pingEvent = PingEvent.ping_now(host=HOST, sequence_number=i)
             print(pingEvent.as_csv_row())
             f.write(pingEvent.as_csv_row() + "\n")
             time.sleep(PING_DELAY / 1000.0)
