@@ -13,12 +13,15 @@ class PingEvent:
 
     @staticmethod
     def ping_now(host: str):
-        ping_time_sec = ping(args.host)
 
-        if ping_time_sec is None: # fix for when ping() returns None
-            ping_time_ms = -1
-        else:
-            ping_time_ms = 1000 * ping_time_sec
+        try:
+            ping_time_sec = ping(args.host)
+            if ping_time_sec is None:  # fix for when ping() returns None
+                ping_time_ms = 0
+            else:
+                ping_time_ms = 1000 * ping_time_sec
+        except OSError as e:
+            ping_time_ms = -abs(e.errno)
 
         return PingEvent(host, datetime.datetime.now(), ping_time_ms)
 
