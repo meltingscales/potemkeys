@@ -49,8 +49,8 @@ class PingEvent:
         return PingEvent(host, datetime.datetime.now(), ping_time_ms)
 
     @staticmethod
-    def get_rows() -> Tuple[str, str, str]:
-        return 'host', 'time', 'ping_time'
+    def get_rows() -> Tuple[str, str, str, str]:
+        return 'host', 'time', 'excel_time', 'ping_time'
 
     @staticmethod
     def get_csv_rows() -> str:
@@ -74,6 +74,7 @@ class PingEvent:
         property_map = {
             'host': self.host,
             'time': self.time,
+            'excel_time': self.excel_time(),
             'ping_time': self.ping_time
         }
 
@@ -88,6 +89,10 @@ class PingEvent:
             rowValues.append(self.get_csv_value(row))
 
         return ','.join(rowValues)
+
+    def excel_time(self) -> str:
+        """Get excel-friendly time"""
+        return datetime_to_excelDatetime(self.time)
 
 
 parser = argparse.ArgumentParser(description='Conduct a ping test and save a log.')
