@@ -9,6 +9,18 @@ from time import gmtime, strftime
 from ping3 import ping
 
 
+def datetime_now() -> datetime.datetime:
+    return datetime.datetime.now()
+
+
+def datetime_to_excel(d: datetime.datetime) -> str:
+    return '4/15/2020 08:56:58 PM'  # TODO
+
+
+def datetime_to_str(d: datetime.datetime) -> str:
+    return d.strftime('%Y-%m-%d_%H-%M-%S')
+
+
 class PingEvent:
 
     @staticmethod
@@ -41,19 +53,20 @@ class PingEvent:
     def __str__(self):
         return (f"{self.time}\n"
                 f"PING {args.host}\n"
-                f"{r * 1000:.2f}ms")
+                f"{self.ping_time * 1000:.2f}ms")
 
     def get_csv_value(self, column_name: str) -> str:
 
         if column_name not in self.get_rows():
             raise Exception(f"No column name called {column_name}!")
 
-        if column_name == 'host':
-            return str(self.host)
-        if column_name == 'time':
-            return str(self.time)
-        if column_name == 'ping_time':
-            return str(self.ping_time)
+        property_map = {
+            'host': self.host,
+            'time': self.time,
+            'ping_time': self.ping_time
+        }
+
+        return str(property_map[column_name])
 
     def as_csv_row(self, rows=None):
 
@@ -90,7 +103,7 @@ if __name__ == '__main__':
     if not os.path.exists(OUTPUT_FOLDER):
         os.mkdir(OUTPUT_FOLDER)
 
-    START_TIME = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    START_TIME = datetime_to_str(datetime_now())
     csv_filename = 'pingstats-' + HOST + "-" + CSV_NAME + "-" + START_TIME + '.csv'
     info_filename = 'pingstats-' + HOST + "-" + CSV_NAME + "-" + START_TIME + '.info.txt'
 
