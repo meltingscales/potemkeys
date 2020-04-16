@@ -121,12 +121,13 @@ if __name__ == '__main__':
     if not os.path.exists(OUTPUT_FOLDER):
         os.mkdir(OUTPUT_FOLDER)
 
-    START_TIME = datetime_to_datetimeStr(datetime_now())
-    csv_filename = 'pingstats-' + HOST + "-" + CSV_NAME + "-" + START_TIME + '.csv'
-    info_filename = 'pingstats-' + HOST + "-" + CSV_NAME + "-" + START_TIME + '.info.txt'
+    START_TIME = datetime_now()
+    START_TIME_STR = datetime_to_datetimeStr(START_TIME)
+    csv_filename = 'pingstats-' + HOST + "-" + CSV_NAME + "-" + START_TIME_STR + '.csv'
+    info_filename = 'pingstats-' + HOST + "-" + CSV_NAME + "-" + START_TIME_STR + '.info.txt'
 
     with open(os.path.join(OUTPUT_FOLDER, info_filename), 'w') as f:
-        f.write(f'STARTED ON {START_TIME}\n')
+        f.write(f'STARTED ON {START_TIME_STR}\n')
         f.write(f'HOST IS {HOST}\n')
         f.write(f"COMMENT: {COMMENT}\n")
         f.write(
