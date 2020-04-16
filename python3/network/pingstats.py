@@ -24,6 +24,7 @@ assert (datetime_to_excelDatetime(datetime.datetime(2020, 4, 16, 4 + 12, 49, 20)
 def datetime_to_datetimeStr(d: datetime.datetime) -> str:
     return d.strftime('%Y-%m-%d_%H-%M-%S')
 
+
 assert (datetime_to_datetimeStr(datetime.datetime(2020, 4, 16, 4 + 12, 49, 20)) == '2020-04-16_16-49-20')
 
 
