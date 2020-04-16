@@ -126,6 +126,7 @@ if __name__ == '__main__':
     csv_filename = 'pingstats-' + HOST + "-" + CSV_NAME + "-" + START_TIME_STR + '.csv'
     info_filename = 'pingstats-' + HOST + "-" + CSV_NAME + "-" + START_TIME_STR + '.info.txt'
 
+    print("Writing INFO to " + os.path.join(OUTPUT_FOLDER, info_filename))
     with open(os.path.join(OUTPUT_FOLDER, info_filename), 'w') as f:
         f.write(f'STARTED ON {START_TIME_STR}\n')
         f.write(f'HOST IS {HOST}\n')
@@ -137,7 +138,9 @@ if __name__ == '__main__':
 
     with open(os.path.join(OUTPUT_FOLDER, csv_filename), 'w') as f:
 
+        print('Writing CSV DATA to ' + os.path.join(OUTPUT_FOLDER, csv_filename))
         f.write(PingEvent.get_csv_rows() + '\n')
+        print(PingEvent.get_csv_rows())
         for i in range(0, int(PING_AMOUNT)):
             pingEvent = PingEvent.ping_now(host=HOST, sequence_number=i)
             print(pingEvent.as_csv_row())
