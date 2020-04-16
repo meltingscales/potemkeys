@@ -13,12 +13,22 @@ def datetime_now() -> datetime.datetime:
     return datetime.datetime.now()
 
 
-def datetime_to_excel(d: datetime.datetime) -> str:
-    return '4/15/2020 08:56:58 PM'  # TODO
+def datetime_to_excelDatetime(d: datetime.datetime) -> str:
+    """4/15/2020 08:56:58 PM"""
+    return d.strftime('%m/%d/%Y %I:%M:%S %p')
 
 
-def datetime_to_str(d: datetime.datetime) -> str:
+assert (datetime_to_excelDatetime(datetime.datetime(2020, 4, 16, 4 + 12, 49, 20)) == '04/16/2020 04:49:20 PM')
+
+
+def datetime_to_datetimeStr(d: datetime.datetime) -> str:
     return d.strftime('%Y-%m-%d_%H-%M-%S')
+
+assert (datetime_to_datetimeStr(datetime.datetime(2020, 4, 16, 4 + 12, 49, 20)) == '2020-04-16_16-49-20')
+
+
+def datetimeStr_to_datetime(s: str) -> datetime.datetime:
+    return datetime.datetime.strptime(s, '%Y-%m-%d_%H-%M-%S')
 
 
 class PingEvent:
@@ -103,7 +113,7 @@ if __name__ == '__main__':
     if not os.path.exists(OUTPUT_FOLDER):
         os.mkdir(OUTPUT_FOLDER)
 
-    START_TIME = datetime_to_str(datetime_now())
+    START_TIME = datetime_to_datetimeStr(datetime_now())
     csv_filename = 'pingstats-' + HOST + "-" + CSV_NAME + "-" + START_TIME + '.csv'
     info_filename = 'pingstats-' + HOST + "-" + CSV_NAME + "-" + START_TIME + '.info.txt'
 
