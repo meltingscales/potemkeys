@@ -1,0 +1,18 @@
+<html lang="en">
+<head>
+    <script src="script.js"></script>
+    <title>GitHub Web API Demo</title>
+</head>
+<body>
+
+<form onsubmit="return false;"> <!-- Don't submit GET request as there is no backend -->
+
+    <label for="githubUsername">Github Username</label>
+    <input type="text" id="githubUsername" name="githubUsername">
+
+    <button onclick="showRepoCount(document.getElementById('githubUsername').value)">How many repos?</button>
+</form>
+
+
+</body>
+</html>
