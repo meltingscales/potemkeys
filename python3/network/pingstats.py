@@ -99,13 +99,24 @@ class PingEvent:
 
 parser = argparse.ArgumentParser(description='Conduct a ping test and save a log.')
 
-parser.add_argument('--host', help='Host to ping.', required=True)
-parser.add_argument('--ping_delay', help='Delay between pings in ms', default=1000.0)
-parser.add_argument('--ping_amount', help='Amount of pings to do.', default=10)
+parser.add_argument('--host', help='Host to ping.',
+                    default='google.com')
+
 # 86400 seconds is 24 hours
-parser.add_argument('--csv_name', help='Name of CSV file.', default='defaultCsvName')
-parser.add_argument('--output_folder', help='Path of output folder.', default='pingstatsoutput.out')
-parser.add_argument('--comment', help='Comment for .info.txt file.', default=socket.gethostname())
+parser.add_argument('--ping_delay', help='Delay between pings in ms',
+                    default=1000.0)
+
+parser.add_argument('--ping_amount', help='Amount of pings to do.',
+                    default=10)
+
+parser.add_argument('--csv_name', help='Name of CSV file.',
+                    default=socket.gethostname())
+
+parser.add_argument('--output_folder', help='Path of output folder.',
+                    default='pingstatsoutput.out')
+
+parser.add_argument('--comment', help='Comment for .info.txt file.',
+                    default=f"comment: started by host {socket.gethostname()}")
 
 args = parser.parse_args()
 
