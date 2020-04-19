@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("VulnerableWindowsFormsApp1")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("gusztavvargadr")]
+[assembly: AssemblyCompany("henryfbp")]
 [assembly: AssemblyProduct("VulnerableWindowsFormsApp1")]
-[assembly: AssemblyCopyright("Copyright © gusztavvargadr 2020")]
+[assembly: AssemblyCopyright("not copyright of anyone :) henryfbp 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
