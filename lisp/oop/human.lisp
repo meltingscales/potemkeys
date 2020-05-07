@@ -18,7 +18,7 @@
 )
 
 (defmethod go-to-sleep ((p Person))
-  (setf (slot-value p 'energy) 100) ;Why is energy not set to 100 here?!
+  (setf (slot-value p 'energy) 100)
   (format t "~S falls asleep. zzz..." (slot-value p 'name))
 )
 
@@ -30,7 +30,8 @@
 ;)
 
 (defvar henry (make-instance 'Person :name "Henry"  :energy 0))
-;(setf (slot-value henry 'energy) 100) ; Why does setf work here but not in go-to-sleep??
-
 (describe henry)
+
+
 (go-to-sleep henry)
+(describe henry)
