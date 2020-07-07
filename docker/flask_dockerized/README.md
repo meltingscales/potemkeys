@@ -1,14 +1,9 @@
 https://runnable.com/docker/python/dockerize-your-flask-application
 
-## Building Docker
+## Building the Docker image
 
-	docker build -t flask-tutorial:latest .
+	sudo docker build --tag flask-dockerized .
 
-## Running
+## Running the Docker image
 
-	docker run -p 5000:5000 flask-tutorial
-
-### With terminal
-
-	docker run -it -p 5000:5000 flask-tutorial
-
+	sudo docker run --name flask-dockerized -p 5001:5001 flask-dockerized
