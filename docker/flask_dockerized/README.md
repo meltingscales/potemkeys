@@ -2,6 +2,10 @@
 
 <https://www.geeksforgeeks.org/dockerize-your-flask-app/>
 
+## Running locally
+
+	python app.py
+
 ## Building the Docker image
 
 	sudo docker build --tag flask-dockerized .
