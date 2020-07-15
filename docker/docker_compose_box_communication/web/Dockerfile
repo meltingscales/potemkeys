@@ -6,5 +6,9 @@ LABEL maintainer="Henry Post, resplendent.falconeer@gmail.com, http://henryfbp.m
 
 # RUN pip install flask
 
+# testing build arguments
+ARG TEST
+RUN echo TEST argument is $TEST
+
 ENTRYPOINT [ "python2" ] 
 CMD [ "-m", "SimpleHTTPServer", "8000" ]

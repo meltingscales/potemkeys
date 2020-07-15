@@ -6,6 +6,8 @@ services:
     build:
       context: ./
       dockerfile: ./web/Dockerfile
+      args: 
+        TEST: this is a test argument, should show up during build...
 
   client:
     container_name: client
