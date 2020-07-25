@@ -1,10 +1,11 @@
 # How do I run these?
 
 A good old Common LISP REPL!
-    
+
 I use [Steel Bank Common Lisp](http://www.sbcl.org/) for Windows, although it is multiplatform.
 
 1. In terminal, run `sbcl --script my_lisp_file_name.lisp`.
+2. You may like `watch sbcl --script my_lisp_file_name.lisp`.
 
 Or,
 

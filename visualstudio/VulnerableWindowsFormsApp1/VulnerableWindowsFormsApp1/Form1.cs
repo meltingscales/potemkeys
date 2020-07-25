@@ -20,12 +20,12 @@ namespace VulnerableWindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            try { 
-            Process.Start(textBox1.Text);
-                richTextBoxException.Text="No error :)";
+            try
+            {
+                Process.Start(textBox1.Text);
+                richTextBoxException.Text = @"No error :)";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 richTextBoxException.Text = ex.ToString();
             }
@@ -33,27 +33,22 @@ namespace VulnerableWindowsFormsApp1
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
-
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
-
         }
 
         private void richTextBox2_TextChanged(object sender, EventArgs e)
         {
-
         }
     }
 }
