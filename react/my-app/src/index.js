@@ -7,7 +7,7 @@ const MOVE_GRAPH = {
     'O': 'X',
 }
 
-const STARTING_MOVE='X';
+const STARTING_MOVE = 'X';
 
 
 function Square(props) {
@@ -32,10 +32,13 @@ class Board extends React.Component {
 
         squares[i] = this.state.currentMove;
 
-        // Update who moves next
-        this.state.currentMove = MOVE_GRAPH[this.state.currentMove];
 
-        this.setState({ squares: squares });
+        this.setState({
+            squares: squares,
+
+            // Update who moves next
+            currentMove: MOVE_GRAPH[this.state.currentMove]
+        });
     }
 
     renderSquare(i) {
@@ -48,7 +51,7 @@ class Board extends React.Component {
     }
 
     render() {
-        const status = 'Next player: X';
+        const status = 'Next player: ' + this.state.currentMove;
 
         return (
             <div>
