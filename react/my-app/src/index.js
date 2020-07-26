@@ -1,6 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// Graph of what player goes after the other
+const MOVE_GRAPH = {
+    'X': 'O',
+    'O': 'X',
+}
+
+const STARTING_MOVE='X';
+
+
 function Square(props) {
     return (
         <button className="square" onClick={props.onClick}>
@@ -14,12 +23,18 @@ class Board extends React.Component {
         super(props);
         this.state = {
             squares: Array(9).fill(null),
+            currentMove: STARTING_MOVE,
         };
     }
 
     handleClick(i) {
         const squares = this.state.squares.slice();
-        squares[i] = 'X';
+
+        squares[i] = this.state.currentMove;
+
+        // Update who moves next
+        this.state.currentMove = MOVE_GRAPH[this.state.currentMove];
+
         this.setState({ squares: squares });
     }
 
