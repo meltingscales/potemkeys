@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.css';
 
 // Graph of what player goes after the other
 const MOVE_GRAPH = {
