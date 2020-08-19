@@ -1,3 +1,5 @@
-May need to run:
+M$ does not make Linux ODBC drivers.
 
-    sudo apt install unixodbc unixodbc-dev python-pyodbc libsqliteodbc
+You must install M$ Access and have Python 3 of the SAME bit architecture (32/64) of BOTH PYTHON AND ACCESS installed.
+
+Google errors.
