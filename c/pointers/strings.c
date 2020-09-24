@@ -11,6 +11,8 @@ int main(int argc, char const *argv[])
     myString[1] = 'e';
 
     char* data = "llo world";
+    // char* data = "llo world... oh crap, uncommenting this line, and commenting out the previous line, is going to result in a buffer overflow. Better do math before I copy data, or use a safe memory copying function.";
+    
 
     strcpy(myString + 2, data);
 
