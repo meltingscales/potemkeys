@@ -6,3 +6,7 @@
 or
 
     watch "gcc myfile.c; ./a.out"
+
+or open the `Makefile` and see what tasks can be run.
+
+Example: Run `cd pointers; make strings2; ./strings_clobbering_null_terminators.exe`

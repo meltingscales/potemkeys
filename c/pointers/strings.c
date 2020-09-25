@@ -28,7 +28,7 @@ int main(int argc, char const *argv[])
 
     printf("\nstrlen(myString) = '%lu'...NOT %lu, %lu being the NUMBER OF BYTES we allocated for the string!\n\n", strlen(myString), sizeof(myString), sizeof(myString));
 
-    printf("byte at %luth index (is NOT null terminator due to way the string was initialized) of myString is '0x%02x'\n\n", sizeof(myString), myString[sizeof(myString)]);
+    printf("byte at %luth index (is NOT GUARANTEED TO BE A null terminator due to way the string was initialized) of myString is '0x%02x'\n\n", sizeof(myString), myString[sizeof(myString)]);
 
     return 0;
 }
