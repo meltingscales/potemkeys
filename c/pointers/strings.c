@@ -21,6 +21,8 @@ int main(int argc, char const *argv[])
     strcpy(myString + 2, data);
     //    strcpy(myString + 12, "test");
 
+    printf("myString memory address = %p\n", (void*)&myString);
+    
     for (int i = 0; i < sizeof(myString) + 1; i++)
     {
         printf("myString[%2d]=0x%02x or '%c'\n", i, myString[i], myString[i]);
