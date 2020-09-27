@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
 {
 
     // char myString[20]; //Note that this line will cause the unallocated array contents to be whatever was previously in memory.
-    char myString[20] = {0 * 0};
+    char myString[20] = {0 * 0}; // And this line will clear the array contents.
     // char* myString2 = {0*10};
 
     myString[0] = 'h';
