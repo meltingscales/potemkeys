@@ -31,7 +31,7 @@ int main(int argc, char const *argv[])
     myString[2] = 'l';
     
 
-    char *data = "lo world";
+    char *data = "l\x30 world";
     // char* data = "llo world... oh crap, uncommenting this line, and commenting out the previous line, is going to result in a buffer overflow. Better do math before I copy data, or use a safe memory copying function.";
 
     strcpy(myString + 3, data);
