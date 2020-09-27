@@ -6,16 +6,36 @@
         {
             "label": "Compile and run strings.c",
             "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/pointers/"
+            },
             "command": "gcc -I. -fno-stack-protector -no-pie strings.c -o strings.exe; ./strings.exe",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
-        },        {
+        },        
+        {
             "label": "Compile and run strings_clobbering_null_terminators.c",
             "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/pointers/"
+            },
             "command": "gcc -I. -fno-stack-protector -no-pie strings_clobbering_null_terminators.c -o strings_clobbering_null_terminators.exe; ./strings_clobbering_null_terminators.exe",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Compile and run calculateSum.c",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/files/"
+            },
+            "command": "gcc calculateSum.c -o calculateSum.exe; ./calculateSum.exe",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
