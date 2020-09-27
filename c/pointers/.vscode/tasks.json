@@ -1,0 +1,27 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile and run strings.c",
+            "type": "shell",
+            "command": "gcc -I. -fno-stack-protector -no-pie strings.c -o strings.exe; ./strings.exe",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },        {
+            "label": "Compile and run strings_clobbering_null_terminators.c",
+            "type": "shell",
+            "command": "gcc -I. -fno-stack-protector -no-pie strings_clobbering_null_terminators.c -o strings_clobbering_null_terminators.exe; ./strings_clobbering_null_terminators.exe",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+
+    ]
+}
