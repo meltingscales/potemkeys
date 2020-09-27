@@ -5,6 +5,20 @@
 This file demonstrates pointers, pointer math, and how strings are allocated in memory.
 */
 
+/***
+ * Returns a char if it's printable, '?' if it's not.
+ */
+char printable_ascii(char c)
+{
+    if(c >= 32 && c < 127){
+        return c;
+    } else
+    {
+        return '?';
+    }
+    
+}
+
 int main(int argc, char const *argv[])
 {
 
@@ -25,7 +39,7 @@ int main(int argc, char const *argv[])
     
     for (int i = 0; i < sizeof(myString) + 1; i++)
     {
-        printf("myString[%2d]=0x%02x or '%c'\n", i, myString[i], myString[i]);
+        printf("myString[%2d]=0x%02x or '%c'\n", i, myString[i], printable_ascii(myString[i]));
     }
 
     printf("\nstrlen(myString) = '%lu'...NOT %lu, %lu being the NUMBER OF BYTES we allocated for the string!\n\n", strlen(myString), sizeof(myString), sizeof(myString));
