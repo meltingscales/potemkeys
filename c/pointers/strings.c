@@ -26,13 +26,15 @@ int main(int argc, char const *argv[])
     char myString[20] = {0 * 0}; // And this line will clear the array contents.
     // char* myString2 = {0*10};
 
-    myString[0] = 'h';
-    myString[1] = 'e';
+    *(myString+0) = 'h';
+    *(myString+1) = 'e';
+    myString[2] = 'l';
+    
 
-    char *data = "llo world";
+    char *data = "lo world";
     // char* data = "llo world... oh crap, uncommenting this line, and commenting out the previous line, is going to result in a buffer overflow. Better do math before I copy data, or use a safe memory copying function.";
 
-    strcpy(myString + 2, data);
+    strcpy(myString + 3, data);
     //    strcpy(myString + 12, "test");
 
     printf("myString memory address = %p\n", (void*)&myString);
