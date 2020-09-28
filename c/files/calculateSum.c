@@ -146,7 +146,7 @@ int main()
 
         writeLoanSheetItemToFile(fileptr, loanSheetItem);
 
-        if (i != numLoanSheetItems) //avoid trailing '\n'
+        if (i != numLoanSheetItems - 1) //avoid trailing '\n'
         {
             fputc('\n', fileptr);
         }
