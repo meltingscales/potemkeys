@@ -46,7 +46,7 @@ public class App {
         pprint_html(buildHTMLMessage(NODE_PAYOAD),NODE_PAYOAD);
         pprint_html(buildHTMLDataObject(ATTRIBUTE_PAYLOAD),ATTRIBUTE_PAYLOAD);
 
-        String NODE_PAYOAD_safe = ESAPI.validator().getValidInput(NODE_PAYOAD,NODE_PAYOAD, "SafeString", 256, true);
+        String NODE_PAYOAD_safe = ESAPI.validator().getValidInput(NODE_PAYOAD,NODE_PAYOAD, "CustomRule", 256, true);
         pprint_html(buildHTMLMessage(NODE_PAYOAD_safe),NODE_PAYOAD_safe);
     }
 }
