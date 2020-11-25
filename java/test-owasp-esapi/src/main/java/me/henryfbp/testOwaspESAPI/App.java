@@ -1,7 +1,6 @@
 package me.henryfbp.testOwaspESAPI;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.owasp.esapi.ESAPI;
 import org.owasp.esapi.errors.ValidationException;
 
@@ -46,7 +45,7 @@ public class App {
         pprint_html(buildHTMLMessage(NODE_PAYOAD),NODE_PAYOAD);
         pprint_html(buildHTMLDataObject(ATTRIBUTE_PAYLOAD),ATTRIBUTE_PAYLOAD);
 
-        String NODE_PAYOAD_safe = ESAPI.validator().getValidInput(NODE_PAYOAD,NODE_PAYOAD, "CustomRule", 256, true);
+        String NODE_PAYOAD_safe = ESAPI.validator().getValidInput("node payload but safe",NODE_PAYOAD, "CustomRule", 256, true);
         pprint_html(buildHTMLMessage(NODE_PAYOAD_safe),NODE_PAYOAD_safe);
     }
 }
