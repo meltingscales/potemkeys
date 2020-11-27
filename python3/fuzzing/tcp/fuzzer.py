@@ -1,6 +1,21 @@
-import collections
+import itertools
 import socket
-from typing import List, Iterator
+import string
+
+
+class PasswordGenerator:
+    def __init__(self, maxlength: int = 9, charset: str = string.ascii_lowercase):
+        self.maxlength = maxlength
+        self.charset = charset
+        pass
+
+    def __iter__(self):
+        for password_length in range(1, self.maxlength):
+            for guess in itertools.product(self.charset, repeat=password_length):
+                guess = ''.join(guess)
+                yield guess
+        raise StopIteration
+
 
 HOST = 'localhost'
 PORT = 13337
@@ -9,47 +24,6 @@ MSG_SIZE = 1024
 ALPHANUM = '0123456789'
 ALPHALOWER = 'abcdefghijklmnopqrstuvwxyz'
 ALPHACAP = ALPHALOWER.upper()
-
-
-class SequentialPasswordGenerator:
-
-    def __init__(self,allowedChars=ALPHALOWER):
-        self.chars: List[str] = []
-        self.charpositions: List[int] = []
-        self.dictionary = allowedChars
-
-    def __iter__(self):
-        while True:
-            # First letter initial condition
-            if len(self.charpositions) is 0:
-                self.charpositions.append(0)
-            else:  # just add 1 to the end, we will carry the ones later
-                self.charpositions[-1] += 1
-
-            # must determine if we need to carry the one (recursively?)
-            # we need to go backwards
-            for i in range(len(self.charpositions)-1, -1, -1):
-
-                number = self.charpositions[i]
-                if number >= len(self.dictionary):  # we need to carry the 1 backwards
-                    if i == 0:  # We're at the largest digit.
-                        # we would overflow...In this case, we need to expand the array by prepending an element.
-                        oldCharPositions = self.charpositions
-                        self.charpositions = [1, ]
-                        [self.charpositions.append(x) for x in oldCharPositions]
-                        self.charpositions[1] = 0 # it's a 0 now, leave the other digits alone
-
-                    else:
-                        self.charpositions[i - 1] += 1
-
-                        # TODO check if we are going to overflow
-
-
-            self.chars = []
-            for k in self.charpositions:
-                self.chars.append(self.dictionary[k])
-
-            yield ''.join(self.chars)
 
 
 def send_passcode(sock: socket.socket, password: str) -> str:
@@ -89,30 +63,63 @@ def no_fuzzing(sock: socket.socket):
 
 
 def bruteforcing(sock: socket.socket):
-    found_password = False
 
-    while not found_password:
-        pass
+    pg = PasswordGenerator()
+
+    tries = 0
+    for password in pg:
+
+        if(tries % 10000) == 0: # print every 'n'
+            print("Trying " + password + "...")
+
+        response = send_passcode(sock, password)
+        if password_correct(response):
+            print(f"Correct password {password}!")
+            print(f"Took {tries} tries!")
+            print(response)
+            break
+
+        tries+=1
 
 
 def fuzzing_part_of_pass(sock: socket.socket):
-    """Suppose your friend at the NSA has tipped you off to the fact that the password starts with 'cr'..."""
-    pass
+    """Suppose your friend at the NSA has tipped you off to the fact that the password starts with 'c' and ends with 's'..."""
+    prepend= 'c'
+    append='s'
+
+    pg = PasswordGenerator()
+
+    tries = 0
+    for password in pg:
+
+        password = prepend+password+append
+
+        # if(tries % 10000) == 0: # print every 'n'
+        print("Trying " + password + "...")
+
+        response = send_passcode(sock, password)
+        if password_correct(response):
+            print(f"Correct password {password}!")
+            print(f"Took {tries} tries!")
+            print(response)
+            break
+
+        tries += 1
+
+
+
 
 
 if __name__ == "__main__":
-    spg = SequentialPasswordGenerator()
-    print(spg)
-
-    i = 0
-    for password in spg:
-        print(password)
-        print(i)
-        i+=1
-
-    exit(0)
-
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect(('localhost', PORT))
 
-    no_fuzzing(s)
+    print("Uncomment below lines to see how each method of cracking the secret NSA server works.")
+
+    # no_fuzzing(s) # manual process is a pain in the butt
+
+    # bruteforcing(s)  # this is just plain brute forcing, takes about 1,688,000 tries...
+
+    # fuzzing_part_of_pass(s) # takes about 12,000 tries if we just fuzz the middle 3
+
+    s.close()
