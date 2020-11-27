@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
 
     spg = SequentialPasswordGenerator()
-    print(x for x in spg)
+    print(spg)
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect(('localhost', PORT))
