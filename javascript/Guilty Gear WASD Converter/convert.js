@@ -7,6 +7,7 @@
 1 2 3
 */
 
+//start of default keys
 const UP = "W";
 const LEFT = "A";
 const DOWN = "S";
@@ -20,6 +21,8 @@ const HEAVYSLASH = "K";
 const DUST = "O";
 
 const DASH = "Q";
+//end of default keys
+
 const ROMANCANCEL = "E"; //custom, added by me
 const PSYCHBURST = "R"; //custom, added by me
 
