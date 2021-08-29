@@ -8,8 +8,11 @@ Go to Python's website and install Python 3.6.
 
 Run `pip install pipenv` to install a dependency manager called "pipenv".
 
-Then, run `pipenv install --system` to install dependencies described in
+Then, run `pipenv install` to install dependencies described in
 `Pipfile`.
+
+Then, you must enter the pipenv environment by running `pipenv shell` before you run any commands. This is done as 
+it separates your system's python packages from this project's.
 
 ## Make and apply migrations
 
