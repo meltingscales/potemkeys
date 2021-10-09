@@ -20,6 +20,8 @@ def people(request):
     # Add all people in DB to context.
     context["people"] = Person.objects.all()
 
+    print(Person.objects.get(pk=2))
+
     # If they want to make a new person,
     if request.method == "POST":
 
