@@ -1,1 +1,6 @@
-current_game: 'GG:S'
+current_game: "GG:S"
+center_text: False
+background_color: [20, 20, 20]
+text_color: [255, 0, 0]
+font_type: "Consolas"
+font_size: 32

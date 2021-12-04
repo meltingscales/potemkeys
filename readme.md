@@ -1,5 +1,7 @@
 # FGfGwK: Fighting Games for Goldfish with Keyboards
 
+![A picture of the application.](/window.png)
+
 ## What is this?
 
 For those who can't remember {keyboard input => controller} mappings, and want to see them in-game.

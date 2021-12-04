@@ -20,13 +20,7 @@ TITLE = 'This app is for goldfish who can\'t remember buttons. Are you a goldfis
 RUNNING = True
 MESSAGE = ['hello :)']
 
-white = (255, 255, 255)
-black = (0,0,0)
-red = (255, 0, 0)
-green = (0, 255, 0)
-blue = (0, 0, 128)
-
-OPTIONS={}
+OPTIONS = {}
 
 with open('options.yaml') as fh:
     OPTIONS = yaml.load(fh, Loader=yaml.SafeLoader)
@@ -42,7 +36,7 @@ def window_always_on_top_WIN32(pygame: pygame, x: int = 100, y: int = 200):
         wintypes.INT, wintypes.INT, wintypes.UINT
     ]
 
-    hwnd=pygame.display.get_wm_info()['window']
+    hwnd = pygame.display.get_wm_info()['window']
 
     user32.SetWindowPos(
         hwnd, -1,
@@ -80,7 +74,8 @@ ALL_GAME_MAPS = {
 # just use GG:S for now
 ACTIVE_GAME_MAP = ALL_GAME_MAPS[OPTIONS['current_game']]
 
-MESSAGE=['You are playing '+OPTIONS['current_game']]
+MESSAGE = ['You are playing '+OPTIONS['current_game']]
+
 
 def on_press(key, strptr=MESSAGE):
 
@@ -115,12 +110,12 @@ if __name__ == '__main__':
 
     pygame.init()
 
-    FONT = pygame.font.SysFont("Consolas", 32)
+    FONT = pygame.font.SysFont(OPTIONS['font_type'], OPTIONS['font_size'])
     DISPLAYSURFACE = pygame.display.set_mode(
         (gamewidth, gameheight), pygame.RESIZABLE
     )
     pygame.display.set_caption(TITLE)
-    # our int handle is 
+    # our int handle is
 
     # make on top
     window_always_on_top_WIN32(
@@ -138,14 +133,16 @@ if __name__ == '__main__':
                 pygame.quit()
                 sys.exit()
 
-        text = FONT.render(MESSAGE[0], True, red, black)
+        text = FONT.render(
+            MESSAGE[0], True, OPTIONS['text_color'], OPTIONS['background_color'])
         textRect = text.get_rect()
-        
+
         gamewidth, gameheight = DISPLAYSURFACE.get_size()
 
+        if OPTIONS['center_text']:
+            textRect.center = (gamewidth // 2, gameheight // 2)
 
-        # textRect.center = (gamewidth // 2, gameheight // 2)
-        DISPLAYSURFACE.fill(black)
+        DISPLAYSURFACE.fill(OPTIONS['background_color'])
         DISPLAYSURFACE.blit(text, textRect)
 
         pygame.display.update()
