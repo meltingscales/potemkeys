@@ -60,7 +60,10 @@ def window_always_on_top_WIN32(pygame: pygame, x: int = 100, y: int = 200):
     )
 
 
-def window_always_on_top_X11(pygame: pygame, xdotool_search='main.py'):
+def window_always_on_top_X11(xdotool_search=__file__):
+
+    print("searching with xdotool for class "+xdotool_search)
+
     process = subprocess.Popen(
         ['xdotool', 'search', '--class', xdotool_search],
         stdout=subprocess.PIPE,
@@ -165,14 +168,15 @@ if __name__ == '__main__':
     pygame.display.set_caption(TITLE)
 
     # make on top
-    if is_windows():
-        window_always_on_top_WIN32(
-            pygame,
-            x=int((screenwidth / 2) - (gamewidth / 2)),
-            y=int((screenheight / 2) - (gameheight / 2))
-        )
-    else:
-        window_always_on_top_X11(pygame)
+    if OPTIONS['window_always_on_top']:
+        if is_windows():
+            window_always_on_top_WIN32(
+                pygame,
+                x=int((screenwidth / 2) - (gamewidth / 2)),
+                y=int((screenheight / 2) - (gameheight / 2))
+            )
+        else:
+            window_always_on_top_X11()
 
     # main game loop
     while RUNNING:
