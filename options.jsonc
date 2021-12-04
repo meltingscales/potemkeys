@@ -63,10 +63,10 @@
             "C": "[LS]  L Stick Press",
             "N": "[RS]  R Stick Press",
             //
-            "U": "[1]   Left Punch",
-            "I": "[2]   Right Punch",
-            "J": "[3]   Left Kick",
-            "K": "[4]   Right Kick"
+            "U": "[1](X)    Left Punch",
+            "I": "[2](Y)    Right Punch",
+            "J": "[3](A)    Left Kick",
+            "K": "[4](B)    Right Kick"
         }
     }
 }
