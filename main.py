@@ -29,11 +29,14 @@ RUNNING = True
 MESSAGE = ['hello :)']
 
 white = (255, 255, 255)
+black = (0,0,0)
+red = (255, 0, 0)
 green = (0, 255, 0)
 blue = (0, 0, 128)
 
 
-def window_always_on_top(hwnd: int, x: int = 100, y: int = 200):
+def window_always_on_top_WIN32(pygame: pygame, x: int = 100, y: int = 200):
+
     user32 = ctypes.WinDLL("user32")
     user32.SetWindowPos.restype = wintypes.HWND
     user32.SetWindowPos.argtypes = [
@@ -41,6 +44,8 @@ def window_always_on_top(hwnd: int, x: int = 100, y: int = 200):
         wintypes.INT, wintypes.INT,
         wintypes.INT, wintypes.INT, wintypes.UINT
     ]
+
+    hwnd=pygame.display.get_wm_info()['window']
 
     user32.SetWindowPos(
         hwnd, -1,
@@ -117,12 +122,11 @@ if __name__ == '__main__':
         (gamewidth, gameheight), pygame.RESIZABLE
     )
     pygame.display.set_caption(TITLE)
-    # our int handle is pygame.display.get_wm_info()['window']
+    # our int handle is 
 
     # make on top
-    window_handle: int = pygame.display.get_wm_info()['window']
-    window_always_on_top(
-        window_handle,
+    window_always_on_top_WIN32(
+        pygame,
         x=int((screenwidth/2)-(gamewidth/2)),
         y=int((screenheight/2)-(gameheight/2))
     )
@@ -136,14 +140,14 @@ if __name__ == '__main__':
                 pygame.quit()
                 sys.exit()
 
-        text = FONT.render(MESSAGE[0], True, green, blue)
+        text = FONT.render(MESSAGE[0], True, red, black)
         textRect = text.get_rect()
         
         gamewidth, gameheight = DISPLAYSURFACE.get_size()
 
 
         textRect.center = (gamewidth // 2, gameheight // 2)
-        DISPLAYSURFACE.fill(white)
+        DISPLAYSURFACE.fill(black)
         DISPLAYSURFACE.blit(text, textRect)
 
         pygame.display.update()
