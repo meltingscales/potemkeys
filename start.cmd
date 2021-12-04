@@ -3,7 +3,7 @@ WHERE pipenv
 IF %ERRORLEVEL% NEQ 0 python -m pip install pipenv
 
 pipenv install
-pipenv run python FGfFwK.py
+pipenv run python FGfGwK.py
 
 echo "Done."
 

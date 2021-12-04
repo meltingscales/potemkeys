@@ -61,8 +61,7 @@ def window_always_on_top_WIN32(pygame: pygame, x: int = 100, y: int = 200):
 
 
 def window_always_on_top_X11(xdotool_search=__file__):
-
-    print("searching with xdotool for class "+xdotool_search)
+    print("searching with xdotool for class " + xdotool_search)
 
     process = subprocess.Popen(
         ['xdotool', 'search', '--class', xdotool_search],
@@ -124,8 +123,11 @@ if OPTIONS['current_keymap'] not in OPTIONS['keymaps'].keys():
 ACTIVE_KEYMAP = OPTIONS['keymaps'][OPTIONS['current_keymap']]
 MESSAGE = ['You are playing ' + OPTIONS['current_keymap']]
 
+LAST_KEY = [None]
+REPEATS = [1]
 
-def on_press(key, strptr=MESSAGE):
+
+def on_press(key, strptr=MESSAGE, repeatsptr=REPEATS, lastkeyptr=LAST_KEY):
     try:
         print('alphanumeric key {0} pressed'.format(key.char))
         strptr[0] = "{}".format(key.char)
@@ -135,6 +137,15 @@ def on_press(key, strptr=MESSAGE):
             strptr[0] += ' = {:2s}'.format(ACTIVE_KEYMAP[normalized_key])
         else:
             strptr[0] += ' = ?'
+
+        if lastkeyptr[0] == normalized_key:
+            # they mashin', show it
+            repeatsptr[0] += 1
+            strptr[0] += f' (x{repeatsptr[0]})'
+        else:
+            # not mashin', reset
+            repeatsptr[0] = 1
+        lastkeyptr[0] = normalized_key
 
     except AttributeError:
         print('special key {0} pressed'.format(key))
