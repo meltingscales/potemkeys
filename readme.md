@@ -34,6 +34,8 @@ Edit [`options.jsonc`](/options.jsonc).
 
 You can make keymaps for literally any game that uses keyboard, by cloning the items under `keymaps`.
 
+If you make one and want to see it included in the "official" branch of this tool, just fork this repo and make a PR.
+
 ## License
 
 No license, DWYW, I'm not your dad.
