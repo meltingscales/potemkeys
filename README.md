@@ -6,6 +6,8 @@
 
 For those who can't remember {keyboard input => controller} mappings, and want to see them in-game.
 
+Created because TEKKEN doesn't show input conversions in multiplayer matches, and neither does Guilty Gear: Strive, and I wanted to see my inputs, but couldn't.
+
 Works on Windows 11, and tested on Ubuntu.
 
 ## How do I use it?
