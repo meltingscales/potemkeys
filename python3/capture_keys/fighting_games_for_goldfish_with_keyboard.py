@@ -11,7 +11,7 @@ import sys
 from pygame.locals import *
 from pynput.keyboard import Key, Listener
 import ctypes
-from ctypes import windll,wintypes, Structure, c_long, byref  # windows only
+from ctypes import windll, wintypes, Structure, c_long, byref  # windows only
 import win32gui
 import win32con
 import win32api
@@ -48,12 +48,20 @@ NOT_TOPMOST = -2
 #     windll.user32.GetWindowRect(window, byref(rc))
 #     windll.user32.SetWindowPos(window, -1, rc.left, rc.top, 0, 0, 0x0001)
 
-def window_always_on_top(hwnd:int):
+def window_always_on_top(hwnd: int, x: int = 100, y: int = 200):
     user32 = ctypes.WinDLL("user32")
     user32.SetWindowPos.restype = wintypes.HWND
-    user32.SetWindowPos.argtypes = [wintypes.HWND, wintypes.HWND, wintypes.INT, wintypes.INT, wintypes.INT, wintypes.INT, wintypes.UINT]
-    user32.SetWindowPos(hwnd, -1, 600, 300, 0, 0, 0x0001)
+    user32.SetWindowPos.argtypes = [
+        wintypes.HWND, wintypes.HWND,
+        wintypes.INT, wintypes.INT,
+        wintypes.INT, wintypes.INT, wintypes.UINT
+    ]
 
+    user32.SetWindowPos(
+        hwnd, -1,
+        x, y,
+        0, 0, 0x0001
+    )
 
 
 # keymaps
@@ -83,10 +91,12 @@ def on_press(key):
 def on_release(key):
 
     print('{0} released'.format(key))
-    if key == Key.esc:
-        # Stop listener
-        return False
+    # if key == Key.esc:
+    #     # Stop listener
+    #     return False
 
+
+MESSAGE = 'This app is for goldfish who can\'t remember fucking buttons. Are you a goldfish? :3c'
 
 if __name__ == '__main__':
 
@@ -94,19 +104,33 @@ if __name__ == '__main__':
     keylistener = Listener(on_press=on_press, on_release=on_release)
     keylistener.start()
 
+    width, height = 400, 300
+
     pygame.init()
-    DISPLAYSURF = pygame.display.set_mode((400, 300))
-    pygame.display.set_caption('Hello World!')
+    DISPLAYSURF = pygame.display.set_mode((width, height))
+    pygame.display.set_caption(MESSAGE)
     # our int handle is pygame.display.get_wm_info()['window']
 
+    # make on top
     window_handle: int = pygame.display.get_wm_info()['window']
+    window_always_on_top(
+        window_handle,
+        x=int((1920/2)-(width/2)),
+        y=int((1080/2)-(height/2)) # who cares????? so what, you can do math 😭😔
+    )
 
-    window_always_on_top(window_handle)
+    # TEXT!!!!!!
 
-    while True:  # main game loop
+    # asdf. todo
+
+    # end TEXT
+
+    # main game loop
+    while True:
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
 
         pygame.display.update()
+        pygame.display.flip()
