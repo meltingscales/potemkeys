@@ -38,7 +38,7 @@ ICON_FILE = './pelleds.jpg'
 
 OPTIONS = {}
 
-with open(OPTIONS_FILE) as fh:
+with open(OPTIONS_FILE, encoding='utf-8') as fh:
     OPTIONS = json5.load(fh)
 
 

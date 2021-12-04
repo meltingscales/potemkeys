@@ -20,10 +20,10 @@
     "font_size": 32,
     "keymaps": {
         "GG:S Default": {
-            "W": "[^]   Jump",
-            "A": "[<]   Left",
-            "S": "[v]   Crouch",
-            "D": "[>]   Right",
+            "W": "[↑]   Jump",
+            "A": "[←]   Left",
+            "S": "[↓]   Crouch",
+            "D": "[→]   Right",
             //
             "U": "[P]   Punch",
             "I": "[S]   Slash",
@@ -32,10 +32,10 @@
             "O": "[D]   Dust"
         },
         "GG:S Henry Custom": { //same as default, just E/R are RC/PB
-            "W": "[^]   Jump",
-            "A": "[<]   Left",
-            "S": "[v]   Crouch",
-            "D": "[>]   Right",
+            "W": "[↑]   Jump",
+            "A": "[←]   Left",
+            "S": "[↓]   Crouch",
+            "D": "[→]   Right",
             //
             "U": "[P]   Punch",
             "I": "[S]   Slash",
@@ -47,10 +47,10 @@
             "R": "[PB]  Psych Burst"
         },
         "Tekken 7 Default": {
-            "W": "[^]   Jump",
-            "A": "[<]   Left",
-            "S": "[v]   Crouch",
-            "D": "[>]   Right"
+            "W": "[↑]   Jump",
+            "A": "[←]   Left",
+            "S": "[↓]   Crouch",
+            "D": "[→]   Right",
             //TODO finish this!
         }
     }
