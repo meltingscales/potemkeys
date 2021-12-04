@@ -24,7 +24,13 @@ NOMOVE = 2
 TOPMOST = -1
 NOT_TOPMOST = -2
 
-# import my_cock
+TITLE = 'This app is for goldfish who can\'t remember buttons. Are you a goldfish? :3c'
+RUNNING = True
+MESSAGE=['phucking beesechurger']
+
+white = (255, 255, 255)
+green = (0, 255, 0)
+blue = (0, 0, 128)
 
 # class RECT(Structure):
 #     _fields_ = [
@@ -79,10 +85,11 @@ game_map = {
 }
 
 
-def on_press(key):
+def on_press(key,strref=MESSAGE):
 
     try:
         print('alphanumeric key {0} pressed'.format(key.char))
+        strref[0]="NIGGA YOU PRESSING "+key.char+" ?????"
 
     except AttributeError:
         print('special key {0} pressed'.format(key))
@@ -96,7 +103,6 @@ def on_release(key):
     #     return False
 
 
-MESSAGE = 'This app is for goldfish who can\'t remember fucking buttons. Are you a goldfish? :3c'
 
 if __name__ == '__main__':
 
@@ -107,8 +113,10 @@ if __name__ == '__main__':
     width, height = 400, 300
 
     pygame.init()
-    DISPLAYSURF = pygame.display.set_mode((width, height))
-    pygame.display.set_caption(MESSAGE)
+
+    FONT = pygame.font.SysFont("Arial",32)
+    DISPLAYSURFACE = pygame.display.set_mode((width, height))
+    pygame.display.set_caption(TITLE)
     # our int handle is pygame.display.get_wm_info()['window']
 
     # make on top
@@ -116,21 +124,23 @@ if __name__ == '__main__':
     window_always_on_top(
         window_handle,
         x=int((1920/2)-(width/2)),
-        y=int((1080/2)-(height/2)) # who cares????? so what, you can do math 😭😔
+        # who cares????? so what, you can do math 😭😔
+        y=int((1080/2)-(height/2))
     )
-
-    # TEXT!!!!!!
-
-    # asdf. todo
-
-    # end TEXT
-
+    
     # main game loop
-    while True:
+    while RUNNING:
+
+        # handle game events
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
 
+        text = FONT.render(MESSAGE[0], True, green, blue)
+        textRect = text.get_rect()
+        textRect.center = (width // 2, height // 2)
+        DISPLAYSURFACE.fill(white)
+        DISPLAYSURFACE.blit(text, textRect)
+
         pygame.display.update()
-        pygame.display.flip()
