@@ -32,6 +32,8 @@ When I'm less lazy (never) I will make X11 equivalents for the win32 API code I 
 
 Edit [`options.jsonc`](/options.jsonc).
 
+You can make keymaps for literally any game that uses keyboard, by cloning the items under `keymaps`.
+
 ## License
 
 No license, DWYW, I'm not your dad.
