@@ -3,7 +3,7 @@
 # links that make me want to `git commit -m 'fortnite battle royale'`
 # https://stackoverflow.com/questions/25381589/pygame-set-window-on-top-without-changing-its-position
 
-import yaml
+import json5
 import pygame
 import sys
 from pygame.locals import *
@@ -19,11 +19,12 @@ NOT_TOPMOST = -2
 TITLE = 'This app is for goldfish who can\'t remember buttons. Are you a goldfish? :3c'
 RUNNING = True
 MESSAGE = ['hello :)']
+OPTIONS_FILE='./options.jsonc'
 
 OPTIONS = {}
 
-with open('options.yaml') as fh:
-    OPTIONS = yaml.load(fh, Loader=yaml.SafeLoader)
+with open(OPTIONS_FILE) as fh:
+    OPTIONS = json5.load(fh)
 
 
 def window_always_on_top_WIN32(pygame: pygame, x: int = 100, y: int = 200):
@@ -44,35 +45,16 @@ def window_always_on_top_WIN32(pygame: pygame, x: int = 100, y: int = 200):
         0, 0, 0x0001
     )
 
+ACTIVE_GAME_MAP = OPTIONS['keymaps'][OPTIONS['current_game']]
 
-# keymaps
-ggst_map = {
-    'W': "      jump",
-    'A': "      left",
-    'S': "      crouch",
-    'D': "      right",
-
-    'U': '[P]   Punch',
-    'I': '[S]   Slash',
-    'J': '[K]   Kick',
-    'K': '[HS]  HSlash',
-    'O': '[D]   Dust'
-}
-
-tekken7map = {
-    'W': "jump",
-    'A': "left",
-    'S': "crouch",
-    'D': "right",
-}
-
-ALL_GAME_MAPS = {
-    'GG:S': ggst_map,
-    'Tekken 7': tekken7map,
-}
-
-# just use GG:S for now
-ACTIVE_GAME_MAP = ALL_GAME_MAPS[OPTIONS['current_game']]
+# if they want a non existent game
+if OPTIONS['current_game'] not in OPTIONS['keymaps'].keys():
+    raise ValueError("""You have specified a game that is not configured!\n
+    You want: {}\n
+    Valid games: {}""".format(
+        OPTIONS['current_game'],
+        ','.join(list(OPTIONS['keymaps'].keys()))
+    ))
 
 MESSAGE = ['You are playing '+OPTIONS['current_game']]
 

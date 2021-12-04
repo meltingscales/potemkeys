@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 pygame = "*"
 pynput = "*"
-pyyaml = "*"
+json5 = "*"
 
 [dev-packages]
 

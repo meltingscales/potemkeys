@@ -31,8 +31,3 @@ When I'm less lazy (never) I will make X11 equivalents for the win32 API code I 
 ## Config
 
 Edit [`options.yaml`](/options.yaml).
-
-Currently supported games:
-
--   `Tekken 7`
--   `GG:S`
