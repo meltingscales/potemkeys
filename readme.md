@@ -22,7 +22,7 @@ When I'm less lazy (never) I will make X11 equivalents for the win32 API code I 
     pipenv run python main.py
     ```
 
-    Or, just run `start.cmd
+    Or, just run `start.cmd`.
 
 4.  The window should stay on top.
 
