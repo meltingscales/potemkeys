@@ -17,7 +17,7 @@ Works on Windows 11, and tested on Ubuntu.
     ```
     python -m pip install pipenv
     pipenv install
-    pipenv run python main.py
+    pipenv run python FGfFwK.py
     ```
 
     Or, just run `start.cmd` or `start.sh`.

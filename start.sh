@@ -12,6 +12,6 @@ echo "Making sure required tools are installed."
 sudo apt-get install xdotool wmctrl
 
 pipenv install
-pipenv run python main.py
+pipenv run python FGfFwK.py
 
 echo "Done."
