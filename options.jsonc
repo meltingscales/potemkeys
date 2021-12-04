@@ -2,6 +2,10 @@
     "current_keymap": "GG:S Henry Custom", //name must match a name in "keymaps" below
     "center_text": false,
     "window_always_on_top": true,
+    "window_width": 700,
+    "window_height": 100,
+    "screen_width": 1920,
+    "screen_height": 1080,
     "background_color": [ //R,G,B
         20,
         20,

@@ -153,8 +153,8 @@ if __name__ == '__main__':
     keylistener = Listener(on_press=on_press, on_release=on_release)
     keylistener.start()
 
-    gamewidth, gameheight = 400, 300
-    screenwidth, screenheight = 1920, 1080
+    window_width, window_height = OPTIONS['window_width'], OPTIONS['window_height']
+    screen_width, screen_height = OPTIONS['screen_width'], OPTIONS['screen_height']
 
     pygame.init()
 
@@ -163,7 +163,7 @@ if __name__ == '__main__':
 
     FONT = pygame.font.SysFont(OPTIONS['font_type'], OPTIONS['font_size'])
     DISPLAYSURFACE = pygame.display.set_mode(
-        (gamewidth, gameheight), pygame.RESIZABLE
+        (window_width, window_height), pygame.RESIZABLE
     )
     pygame.display.set_caption(TITLE)
 
@@ -172,8 +172,8 @@ if __name__ == '__main__':
         if is_windows():
             window_always_on_top_WIN32(
                 pygame,
-                x=int((screenwidth / 2) - (gamewidth / 2)),
-                y=int((screenheight / 2) - (gameheight / 2))
+                x=int((screen_width / 2) - (window_width / 2)),
+                y=int((screen_height / 2) - (window_height / 2))
             )
         else:
             window_always_on_top_X11()
@@ -191,10 +191,10 @@ if __name__ == '__main__':
             MESSAGE[0], True, OPTIONS['text_color'], OPTIONS['background_color'])
         textRect = text.get_rect()
 
-        gamewidth, gameheight = DISPLAYSURFACE.get_size()
+        window_width, window_height = DISPLAYSURFACE.get_size()
 
         if OPTIONS['center_text']:
-            textRect.center = (gamewidth // 2, gameheight // 2)
+            textRect.center = (window_width // 2, window_height // 2)
 
         DISPLAYSURFACE.fill(OPTIONS['background_color'])
         DISPLAYSURFACE.blit(text, textRect)
