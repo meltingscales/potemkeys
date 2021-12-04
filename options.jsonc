@@ -1,5 +1,5 @@
 {
-    "current_game": "GG:S", //name must match a name in "keymaps" below
+    "current_keymap": "GG:S Henry Custom", //name must match a name in "keymaps" below
     "center_text": false,
     "background_color": [ //R,G,B
         20,
@@ -14,7 +14,7 @@
     "font_type": "Consolas",
     "font_size": 32,
     "keymaps": {
-        "GG:S": {
+        "GG:S Default": {
             "W": "[^]   Jump",
             "A": "[<]   Left",
             "S": "[v]   Crouch",
@@ -26,7 +26,22 @@
             "K": "[HS]  HSlash",
             "O": "[D]   Dust"
         },
-        "Tekken 7": {
+        "GG:S Henry Custom": { //same as default, just E/R are RC/PB
+            "W": "[^]   Jump",
+            "A": "[<]   Left",
+            "S": "[v]   Crouch",
+            "D": "[>]   Right",
+            //
+            "U": "[P]   Punch",
+            "I": "[S]   Slash",
+            "J": "[K]   Kick",
+            "K": "[HS]  HSlash",
+            "O": "[D]   Dust",
+            // my custom keys below
+            "E": "[RC]  Roman Cancel",
+            "R": "[PB]  Psych Burst"
+        },
+        "Tekken 7 Default": {
             "W": "[^]   Jump",
             "A": "[<]   Left",
             "S": "[v]   Crouch",

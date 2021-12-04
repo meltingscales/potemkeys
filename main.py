@@ -47,16 +47,16 @@ def window_always_on_top_WIN32(pygame: pygame, x: int = 100, y: int = 200):
 
 
 # if they want a non existent game
-if OPTIONS['current_game'] not in OPTIONS['keymaps'].keys():
+if OPTIONS['current_keymap'] not in OPTIONS['keymaps'].keys():
     raise ValueError("""You have specified a game that is not configured!\n
     You want: {}\n
     Valid games: {}""".format(
-        OPTIONS['current_game'],
+        OPTIONS['current_keymap'],
         ','.join(list(OPTIONS['keymaps'].keys()))
     ))
 
-ACTIVE_GAME_MAP = OPTIONS['keymaps'][OPTIONS['current_game']]
-MESSAGE = ['You are playing '+OPTIONS['current_game']]
+ACTIVE_KEYMAP = OPTIONS['keymaps'][OPTIONS['current_keymap']]
+MESSAGE = ['You are playing '+OPTIONS['current_keymap']]
 
 
 def on_press(key, strptr=MESSAGE):
@@ -66,8 +66,10 @@ def on_press(key, strptr=MESSAGE):
         strptr[0] = "{}".format(key.char)
 
         normalized_key = key.char.upper()
-        if(normalized_key in ACTIVE_GAME_MAP.keys()):
-            strptr[0] += ' = {:2s}'.format(ACTIVE_GAME_MAP[normalized_key])
+        if(normalized_key in ACTIVE_KEYMAP.keys()):
+            strptr[0] += ' = {:2s}'.format(ACTIVE_KEYMAP[normalized_key])
+        else:
+            strptr[0] += ' = ?'
 
     except AttributeError:
         print('special key {0} pressed'.format(key))
