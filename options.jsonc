@@ -46,6 +46,7 @@
             "A": "[<]   Left",
             "S": "[v]   Crouch",
             "D": "[>]   Right"
+            //TODO finish this!
         }
     }
 }
