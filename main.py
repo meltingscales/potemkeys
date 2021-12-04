@@ -20,6 +20,7 @@ TITLE = 'This app is for goldfish who can\'t remember buttons. Are you a goldfis
 RUNNING = True
 MESSAGE = ['hello :)']
 OPTIONS_FILE='./options.jsonc'
+ICON_FILE='./pelleds.jpg'
 
 OPTIONS = {}
 
@@ -93,6 +94,9 @@ if __name__ == '__main__':
     screenwidth, screenheight = 1920, 1080
 
     pygame.init()
+    
+    pygame_icon = pygame.image.load(ICON_FILE)
+    pygame.display.set_icon(pygame_icon)
 
     FONT = pygame.font.SysFont(OPTIONS['font_type'], OPTIONS['font_size'])
     DISPLAYSURFACE = pygame.display.set_mode(
