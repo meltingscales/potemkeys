@@ -1,4 +1,4 @@
-{
+{ //json5 allows for comments :)
     "current_keymap": "GG:S Henry Custom", //name must match a name in "keymaps" below
     "center_text": false,
     "background_color": [ //R,G,B

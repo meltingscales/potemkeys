@@ -8,8 +8,6 @@ For those who can't remember {keyboard input => controller} mappings, and want t
 
 ## How do I use it?
 
-You must use Windows currently. 
-
 When I'm less lazy (never) I will make X11 equivalents for the win32 API code I use to make the window stay on top.
 
 1.  Install Python version 3.whatever

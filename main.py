@@ -1,26 +1,39 @@
-# keylogger using pynput module
+#!/usr/bin/env python
 
 # links that make me want to `git commit -m 'fortnite battle royale'`
 # https://stackoverflow.com/questions/25381589/pygame-set-window-on-top-without-changing-its-position
+import os
+import sys
 
+
+def is_windows():
+    return 'win' in sys.platform
+
+
+def not_windows():
+    return not is_windows()
+
+
+if not_windows():
+    os.environ['DISPLAY'] = ':0'
+
+print(os.environ['DISPLAY'])
+import pynput
 import json5
 import pygame
-import sys
 from pygame.locals import *
 from pynput.keyboard import Listener
-import ctypes
-from ctypes import wintypes  # windows only
 
-NOSIZE = 1
-NOMOVE = 2
-TOPMOST = -1
-NOT_TOPMOST = -2
+print(is_windows())
+if is_windows():
+    import ctypes
+    from ctypes import wintypes
 
 TITLE = 'This app is for goldfish who can\'t remember buttons. Are you a goldfish? :3c'
 RUNNING = True
 MESSAGE = ['hello :)']
-OPTIONS_FILE='./options.jsonc'
-ICON_FILE='./pelleds.jpg'
+OPTIONS_FILE = './options.jsonc'
+ICON_FILE = './pelleds.jpg'
 
 OPTIONS = {}
 
@@ -29,7 +42,6 @@ with open(OPTIONS_FILE) as fh:
 
 
 def window_always_on_top_WIN32(pygame: pygame, x: int = 100, y: int = 200):
-
     user32 = ctypes.WinDLL("user32")
     user32.SetWindowPos.restype = wintypes.HWND
     user32.SetWindowPos.argtypes = [
@@ -57,17 +69,16 @@ if OPTIONS['current_keymap'] not in OPTIONS['keymaps'].keys():
     ))
 
 ACTIVE_KEYMAP = OPTIONS['keymaps'][OPTIONS['current_keymap']]
-MESSAGE = ['You are playing '+OPTIONS['current_keymap']]
+MESSAGE = ['You are playing ' + OPTIONS['current_keymap']]
 
 
 def on_press(key, strptr=MESSAGE):
-
     try:
         print('alphanumeric key {0} pressed'.format(key.char))
         strptr[0] = "{}".format(key.char)
 
         normalized_key = key.char.upper()
-        if(normalized_key in ACTIVE_KEYMAP.keys()):
+        if normalized_key in ACTIVE_KEYMAP.keys():
             strptr[0] += ' = {:2s}'.format(ACTIVE_KEYMAP[normalized_key])
         else:
             strptr[0] += ' = ?'
@@ -77,7 +88,6 @@ def on_press(key, strptr=MESSAGE):
 
 
 def on_release(key):
-
     print('{0} released'.format(key))
     # if key == Key.esc:
     #     # Stop listener
@@ -94,7 +104,7 @@ if __name__ == '__main__':
     screenwidth, screenheight = 1920, 1080
 
     pygame.init()
-    
+
     pygame_icon = pygame.image.load(ICON_FILE)
     pygame.display.set_icon(pygame_icon)
 
@@ -106,11 +116,14 @@ if __name__ == '__main__':
     # our int handle is
 
     # make on top
-    window_always_on_top_WIN32(
-        pygame,
-        x=int((screenwidth/2)-(gamewidth/2)),
-        y=int((screenheight/2)-(gameheight/2))
-    )
+    if is_windows():
+        window_always_on_top_WIN32(
+            pygame,
+            x=int((screenwidth / 2) - (gamewidth / 2)),
+            y=int((screenheight / 2) - (gameheight / 2))
+        )
+    else:
+        print("TODO staple window on linux displays...")
 
     # main game loop
     while RUNNING:

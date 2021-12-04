@@ -7,6 +7,7 @@ name = "pypi"
 pygame = "*"
 pynput = "*"
 json5 = "*"
+python3-xlib = { version = "*", sys_platform = "!= 'win32'" }
 
 [dev-packages]
 
