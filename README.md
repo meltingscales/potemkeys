@@ -26,7 +26,7 @@ Works on Windows 11, and tested on Ubuntu.
 
 4.  The window should stay on top.
 
-    Play your game in borderless mode and see the inputs get transformed and shown to you.
+    ***Play your game in borderless/windowed mode*** and see the inputs get transformed and shown to you.
 
 ## Config
 
