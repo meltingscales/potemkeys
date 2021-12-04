@@ -6,9 +6,9 @@
 
 For those who can't remember {keyboard input => controller} mappings, and want to see them in-game.
 
-## How do I use it?
+Works on Windows 11, and tested on Ubuntu.
 
-When I'm less lazy (never) I will make X11 equivalents for the win32 API code I use to make the window stay on top.
+## How do I use it?
 
 1.  Install Python version 3.whatever
 2.  Clone this repo
@@ -20,7 +20,7 @@ When I'm less lazy (never) I will make X11 equivalents for the win32 API code I 
     pipenv run python main.py
     ```
 
-    Or, just run `start.cmd`.
+    Or, just run `start.cmd` or `start.sh`.
 
 4.  The window should stay on top.
 
