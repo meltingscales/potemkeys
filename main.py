@@ -3,7 +3,9 @@
 # links that make me want to `git commit -m 'fortnite battle royale'`
 # https://stackoverflow.com/questions/25381589/pygame-set-window-on-top-without-changing-its-position
 import os
+import subprocess
 import sys
+import time
 
 
 def is_windows():
@@ -24,7 +26,6 @@ import pygame
 from pygame.locals import *
 from pynput.keyboard import Listener
 
-print(is_windows())
 if is_windows():
     import ctypes
     from ctypes import wintypes
@@ -57,6 +58,55 @@ def window_always_on_top_WIN32(pygame: pygame, x: int = 100, y: int = 200):
         x, y,
         0, 0, 0x0001
     )
+
+
+def window_always_on_top_X11(pygame: pygame, xdotool_search='main.py'):
+    process = subprocess.Popen(
+        ['xdotool', 'search', '--class', xdotool_search],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE
+    )
+    stdout, stderr = process.communicate()
+    stdout = stdout.decode('utf-8')
+    stderr = stderr.decode('utf-8')
+
+    print(stdout)
+    print(stderr)
+
+    if stdout.strip() == '':
+        raise Exception("Error, could not find a window ID for {0}".format(xdotool_search))
+
+    windowid = None
+    try:
+        windowid = int(stdout.strip())
+    except ValueError:
+        raise Exception("Error, was returned '{0}' from xdotool instead of an int!".format(stdout))
+
+    # do something with windowid...
+    print("Found window with ID {0}. Going to use wmctrl to make it on top.".format(windowid))
+
+    # show info
+    process = subprocess.Popen(
+        ['xprop', '-id', str(windowid)],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE
+    )
+    stdout, stderr = process.communicate()
+    stdout = stdout.decode('utf-8')
+    stderr = stderr.decode('utf-8')
+    print(stdout)
+    print(stderr)
+
+    process = subprocess.Popen(
+        ['wmctrl', '-i', '-r', str(windowid), '-b', 'add,above'],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE
+    )
+    stdout, stderr = process.communicate()
+    stdout = stdout.decode('utf-8')
+    stderr = stderr.decode('utf-8')
+    print(stdout)
+    print(stderr)
 
 
 # if they want a non existent game
@@ -113,7 +163,6 @@ if __name__ == '__main__':
         (gamewidth, gameheight), pygame.RESIZABLE
     )
     pygame.display.set_caption(TITLE)
-    # our int handle is
 
     # make on top
     if is_windows():
@@ -123,7 +172,7 @@ if __name__ == '__main__':
             y=int((screenheight / 2) - (gameheight / 2))
         )
     else:
-        print("TODO staple window on linux displays...")
+        window_always_on_top_X11(pygame)
 
     # main game loop
     while RUNNING:
