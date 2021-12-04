@@ -30,4 +30,10 @@ When I'm less lazy (never) I will make X11 equivalents for the win32 API code I 
 
 ## Config
 
-Edit [`options.yaml`](/options.yaml).
+Edit [`options.jsonc`](/options.jsonc).
+
+## License
+
+No license, DWYW, I'm not your dad.
+
+Just make sure to link/PR, or just fork it if I die or something :P
