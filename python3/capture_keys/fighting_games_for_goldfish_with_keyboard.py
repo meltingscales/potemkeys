@@ -48,7 +48,7 @@ NOT_TOPMOST = -2
 #     windll.user32.GetWindowRect(window, byref(rc))
 #     windll.user32.SetWindowPos(window, -1, rc.left, rc.top, 0, 0, 0x0001)
 
-def staple_my_dick(hwnd:int):
+def window_always_on_top(hwnd:int):
     user32 = ctypes.WinDLL("user32")
     user32.SetWindowPos.restype = wintypes.HWND
     user32.SetWindowPos.argtypes = [wintypes.HWND, wintypes.HWND, wintypes.INT, wintypes.INT, wintypes.INT, wintypes.INT, wintypes.UINT]
@@ -101,7 +101,7 @@ if __name__ == '__main__':
 
     window_handle: int = pygame.display.get_wm_info()['window']
 
-    staple_my_dick(window_handle)
+    window_always_on_top(window_handle)
 
     while True:  # main game loop
         for event in pygame.event.get():
