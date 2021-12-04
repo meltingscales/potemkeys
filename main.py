@@ -45,7 +45,6 @@ def window_always_on_top_WIN32(pygame: pygame, x: int = 100, y: int = 200):
         0, 0, 0x0001
     )
 
-ACTIVE_GAME_MAP = OPTIONS['keymaps'][OPTIONS['current_game']]
 
 # if they want a non existent game
 if OPTIONS['current_game'] not in OPTIONS['keymaps'].keys():
@@ -56,6 +55,7 @@ if OPTIONS['current_game'] not in OPTIONS['keymaps'].keys():
         ','.join(list(OPTIONS['keymaps'].keys()))
     ))
 
+ACTIVE_GAME_MAP = OPTIONS['keymaps'][OPTIONS['current_game']]
 MESSAGE = ['You are playing '+OPTIONS['current_game']]
 
 
