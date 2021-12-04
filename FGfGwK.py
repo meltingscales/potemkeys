@@ -18,8 +18,8 @@ def not_windows():
 
 if not_windows():
     os.environ['DISPLAY'] = ':0'
+    print(os.environ['DISPLAY'])
 
-print(os.environ['DISPLAY'])
 import pynput
 import json5
 import pygame
