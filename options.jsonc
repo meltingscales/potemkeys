@@ -1,5 +1,5 @@
 { //json5 allows for comments :)
-    "current_keymap": "GG:S Henry Custom", //name must match a name in "keymaps" below
+    "current_keymap": "Tekken 7 Default", //name must match a name in "keymaps" below
     "center_text": false,
     "window_always_on_top": true,
     "window_width": 700,
@@ -51,7 +51,22 @@
             "A": "[←]   Left",
             "S": "[↓]   Crouch",
             "D": "[→]   Right",
-            //TODO finish this!
+            //
+            "B": "[Pause]",
+            "V": "[Select]",
+            //
+            "P": "[LB]  L Bumper",
+            "O": "[RB]  R Bumper",
+            ";": "[LT]  L Trigger",
+            "L": "[RT]  R Trigger",
+            //
+            "C": "[LS]  L Stick Press",
+            "N": "[RS]  R Stick Press",
+            //
+            "U": "[1]   Left Punch",
+            "I": "[2]   Right Punch",
+            "J": "[3]   Left Kick",
+            "K": "[4]   Right Kick"
         }
     }
 }
