@@ -3,21 +3,13 @@
 # links that make me want to `git commit -m 'fortnite battle royale'`
 # https://stackoverflow.com/questions/25381589/pygame-set-window-on-top-without-changing-its-position
 
-from typing import List
-import pynput
-import os
+import yaml
 import pygame
 import sys
 from pygame.locals import *
-from pynput.keyboard import Key, Listener
+from pynput.keyboard import Listener
 import ctypes
-from ctypes import windll, wintypes, Structure, c_long, byref  # windows only
-import win32gui
-import win32con
-import win32api
-from ctypes import POINTER, WINFUNCTYPE, windll
-from ctypes.wintypes import BOOL, HWND, RECT
-from ctypes import windll
+from ctypes import wintypes  # windows only
 
 NOSIZE = 1
 NOMOVE = 2
@@ -33,6 +25,11 @@ black = (0,0,0)
 red = (255, 0, 0)
 green = (0, 255, 0)
 blue = (0, 0, 128)
+
+OPTIONS={}
+
+with open('options.yaml') as fh:
+    OPTIONS = yaml.load(fh, Loader=yaml.SafeLoader)
 
 
 def window_always_on_top_WIN32(pygame: pygame, x: int = 100, y: int = 200):
@@ -56,16 +53,16 @@ def window_always_on_top_WIN32(pygame: pygame, x: int = 100, y: int = 200):
 
 # keymaps
 ggst_map = {
-    'W': "jump",
-    'A': "left",
-    'S': "crouch",
-    'D': "right",
+    'W': "      jump",
+    'A': "      left",
+    'S': "      crouch",
+    'D': "      right",
 
-    'U': '[P] Punch',
-    'I': '[S] Slash',
-    'J': '[K] Kick',
-    'K': '[HS] HSlash',
-    'O': '[D] Dust'
+    'U': '[P]   Punch',
+    'I': '[S]   Slash',
+    'J': '[K]   Kick',
+    'K': '[HS]  HSlash',
+    'O': '[D]   Dust'
 }
 
 tekken7map = {
@@ -81,18 +78,19 @@ ALL_GAME_MAPS = {
 }
 
 # just use GG:S for now
-ACTIVE_GAME_MAP = ALL_GAME_MAPS['GG:S']
+ACTIVE_GAME_MAP = ALL_GAME_MAPS[OPTIONS['current_game']]
 
+MESSAGE=['You are playing '+OPTIONS['current_game']]
 
-def on_press(key, strref=MESSAGE):
+def on_press(key, strptr=MESSAGE):
 
     try:
         print('alphanumeric key {0} pressed'.format(key.char))
-        strref[0] = "{}".format(key.char)
+        strptr[0] = "{}".format(key.char)
 
         normalized_key = key.char.upper()
         if(normalized_key in ACTIVE_GAME_MAP.keys()):
-            strref[0] += '={}'.format(ACTIVE_GAME_MAP[normalized_key])
+            strptr[0] += ' = {:2s}'.format(ACTIVE_GAME_MAP[normalized_key])
 
     except AttributeError:
         print('special key {0} pressed'.format(key))
@@ -146,7 +144,7 @@ if __name__ == '__main__':
         gamewidth, gameheight = DISPLAYSURFACE.get_size()
 
 
-        textRect.center = (gamewidth // 2, gameheight // 2)
+        # textRect.center = (gamewidth // 2, gameheight // 2)
         DISPLAYSURFACE.fill(black)
         DISPLAYSURFACE.blit(text, textRect)
 

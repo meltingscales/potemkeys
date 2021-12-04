@@ -17,10 +17,20 @@ When I'm less lazy (never) I will make X11 equivalents for the win32 API code I 
     ```
     python -m pip install pipenv
     pipenv install
-    pipenv shell
-    python main.py
+    pipenv run python main.py
     ```
+
+    Or, just run `start.cmd
 
 4.  The window should stay on top.
 
     Play your game in borderless mode and see the inputs get transformed and shown to you.
+
+## Config
+
+Edit [`options.yaml`](/options.yaml).
+
+Currently supported games:
+
+-   `Tekken 7`
+-   `GG:S`
