@@ -1,1 +1,0 @@
-These scripts set up useful tools on your Windows computer.

@@ -1,3 +1,0 @@
-Nevada    : 002
-Illinois  : 004
-Hell      : 001

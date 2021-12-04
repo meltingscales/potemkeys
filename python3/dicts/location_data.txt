@@ -1,7 +1,0 @@
-Tom,Nevada
-Larry,Illinois
-Max,Illinois
-Jerry,Nevada
-Carrie,Illinois
-Jack,Illinois
-Andrew,Hell

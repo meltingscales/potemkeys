@@ -1,4 +1,0 @@
-jack:100
-jill:130
-jack:100
-jack:200
