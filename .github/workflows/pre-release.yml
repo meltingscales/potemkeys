@@ -25,9 +25,9 @@ jobs:
       - run: "python3 -m pipenv install --dev"
       - run: "pipenv run pyinstaller --onefile ./FGfGwK.py"
       - run: "ls dist/"
-      - run: "ls dist/FGfGwK/"
+      - run: "ls dist/FGfGwK"
 
-      - uses: "./"
+      - uses: "henryfbp/FGfGwK@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
