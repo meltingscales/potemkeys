@@ -10,7 +10,14 @@ on:
 
 jobs:
   gh_pre_release:
-    runs-on: "ubuntu-latest"
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      # just an example matrix
+      matrix:
+        config:
+          - os: ubuntu-latest
+          - os: windows-latest
+
     env:
       JEST_VERBOSE: ${{ secrets.JEST_VERBOSE }}
 
@@ -18,9 +25,9 @@ jobs:
       - name: "Checkout source code"
         uses: "actions/checkout@v2.3.4"
 
-      - run: "python3 -m pip install pipenv"
       - run: "python3 -m pipenv install --dev"
       - run: "pipenv run pyinstaller --onefile ./FGfGwK.py"
+      - run: "ls dist/"
 
       - uses: "./packages/automatic-releases/"
         with:
@@ -29,6 +36,6 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            dist/FGfGwK.exe
+            dist/
             options.jsonc
         id: "automatic_releases"
