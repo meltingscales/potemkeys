@@ -18,7 +18,7 @@ Works on Windows 11, and tested on Ubuntu.
 
     ```
     python -m pip install pipenv
-    pipenv install
+    pipenv install --dev
     pipenv run python FGfFwK.py
     ```
 
