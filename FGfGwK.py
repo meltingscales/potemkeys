@@ -2,6 +2,11 @@
 
 # links that make me want to `git commit -m 'fortnite battle royale'`
 # https://stackoverflow.com/questions/25381589/pygame-set-window-on-top-without-changing-its-position
+from pynput.keyboard import Listener
+from pygame.locals import *
+import pygame
+import json5
+import pynput
 import os
 import subprocess
 import sys
@@ -20,15 +25,13 @@ if not_windows():
     os.environ['DISPLAY'] = ':0'
     print(os.environ['DISPLAY'])
 
-import pynput
-import json5
-import pygame
-from pygame.locals import *
-from pynput.keyboard import Listener
 
 if is_windows():
     import ctypes
     from ctypes import wintypes
+
+GIT_URL = 'https://github.com/HenryFBP/FGfGwK'
+CONFIG_URL = GIT_URL+"/raw/master/options.jsonc"
 
 TITLE = 'This app is for goldfish who can\'t remember buttons. Are you a goldfish? :3c'
 RUNNING = True
@@ -37,6 +40,11 @@ OPTIONS_FILE = './options.jsonc'
 ICON_FILE = './pelleds.jpg'
 
 OPTIONS = {}
+
+if not os.path.exists(OPTIONS_FILE):
+    input("Failed to load options file...\n"
+          "Please download it at {} and then place it in the same directory as the executable.\n > ".format(CONFIG_URL))
+
 
 with open(OPTIONS_FILE, encoding='utf-8') as fh:
     OPTIONS = json5.load(fh)
@@ -76,16 +84,19 @@ def window_always_on_top_X11(xdotool_search=__file__):
     print(stderr)
 
     if stdout.strip() == '':
-        raise Exception("Error, could not find a window ID for {0}".format(xdotool_search))
+        raise Exception(
+            "Error, could not find a window ID for {0}".format(xdotool_search))
 
     windowid = None
     try:
         windowid = int(stdout.strip())
     except ValueError:
-        raise Exception("Error, was returned '{0}' from xdotool instead of an int!".format(stdout))
+        raise Exception(
+            "Error, was returned '{0}' from xdotool instead of an int!".format(stdout))
 
     # do something with windowid...
-    print("Found window with ID {0}. Going to use wmctrl to make it on top.".format(windowid))
+    print("Found window with ID {0}. Going to use wmctrl to make it on top.".format(
+        windowid))
 
     # show info
     process = subprocess.Popen(

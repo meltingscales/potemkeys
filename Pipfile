@@ -10,6 +10,7 @@ json5 = "*"
 python3-xlib = { version = "*", sys_platform = "!= 'win32'" }
 
 [dev-packages]
+pyinstaller = "*"
 
 [requires]
 python_version = "3"
