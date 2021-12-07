@@ -10,11 +10,12 @@ on:
 
 jobs:
   gh_pre_release:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.config.os }}
     strategy:
       matrix:
-        - os: ubuntu-latest
-        - os: windows-latest
+        config:
+          - os: ubuntu-latest
+          - os: windows-latest
 
     steps:
       - name: "Checkout source code"
@@ -30,8 +31,8 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: true
-          title: "Development Build for ${{ matrix.os }}"
+          title: "Development Build"
           files: |
             dist/*
             options.jsonc
-        id: "automatic_releases ${{ matrix.os }}"
+        id: ${{ matrix.config.os }}
