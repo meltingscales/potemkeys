@@ -10,6 +10,8 @@ import os
 import subprocess
 import sys
 from shutil import which
+import urllib.request
+
 
 required_linux_tools = {
     'xdotool': 'apt install xdotool',
@@ -56,9 +58,16 @@ ICON_FILE = './pelleds.jpg'
 OPTIONS = {}
 
 if not os.path.exists(OPTIONS_FILE):
-    input("Failed to load options file...\n"
-          "Please download it at {} and then place it in the same directory as the executable.\n > ".format(CONFIG_URL))
+    print("You don't have an options file. Downloading from '{}' into '{}'.".format(
+        CONFIG_URL,OPTIONS_FILE
+    ))
+    urllib.request.urlretrieve(CONFIG_URL, OPTIONS_FILE)
 
+if not os.path.exists(OPTIONS_FILE):    
+    input("Failed to automatically download options file...\n"
+          "Please download it at {} and then place it in the same directory as the executable.\n > ".format(CONFIG_URL))
+else:
+    print("Downloaded successfully.")
 
 with open(OPTIONS_FILE, encoding='utf-8') as fh:
     OPTIONS = json5.load(fh)
