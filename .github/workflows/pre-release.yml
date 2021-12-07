@@ -26,7 +26,7 @@ jobs:
       - run: "pipenv run pyinstaller --onefile ./FGfGwK.py"
       - run: "ls dist/"
 
-      - uses: "henryfbp/FGfGwK@latest"
+      - uses: "./packages/automatic-releases/"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
