@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5b1084efee164318875bb7ea8db8347e5756a3cd6de8ee442b9813ef804a8a4f"
+            "sha256": "8da9d644b9df5972d8551a17a7961547cf8be95d2935e617a3e3187a972c3a2b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,13 +16,6 @@
         ]
     },
     "default": {
-        "evdev": {
-            "hashes": [
-                "sha256:8782740eb1a86b187334c07feb5127d3faa0b236e113206dfe3ae8f77fb1aaf1"
-            ],
-            "markers": "'linux' in sys_platform",
-            "version": "==1.4.0"
-        },
         "json5": {
             "hashes": [
                 "sha256:823e510eb355949bed817e1f3e2d682455dc6af9daf6066d5698d6a2ca4481c2",
@@ -104,21 +97,21 @@
             "index": "pypi",
             "version": "==1.7.5"
         },
-        "python-xlib": {
-            "hashes": [
-                "sha256:1ec6ce0de73d9e6592ead666779a5732b384e5b8fb1f1886bd0a81cafa477759",
-                "sha256:74d83a081f532bc07f6d7afcd6416ec38403d68f68b9b9dc9e1f28fbf2d799e9"
-            ],
-            "markers": "'linux' in sys_platform",
-            "version": "==0.31"
-        },
         "python3-xlib": {
             "hashes": [
                 "sha256:dc4245f3ae4aa5949c1d112ee4723901ade37a96721ba9645f2bfa56e5b383f8"
             ],
-            "index": "pypi",
             "markers": "sys_platform != 'win32'",
             "version": "==0.15"
+        },
+        "pywin32-ctypes": {
+            "hashes": [
+                "sha256:24ffc3b341d457d48e8922352130cf2644024a4ff09762a2261fd34c36ee5942",
+                "sha256:9dc2d991b3479cc2df15930958b674a48a227d5361d413827a4cfd0b5876fc98"
+            ],
+            "index": "pypi",
+            "markers": "sys_platform == 'win32'",
+            "version": "==0.2.0"
         },
         "six": {
             "hashes": [
@@ -137,13 +130,19 @@
             ],
             "version": "==0.17.2"
         },
-        "importlib-metadata": {
+        "future": {
             "hashes": [
-                "sha256:53ccfd5c134223e497627b9815d5030edf77d2ed573922f7a0b8f8bb81a1c100",
-                "sha256:75bdec14c397f528724c1bfd9709d660b33a4d2e77387a3358f20b848bb5e5fb"
+                "sha256:b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"
             ],
-            "markers": "python_version < '3.8'",
-            "version": "==4.8.2"
+            "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==0.18.2"
+        },
+        "pefile": {
+            "hashes": [
+                "sha256:344a49e40a94e10849f0fe34dddc80f773a12b40675bf2f7be4b8be578bdd94a"
+            ],
+            "markers": "sys_platform == 'win32'",
+            "version": "==2021.9.3"
         },
         "pyinstaller": {
             "hashes": [
@@ -167,29 +166,14 @@
             ],
             "version": "==2021.4"
         },
-        "setuptools": {
+        "pywin32-ctypes": {
             "hashes": [
-                "sha256:6d10741ff20b89cd8c6a536ee9dc90d3002dec0226c78fb98605bfb9ef8a7adf",
-                "sha256:d144f85102f999444d06f9c0e8c737fd0194f10f2f7e5fdb77573f6e2fa4fad0"
+                "sha256:24ffc3b341d457d48e8922352130cf2644024a4ff09762a2261fd34c36ee5942",
+                "sha256:9dc2d991b3479cc2df15930958b674a48a227d5361d413827a4cfd0b5876fc98"
             ],
-            "markers": "python_version >= '3.6'",
-            "version": "==59.5.0"
-        },
-        "typing-extensions": {
-            "hashes": [
-                "sha256:4ca091dea149f945ec56afb48dae714f21e8692ef22a395223bcd328961b6a0e",
-                "sha256:7f001e5ac290a0c0401508864c7ec868be4e701886d5b573a9528ed3973d9d3b"
-            ],
-            "markers": "python_version < '3.8'",
-            "version": "==4.0.1"
-        },
-        "zipp": {
-            "hashes": [
-                "sha256:71c644c5369f4a6e07636f0aa966270449561fcea2e3d6747b8d23efaa9d7832",
-                "sha256:9fe5ea21568a0a70e50f273397638d39b03353731e6cbbb3fd8502a33fec40bc"
-            ],
-            "markers": "python_version >= '3.6'",
-            "version": "==3.6.0"
+            "index": "pypi",
+            "markers": "sys_platform == 'win32'",
+            "version": "==0.2.0"
         }
     }
 }
