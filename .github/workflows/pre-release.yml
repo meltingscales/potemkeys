@@ -35,4 +35,4 @@ jobs:
           files: |
             dist/*
             options.jsonc
-        id: ${{ matrix.config.os }}
+        id: "automatic_releases"
