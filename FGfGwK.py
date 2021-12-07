@@ -6,11 +6,15 @@ from pynput.keyboard import Listener
 from pygame.locals import *
 import pygame
 import json5
-import pynput
 import os
 import subprocess
 import sys
-import time
+from shutil import which
+
+required_linux_tools = {
+    'xdotool': 'apt install xdotool',
+    'wmctrl': 'apt install wmctrl',
+}
 
 
 def is_windows():
@@ -21,14 +25,22 @@ def not_windows():
     return not is_windows()
 
 
-if not_windows():
-    os.environ['DISPLAY'] = ':0'
-    print(os.environ['DISPLAY'])
-
-
 if is_windows():
     import ctypes
     from ctypes import wintypes
+
+if not_windows():
+
+    # os.environ['DISPLAY'] = ':0'
+    # print(os.environ['DISPLAY'])
+
+    for toolname in required_linux_tools.keys():
+        packagename = required_linux_tools[toolname]
+        if not which(toolname):
+            raise FileNotFoundError(
+                ("Executable '{}' is missing. \n"
+                 "Please install the package by running '{}'.").format(
+                    toolname, packagename))
 
 GIT_URL = 'https://github.com/HenryFBP/FGfGwK'
 CONFIG_URL = GIT_URL+"/raw/master/options.jsonc"
