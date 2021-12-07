@@ -203,8 +203,9 @@ if __name__ == '__main__':
 
     pygame.init()
 
-    pygame_icon = pygame.image.load(ICON_FILE)
-    pygame.display.set_icon(pygame_icon)
+    if(os.path.exists(ICON_FILE)):
+        pygame_icon = pygame.image.load(ICON_FILE)
+        pygame.display.set_icon(pygame_icon)
 
     FONT = pygame.font.SysFont(OPTIONS['font_type'], OPTIONS['font_size'])
     DISPLAYSURFACE = pygame.display.set_mode(
