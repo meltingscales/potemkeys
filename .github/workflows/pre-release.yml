@@ -10,12 +10,11 @@ on:
 
 jobs:
   gh_pre_release:
-    runs-on: ${{ matrix.config.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        config:
-          - os: ubuntu-latest
-          - os: windows-latest
+        - os: ubuntu-latest
+        - os: windows-latest
 
     steps:
       - name: "Checkout source code"
