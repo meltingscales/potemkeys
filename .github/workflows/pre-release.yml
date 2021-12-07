@@ -31,8 +31,8 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: true
-          title: "Development Build"
+          title: "Development Build for ${{matrix.config.os}}"
           files: |
-            dist/
+            dist/*
             options.jsonc
-        id: "automatic_releases"
+        id: "automatic_releases_${{matrix.config.os}}"
