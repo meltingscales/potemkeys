@@ -1,3 +1,0 @@
-## Commits
-- f6f40d9: Fix all the bugs (Monalisa Octocat)
-- a6f40d9: tests: Fix tests failures (Monalisa Octocat)
