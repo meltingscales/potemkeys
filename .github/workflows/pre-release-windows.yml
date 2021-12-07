@@ -1,0 +1,38 @@
+---
+name: "pre-release-windows"
+
+on:
+  push:
+    branches:
+      - "master"
+    tags-ignore:
+      - "*"
+
+jobs:
+  gh_pre_release:
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      matrix:
+        config:
+          - os: ubuntu-latest
+          - os: windows-latest
+
+    steps:
+      - name: "Checkout source code"
+        uses: "actions/checkout@v2.4.0"
+
+      - run: "python3 -m pip install pipenv"
+      - run: "python3 -m pipenv install --dev"
+      - run: "pipenv run pyinstaller --onefile ./FGfGwK.py"
+      - run: "ls dist/"
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build Windows"
+          files: |
+            dist/*
+            options.jsonc
+        id: "automatic_releases_windows"
