@@ -1,5 +1,5 @@
 { //json5 allows for comments :)
-    "current_keymap": "Tekken 7 Default", //name must match a name in "keymaps" below
+    "current_keymap": "MELTY BLOOD: TYPE LUMINA Default", //name must match a name in "keymaps" below
     "center_text": false,
     "window_always_on_top": true,
     "window_width": 700,
@@ -67,6 +67,26 @@
             "I": "[2](Y)    Right Punch",
             "J": "[3](A)    Left Kick",
             "K": "[4](B)    Right Kick"
+        },
+        "MELTY BLOOD: TYPE LUMINA Default": {
+            "W": "[↑]       Jump",
+            "A": "[←]       Left",
+            "S": "[↓]       Crouch",
+            "D": "[→]       Right",
+            //
+            "U": "[A]   (x)     Weak",
+            "I": "[B]   (y)     Medium",
+            "O": "[C]   (b)     Strong",
+            "J": "[D]   (a)     Shield",
+            //
+            ";": "[BC]  (RB)    B+C",
+            "L": "[AD]  (LB)    A+D",
+            ":": "[AB]  (RT)    A+B",
+            "K": "[ABC] (LT)    A+B+C",
+            //
+            "T": "Start",
+            "R": "Restart"
+            //
         }
     }
 }
