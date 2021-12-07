@@ -37,10 +37,12 @@ if not_windows():
     for toolname in required_linux_tools.keys():
         packagename = required_linux_tools[toolname]
         if not which(toolname):
-            raise FileNotFoundError(
+            errormsg=(
                 ("Executable '{}' is missing. \n"
                  "Please install the package by running '{}'.").format(
                     toolname, packagename))
+            input(errormsg)
+            raise FileNotFoundError(errormsg)
 
 GIT_URL = 'https://github.com/HenryFBP/FGfGwK'
 CONFIG_URL = GIT_URL+"/raw/master/options.jsonc"
