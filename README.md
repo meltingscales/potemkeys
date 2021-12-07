@@ -12,6 +12,10 @@ Works on Windows 11, and tested on Ubuntu.
 
 ## How do I use it?
 
+See <https://github.com/HenryFBP/FGfGwK/releases> and download the provided exe/binary file.
+
+##  Development
+
 1.  Install Python version 3.whatever
 2.  Clone this repo
 3.  In the repo's folder, run:
