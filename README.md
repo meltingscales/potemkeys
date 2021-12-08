@@ -1,5 +1,7 @@
 # FGfGwK: Fighting Games for Goldfish with Keyboards
 
+[![forthebadge](https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](https://forthebadge.com)
+
 ![A picture of the application.](/window.png)
 
 ## What is this?
