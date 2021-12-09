@@ -2,8 +2,10 @@
 
 # links that make me want to `git commit -m 'fortnite battle royale'`
 # https://stackoverflow.com/questions/25381589/pygame-set-window-on-top-without-changing-its-position
-from pynput.keyboard import Listener
+from typing import List
+from pynput.keyboard import Key, Listener
 from pygame.locals import *
+import pynput
 import pygame
 import json5
 import os
@@ -39,7 +41,7 @@ if not_windows():
     for toolname in required_linux_tools.keys():
         packagename = required_linux_tools[toolname]
         if not which(toolname):
-            errormsg=(
+            errormsg = (
                 ("Executable '{}' is missing. \n"
                  "Please install the package by running '{}'.").format(
                     toolname, packagename))
@@ -51,7 +53,6 @@ CONFIG_URL = GIT_URL+"/raw/master/options.jsonc"
 
 TITLE = 'This app is for goldfish who can\'t remember buttons. Are you a goldfish? :3c'
 RUNNING = True
-MESSAGE = ['hello :)']
 OPTIONS_FILE = './options.jsonc'
 ICON_FILE = './pelleds.jpg'
 
@@ -59,11 +60,11 @@ OPTIONS = {}
 
 if not os.path.exists(OPTIONS_FILE):
     print("You don't have an options file. Downloading from '{}' into '{}'.".format(
-        CONFIG_URL,OPTIONS_FILE
+        CONFIG_URL, OPTIONS_FILE
     ))
     urllib.request.urlretrieve(CONFIG_URL, OPTIONS_FILE)
 
-if not os.path.exists(OPTIONS_FILE):    
+if not os.path.exists(OPTIONS_FILE):
     input("Failed to automatically download options file...\n"
           "Please download it at {} and then place it in the same directory as the executable.\n > ".format(CONFIG_URL))
 else:
@@ -154,42 +155,80 @@ if OPTIONS['current_keymap'] not in OPTIONS['keymaps'].keys():
         ','.join(list(OPTIONS['keymaps'].keys()))
     ))
 
-ACTIVE_KEYMAP = OPTIONS['keymaps'][OPTIONS['current_keymap']]
-MESSAGE = ['You are playing ' + OPTIONS['current_keymap']]
-
-LAST_KEY = [None]
-REPEATS = [1]
+class KeyEvent():
+    def __init__(self) -> None:
+        raise Exception("lol todo :p")
 
 
-def on_press(key, strptr=MESSAGE, repeatsptr=REPEATS, lastkeyptr=LAST_KEY):
+class GlobalState():
+    def __init__(self) -> None:
+        self.keymap = OPTIONS['keymaps'][OPTIONS['current_keymap']]
+        self.key_log: List[str] = []
+        self.message_log: List[str] = [
+            'You are playing ' + OPTIONS['current_keymap']]
+        self.repeats: int = 0
+
+    def add_key(self, k: str):
+        self.key_log.append(k)
+
+    def get_key(self, i=-1) -> str:
+        return self.key_log[i]
+
+    def get_key_log_length(self)->int:
+        return len(self.key_log)
+
+    def add_message(self, m: str):
+        self.message_log.append(m)
+
+    def get_message(self, i=-1) -> str:
+        return self.message_log[i]
+
+
+# lol yes we are fucking doing this shitty programming practice     >:3c
+GLOBAL_STATE = GlobalState()
+
+
+def on_press(key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
+
+    state.add_key(key)
+
+    tmpmessage = ""
+    tmprepeats = 0
+
     try:
-        print('alphanumeric key {0} pressed'.format(key.char))
-        strptr[0] = "{}".format(key.char)
+        print('alphanumeric key {0} pressed'.format(state.get_key().char))
+        tmpmessage = "{}".format(state.get_key().char)
 
-        normalized_key = key.char.upper()
-        if normalized_key in ACTIVE_KEYMAP.keys():
-            strptr[0] += ' = {:2s}'.format(ACTIVE_KEYMAP[normalized_key])
+        normalized_key = state.get_key().char.upper()
+        if normalized_key in GLOBAL_STATE.keymap.keys():
+            tmpmessage += ' = {:2s}'.format(
+                GLOBAL_STATE.keymap[normalized_key])
         else:
-            strptr[0] += ' = ?'
+            tmpmessage += ' = ?'
 
-        if lastkeyptr[0] == normalized_key:
-            # they mashin', show it
-            repeatsptr[0] += 1
-            strptr[0] += f' (x{repeatsptr[0]})'
-        else:
-            # not mashin', reset
-            repeatsptr[0] = 1
-        lastkeyptr[0] = normalized_key
+        print("pressed {} keys".format(state.get_key_log_length()))
+
+        if(state.get_key_log_length() >= 2):
+            # if they've pressed at least 2 keys
+            if (state.get_key(-2)).char.upper() == normalized_key:
+                # they mashin', show it
+                state.repeats += 1
+                tmpmessage += f' (x{state.repeats})'
+            else:
+                # not mashin', reset
+                state.repeats = 1
 
     except AttributeError:
-        print('special key {0} pressed'.format(key))
+        print('special key {0} pressed'.format(state.get_key()))
+    finally:
+        GLOBAL_STATE.add_message(tmpmessage)
 
 
-def on_release(key):
+def on_release(key, state=GLOBAL_STATE):
     print('{0} released'.format(key))
-    # if key == Key.esc:
-    #     # Stop listener
-    #     return False
+    if key == Key.esc:
+        # Stop listener
+        return False
 
 
 if __name__ == '__main__':
@@ -234,7 +273,7 @@ if __name__ == '__main__':
                 sys.exit()
 
         text = FONT.render(
-            MESSAGE[0], True, OPTIONS['text_color'], OPTIONS['background_color'])
+            GLOBAL_STATE.get_message(), True, OPTIONS['text_color'], OPTIONS['background_color'])
         textRect = text.get_rect()
 
         window_width, window_height = DISPLAYSURFACE.get_size()
