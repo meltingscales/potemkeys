@@ -155,17 +155,19 @@ if OPTIONS['current_keymap'] not in OPTIONS['keymaps'].keys():
         ','.join(list(OPTIONS['keymaps'].keys()))
     ))
 
+
 class KeyEvent():
     def __init__(self) -> None:
         raise Exception("lol todo :p")
 
 
 class GlobalState():
-    def __init__(self) -> None:
-        self.keymap = OPTIONS['keymaps'][OPTIONS['current_keymap']]
+    def __init__(self, options=OPTIONS) -> None:
+        self.optionsJson = options
+        self.keymap = self.optionsJson['keymaps'][self.optionsJson['current_keymap']]
         self.key_log: List[str] = []
         self.message_log: List[str] = [
-            'You are playing ' + OPTIONS['current_keymap']]
+            'You are playing ' + self.optionsJson['current_keymap']]
         self.repeats: int = 0
 
     def add_key(self, k: str):
@@ -174,7 +176,7 @@ class GlobalState():
     def get_key(self, i=-1) -> str:
         return self.key_log[i]
 
-    def get_key_log_length(self)->int:
+    def get_key_log_length(self) -> int:
         return len(self.key_log)
 
     def add_message(self, m: str):
