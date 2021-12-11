@@ -15,6 +15,12 @@ from shutil import which
 import urllib.request
 
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+
+
 required_linux_tools = {
     'xdotool': 'apt install xdotool',
     'wmctrl': 'apt install wmctrl',
@@ -49,12 +55,12 @@ if not_windows():
             raise FileNotFoundError(errormsg)
 
 GIT_URL = 'https://github.com/HenryFBP/FGfGwK'
-CONFIG_URL = GIT_URL+"/raw/master/options.jsonc"
+CONFIG_URL = GIT_URL + "/raw/master/options.jsonc"
 
 TITLE = 'This app is for goldfish who can\'t remember buttons. Are you a goldfish? :3c'
 RUNNING = True
-OPTIONS_FILE = './options.jsonc'
-ICON_FILE = './pelleds.jpg'
+OPTIONS_FILE = resource_path('./options.jsonc')
+ICON_FILE = resource_path('./pelleds.jpg')
 
 OPTIONS = {}
 
@@ -191,7 +197,6 @@ GLOBAL_STATE = GlobalState()
 
 
 def on_press(key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
-
     state.add_key(key)
 
     tmpmessage = ""
@@ -210,7 +215,7 @@ def on_press(key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
 
         print("pressed {} keys".format(state.get_key_log_length()))
 
-        if(state.get_key_log_length() >= 2):
+        if (state.get_key_log_length() >= 2):
             # if they've pressed at least 2 keys
             if (state.get_key(-2)).char.upper() == normalized_key:
                 # they mashin', show it
@@ -244,7 +249,7 @@ if __name__ == '__main__':
 
     pygame.init()
 
-    if(os.path.exists(ICON_FILE)):
+    if (os.path.exists(ICON_FILE)):
         pygame_icon = pygame.image.load(ICON_FILE)
         pygame.display.set_icon(pygame_icon)
 
