@@ -18,7 +18,7 @@ jobs:
 
       - run: "python3 -m pip install pipenv"
       - run: "python3 -m pipenv install --dev"
-      - run: "pipenv run pyinstaller --onefile ./FGfGwK.py"
+      - run: "pipenv run pyinstaller ./FGfGwK.spec"
       - run: "ls dist/"
 
       - uses: "marvinpinto/action-automatic-releases@latest"

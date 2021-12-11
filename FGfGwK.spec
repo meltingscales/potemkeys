@@ -1,13 +1,19 @@
 # -*- mode: python ; coding: utf-8 -*-
-
+from PyInstaller.building.api import PYZ, EXE
+from PyInstaller.building.build_main import Analysis
 
 block_cipher = None
 
+# from https://stackoverflow.com/questions/7674790/bundling-data-files-with-pyinstaller-onefile
+added_files = [
+    ('options.jsonc', 'options.jsonc'),
+    ("pelleds.jpg", "pelleds.jpg")
+]
 
 a = Analysis(['FGfGwK.py'],
              pathex=[],
              binaries=[],
-             datas=[],
+             datas=added_files,
              hiddenimports=[],
              hookspath=[],
              hooksconfig={},
@@ -18,13 +24,13 @@ a = Analysis(['FGfGwK.py'],
              cipher=block_cipher,
              noarchive=False)
 pyz = PYZ(a.pure, a.zipped_data,
-             cipher=block_cipher)
+          cipher=block_cipher)
 
 exe = EXE(pyz,
           a.scripts,
           a.binaries,
           a.zipfiles,
-          a.datas,  
+          a.datas,
           [],
           name='FGfGwK',
           debug=False,
@@ -37,4 +43,4 @@ exe = EXE(pyz,
           disable_windowed_traceback=False,
           target_arch=None,
           codesign_identity=None,
-          entitlements_file=None )
+          entitlements_file=None)
