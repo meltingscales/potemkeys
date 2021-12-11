@@ -29,12 +29,11 @@ See <https://github.com/HenryFBP/FGfGwK/releases> and download the provided exe/
 3.  In the repo's folder, run:
 
     ```
-    python -m pip install pipenv
-    pipenv install --dev
+    ./scripts/setup[.cmd|.sh]
     pipenv run python FGfFwK.py
     ```
 
-    Or, just run `start.cmd` or `start.sh`.
+    Or, just run `./scripts/start.cmd` or `./scripts/start.sh`.
 
 4.  The window should stay on top.
 

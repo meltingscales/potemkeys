@@ -16,9 +16,8 @@ jobs:
       - name: "Checkout source code"
         uses: "actions/checkout@v2.4.0"
 
-      - run: "python3 -m pip install pipenv"
-      - run: "python3 -m pipenv install --dev"
-      - run: "pipenv run pyinstaller ./FGfGwK.spec"
+      - run: "./scripts/setup.cmd"
+      - run: "./scripts/generate_exe.cmd"
       - run: "ls dist/"
 
       - uses: "marvinpinto/action-automatic-releases@latest"
