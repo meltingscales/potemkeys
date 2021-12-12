@@ -8,9 +8,9 @@
 
 [![forthebadge](https://forthebadge.com/images/badges/compatibility-club-penguin.svg)](https://forthebadge.com)
 
-![A picture of the application.](/screenshot1.png)
+![A picture of the application.](/media/screenshot1.png)
 
-![Another picture of the application.](/screenshot2.png)
+![Another picture of the application.](/media/screenshot2.png)
 
 ## What is this?
 
@@ -30,6 +30,8 @@ See [./TODO.md](./TODO.md). Or fork this repo and add it yourself, and make a Pu
 See <https://github.com/HenryFBP/FGfGwK/releases> and download the provided exe/binary file.
  
 If you put `FGfGwKoptions.jsonc` in the same folder as the EXE file, it will prefer that over its temporary directory.
+
+If you want to know where the temp file is, look at the console output when the .exe first starts up.
 
 ##  Development
 
