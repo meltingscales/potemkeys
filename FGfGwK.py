@@ -95,8 +95,11 @@ class GlobalState:
     def all_keymaps(self) -> Dict[str, str]:
         return self.optionsJson.get('keymaps')
 
+    def current_keymap_invididual_keys(self) -> Dict[str, str]:
+        return self.keymap['keys']
+
     def current_keymap_mapped_keys(self) -> List[str]:
-        return list(self.keymap.keys())
+        return list(self.current_keymap_invididual_keys().keys())
 
     def enforce_linux_x11_dependencies(self):
 
@@ -326,9 +329,9 @@ def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
         print('alphanumeric key {0} pressed'.format(key_char))
         msg = "{}".format(key_char)
 
-        if normalized_key_char in GLOBAL_STATE.keymap.keys():
+        if normalized_key_char in GLOBAL_STATE.current_keymap_mapped_keys():
             msg += ' = {:2s}'.format(
-                GLOBAL_STATE.keymap[normalized_key_char])
+                GLOBAL_STATE.current_keymap_invididual_keys()[normalized_key_char])
         else:
             msg += ' = ?'
 

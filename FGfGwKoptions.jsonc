@@ -1,99 +1,123 @@
-{ //json5 allows for comments :)
-    "center_text": false,
-    "title": "This app is for goldfish who can't remember buttons. Are you a goldfish? :3c",
-    "default_messages":[
-        ["Welcome!"],
-        ["Feel free to resize the window to hide these lower lines."],
-        ["Also, press a non-numeric button to choose a keymap."],
+{
+  //json5 allows for comments :)
+  "center_text": false,
+  "title": "This app is for goldfish who can't remember buttons. Are you a goldfish? :3c",
+  "default_messages": [
+    [
+      "Welcome!"
     ],
-    "font_type": "Consolas",
-    "font_size": 32,
-    "font_margin": 4,
-    "window_always_on_top": true,
-    "icon_path": "pelleds.jpg",
-    "window_width": 1000,
-    "window_height": 400,
-    "screen_width": 1920,
-    "screen_height": 1080,
-    "background_color": [ //R,G,B
-        20,
-        20,
-        20
+    [
+      "Feel free to resize the window to hide these lower lines."
     ],
-    "text_color": [
-        255,
-        0,
-        0
+    [
+      "Also, press a non-numeric button to choose a keymap."
     ],
-    "keymaps": {
-        "GG:S Default": {
-            "W": "[↑]   Jump",
-            "A": "[←]   Left",
-            "S": "[↓]   Crouch",
-            "D": "[→]   Right",
-            //
-            "U": "[P]   Punch",
-            "I": "[S]   Slash",
-            "J": "[K]   Kick",
-            "K": "[HS]  HSlash",
-            "O": "[D]   Dust"
-        },
-        "GG:S HenryFBP Custom (E+R=RC,PB)": { //same as default, just E/R are RC/PB
-            "W": "[↑]   Jump",
-            "A": "[←]   Left",
-            "S": "[↓]   Crouch",
-            "D": "[→]   Right",
-            //
-            "U": "[P]   Punch",
-            "I": "[S]   Slash",
-            "J": "[K]   Kick",
-            "K": "[HS]  HSlash",
-            "O": "[D]   Dust",
-            // my custom keys below
-            "E": "[RC]  Roman Cancel",
-            "R": "[PB]  Psych Burst"
-        },
-        "Tekken 7 Default": {
-            "W": "[↑]   Jump",
-            "A": "[←]   Left",
-            "S": "[↓]   Crouch",
-            "D": "[→]   Right",
-            //
-            "B": "[Pause]",
-            "V": "[Select]",
-            //
-            "P": "[LB]  L Bumper",
-            "O": "[RB]  R Bumper",
-            ";": "[LT]  L Trigger",
-            "L": "[RT]  R Trigger",
-            //
-            "C": "[LS]  L Stick Press",
-            "N": "[RS]  R Stick Press",
-            //
-            "U": "[1](X)    Left Punch",
-            "I": "[2](Y)    Right Punch",
-            "J": "[3](A)    Left Kick",
-            "K": "[4](B)    Right Kick"
-        },
-        "MELTY BLOOD: TYPE LUMINA Default": {
-            "W": "[↑]       Jump",
-            "A": "[←]       Left",
-            "S": "[↓]       Crouch",
-            "D": "[→]       Right",
-            //
-            "U": "[A]   (x)     Weak",
-            "I": "[B]   (y)     Medium",
-            "O": "[C]   (b)     Strong",
-            "J": "[D]   (a)     Shield",
-            //
-            ";": "[BC]  (RB)    B+C",
-            "L": "[AD]  (LB)    A+D",
-            ":": "[AB]  (RT)    A+B",
-            "K": "[ABC] (LT)    A+B+C",
-            //
-            "T": "Start",
-            "R": "Restart"
-            //
-        }
+  ],
+  "font_type": "Consolas",
+  "font_size": 32,
+  "font_margin": 4,
+  "window_always_on_top": true,
+  "icon_path": "pelleds.jpg",
+  "window_width": 1000,
+  "window_height": 400,
+  "screen_width": 1920,
+  "screen_height": 1080,
+  "background_color": [
+    //R,G,B
+    20,
+    20,
+    20
+  ],
+  "text_color": [
+    255,
+    0,
+    0
+  ],
+  "keymaps": {
+    "GG:S Default": {
+      "keys": {
+        "W": "[↑]   Jump",
+        "A": "[←]   Left",
+        "S": "[↓]   Crouch",
+        "D": "[→]   Right",
+        //
+        "U": "[P]   Punch",
+        "I": "[S]   Slash",
+        "J": "[K]   Kick",
+        "K": "[HS]  HSlash",
+        "O": "[D]   Dust"
+      }
+    },
+    "GG:S HenryFBP Custom (E+R=RC,PB)": {
+      "keys": { //individual keys
+        "W": "[↑]   Jump",
+        "A": "[←]   Left",
+        "S": "[↓]   Crouch",
+        "D": "[→]   Right",
+        //
+        "U": "[P]   Punch",
+        "I": "[S]   Slash",
+        "J": "[K]   Kick",
+        "K": "[HS]  HSlash",
+        "O": "[D]   Dust",
+        // my custom keys below
+        "E": "[RC]  Roman Cancel",
+        "R": "[PB]  Psych Burst"
+      },
+      "chords": {
+        //for testing key "chords", just taps
+        "A S S": "you tapped [a s s]",
+      },
+      "combinations": { //key combos, hold CTRL + X
+        "CTRL X": "Cut",
+        "S K": "Crouching heavy slash"
+      }
+    },
+    "Tekken 7 Default": {
+      "keys": {
+        "W": "[↑]   Jump",
+        "A": "[←]   Left",
+        "S": "[↓]   Crouch",
+        "D": "[→]   Right",
+        //
+        "B": "[Pause]",
+        "V": "[Select]",
+        //
+        "P": "[LB]  L Bumper",
+        "O": "[RB]  R Bumper",
+        ";": "[LT]  L Trigger",
+        "L": "[RT]  R Trigger",
+        //
+        "C": "[LS]  L Stick Press",
+        "N": "[RS]  R Stick Press",
+        //
+        "U": "[1](X)    Left Punch",
+        "I": "[2](Y)    Right Punch",
+        "J": "[3](A)    Left Kick",
+        "K": "[4](B)    Right Kick"
+      }
+    },
+    "MELTY BLOOD: TYPE LUMINA Default": {
+      "keys": {
+        "W": "[↑]       Jump",
+        "A": "[←]       Left",
+        "S": "[↓]       Crouch",
+        "D": "[→]       Right",
+        //
+        "U": "[A]   (x)     Weak",
+        "I": "[B]   (y)     Medium",
+        "O": "[C]   (b)     Strong",
+        "J": "[D]   (a)     Shield",
+        //
+        ";": "[BC]  (RB)    B+C",
+        "L": "[AD]  (LB)    A+D",
+        ":": "[AB]  (RT)    A+B",
+        "K": "[ABC] (LT)    A+B+C",
+        //
+        "T": "Start",
+        "R": "Restart"
+        //
+      }
     }
+  }
 }
