@@ -9,7 +9,7 @@ if [ "$?" -eq "1" ]; then
 fi
 
 echo "Making sure required tools are installed."
-sudo apt-get install xdotool wmctrl
+sudo apt-get install -y xdotool wmctrl
 
 pipenv install
 
