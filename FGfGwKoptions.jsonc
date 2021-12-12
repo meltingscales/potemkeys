@@ -11,8 +11,8 @@
     "font_margin": 4,
     "window_always_on_top": true,
     "icon_path": "pelleds.jpg",
-    "window_width": 700,
-    "window_height": 300,
+    "window_width": 1000,
+    "window_height": 400,
     "screen_width": 1920,
     "screen_height": 1080,
     "background_color": [ //R,G,B
