@@ -148,7 +148,7 @@ Stack trace:"
 
     def blank_message_log(self):
         for i in range(0, len(self.message_array_log)):
-            self.add_message("",i)
+            self.add_message("", i)
 
     def get_message(self, j=-1, i=0) -> str:
         return self.message_array_log[i][j]
@@ -269,33 +269,48 @@ class KeyEvent:
         raise Exception("lol todo :p")
 
 
+def prompt_choose_keymap(state) -> None:
+    """Returns true if a user picks a keymap successfully."""
+    print("Keymap is not chosen yet! Asking them to choose...")
+
+    state.add_message("[{:^10s}] Choose a keymap:".format(str(state.get_key())))
+    all_keymap_names = list(state.all_keymaps().keys())
+
+    i = 0
+    for keymapname in all_keymap_names:
+        state.add_message("[{}]: {}".format(i, keymapname), i + 1)
+        i += 1
+
+    if not is_modifier_key(state.get_key()):
+        try:
+            user_wants_n = int(state.get_key().char)
+
+            if (user_wants_n >= 0) and (user_wants_n <= len(all_keymap_names)):
+                # they select n
+                chosen_keymap_name = all_keymap_names[user_wants_n]
+                state.choose_keymap(chosen_keymap_name)
+
+                # clear other message logs
+                state.blank_message_log()
+
+                state.add_message(chosen_keymap_name,4)
+
+                return
+
+        except ValueError:
+            pass
+
+    # not successful
+    return
+
+
 def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
     state.press_key(_key)
 
+    # halt if they haven't chosen a keymap
     if not state.keymap_is_chosen:
-        print("Keymap is not chosen yet! Asking them to choose...")
-
-        state.add_message("[{:^10s}] Choose a keymap:".format(str(state.get_key())))
-        all_keymap_names = list(state.all_keymaps().keys())
-
-        i = 0
-        for keymapname in all_keymap_names:
-            state.add_message("[{}]: {}".format(i, keymapname), i + 1)
-            i += 1
-
-        if not is_modifier_key(state.get_key()):
-            try:
-                user_wants_n = int(state.get_key().char)
-                if (user_wants_n >= 0) and (user_wants_n <= len(all_keymap_names)):
-                    # they select n
-                    state.choose_keymap(all_keymap_names[user_wants_n])
-
-                    # clear other message logs
-                    state.blank_message_log()
-
-            except ValueError:
-                return True
-
+        prompt_choose_keymap(state)
+        return True
 
     msg = ""
     if not is_modifier_key(state.get_key()):
@@ -329,7 +344,7 @@ def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
     else:
         print('special key {0} pressed'.format(state.get_key()))
 
-    GLOBAL_STATE.add_message(msg)
+    state.add_message(msg)
 
 
 # noinspection PyUnusedLocal
