@@ -3,7 +3,8 @@
 # links that make me want to `git commit -m 'fortnite battle royale'`
 # https://stackoverflow.com/questions/25381589/pygame-set-window-on-top-without-changing-its-position
 import time
-from typing import List
+from pprint import pprint
+from typing import List, Set
 from pynput.keyboard import Key, Listener
 from pygame.locals import *
 import pynput
@@ -40,6 +41,14 @@ if is_windows():
     from ctypes import wintypes
 
 
+def is_modifier_key(k: Key):
+    try:
+        _ = k.char
+        return False
+    except AttributeError:
+        return True
+
+
 class GlobalState:
     def __init__(self, options: dict) -> None:
         self.optionsJson: dict = options
@@ -58,6 +67,8 @@ class GlobalState:
             'wmctrl': 'apt install wmctrl',
         }
 
+        self.currently_pressed_keys: Set[Key] = set()
+
     def enforce_linux_x11_dependencies(self):
 
         if not_windows():
@@ -75,13 +86,23 @@ class GlobalState:
                     input(errormsg)
                     raise FileNotFoundError(errormsg)
 
-    def add_key(self, k: pynput.keyboard.Key):
+    def is_key_pressed(self, k: Key):
+        return k in self.currently_pressed_keys
+
+    def press_key(self, k: Key):
+        self.add_key(k)
+        self.currently_pressed_keys.add(k)
+
+    def release_key(self, k: Key):
+        self.currently_pressed_keys.remove(k)
+
+    def add_key(self, k: Key):
         self.key_log.append(k)
 
-    def get_key(self, i=-1) -> pynput.keyboard.Key:
+    def get_key(self, i=-1) -> Key:
         return self.key_log[i]
 
-    def get_key_log_length(self) -> int:
+    def total_keys_pressed(self) -> int:
         return len(self.key_log)
 
     def add_message(self, m: str):
@@ -208,42 +229,47 @@ class KeyEvent:
         raise Exception("lol todo :p")
 
 
-def on_press(key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
-    state.add_key(key)
+def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
+    state.press_key(_key)
 
-    tmpmessage = ""
+    msg = ""
+    if not is_modifier_key(state.get_key()):
+        key_char = state.get_key().char
+        normalized_key_char = key_char.upper()
 
-    try:
-        print('alphanumeric key {0} pressed'.format(state.get_key().char))
-        tmpmessage = "{}".format(state.get_key().char)
+        print('alphanumeric key {0} pressed'.format(key_char))
+        msg = "{}".format(key_char)
 
-        normalized_key = state.get_key().char.upper()
-        if normalized_key in GLOBAL_STATE.keymap.keys():
-            tmpmessage += ' = {:2s}'.format(
-                GLOBAL_STATE.keymap[normalized_key])
+        if normalized_key_char in GLOBAL_STATE.keymap.keys():
+            msg += ' = {:2s}'.format(
+                GLOBAL_STATE.keymap[normalized_key_char])
         else:
-            tmpmessage += ' = ?'
+            msg += ' = ?'
 
-        print("pressed {} keys".format(state.get_key_log_length()))
+        print("pressed {} keys".format(state.total_keys_pressed()))
 
-        if state.get_key_log_length() >= 2:
+        if state.total_keys_pressed() >= 2:
             # if they've pressed at least 2 keys
-            if (state.get_key(-2)).char.upper() == normalized_key:
+
+            prev_key = state.get_key(-2)
+
+            if prev_key == state.get_key():
                 # they mashin', show it
                 state.repeats += 1
-                tmpmessage += f' (x{state.repeats})'
+                msg += f' (x{state.repeats})'
             else:
                 # not mashin', reset
                 state.repeats = 1
 
-    except AttributeError:
+    else:
         print('special key {0} pressed'.format(state.get_key()))
-    finally:
-        GLOBAL_STATE.add_message(tmpmessage)
+
+    GLOBAL_STATE.add_message(msg)
 
 
 # noinspection PyUnusedLocal
 def on_release(key, state=GLOBAL_STATE):
+    state.release_key(key)
     print('{0} released'.format(key))
     if key == Key.esc:
         # Stop listener
