@@ -95,6 +95,9 @@ class GlobalState:
     def all_keymaps(self) -> Dict[str, str]:
         return self.optionsJson.get('keymaps')
 
+    def current_keymap_mapped_keys(self) -> List[str]:
+        return list(self.keymap.keys())
+
     def enforce_linux_x11_dependencies(self):
 
         if not_windows():
@@ -293,7 +296,10 @@ def prompt_choose_keymap(state) -> None:
                 # clear other message logs
                 state.blank_message_log()
 
-                state.add_message(chosen_keymap_name,4)
+                state.add_message(chosen_keymap_name, 4)
+                state.add_message("Valid keys: {}".format(
+                    ','.join(state.current_keymap_mapped_keys())
+                ), 5)
 
                 return
 
