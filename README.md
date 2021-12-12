@@ -14,7 +14,8 @@
 
 For those who can't remember {keyboard input => controller} mappings, and want to see them in-game.
 
-Created because TEKKEN doesn't show input conversions in multiplayer matches, and neither does Guilty Gear: Strive, and I wanted to see my inputs, so I wasted 6 hours writing this tool.
+Created because TEKKEN doesn't show input conversions in multiplayer matches, and neither does Guilty Gear: Strive, 
+and I wanted to see my inputs, so I wasted 6 hours writing this tool.
 
 Works on Windows 11, and tested on Ubuntu.
 
@@ -57,3 +58,11 @@ If you make one and want to see it included in the "official" branch of this too
 No license, DWYW, I'm not your dad.
 
 Just make sure to link/PR, or just fork it if I die or something :P
+
+## VIRUSES????
+
+https://www.reddit.com/r/learnpython/comments/e99bhe/why_does_pyinstaller_trigger_windows_defender
+
+### REEEEEEEEEEEEEEE
+
+https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/ms537361(v=vs.85)?redirectedfrom=MSDN
