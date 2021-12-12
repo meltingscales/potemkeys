@@ -8,7 +8,7 @@ import subprocess
 import sys
 import urllib.request
 from shutil import which
-from typing import List, Set
+from typing import List, Set, Dict
 
 import json5
 import pygame
@@ -68,14 +68,13 @@ def is_modifier_key(k: Key):
 class GlobalState:
     def __init__(self, options: dict) -> None:
         self.optionsJson: dict = options
-        self.keymap: dict = self.optionsJson['keymaps'][self.optionsJson['current_keymap']]
-        self.key_log: List[pynput.keyboard.Key] = []
-        self.message_log: List[str] = [
-            'You are playing ' + self.optionsJson['current_keymap']]
+        self.keymap: dict = None
+        self.keymap_is_chosen = False
+        self.key_log: List[Key] = []
+        self.message_array_log: List[List[str]] = self.optionsJson['default_messages']
         self.repeats: int = 0
         self.title: str = \
-            self.optionsJson.get('title',
-                                 'This app is for goldfish who can\'t remember buttons. Are you a goldfish? :3c')
+            self.optionsJson.get('title')
         self.icon_path: str = resource_path(self.optionsJson.get('icon_path'))
         self.running: bool = True
         self.required_linux_tools = {
@@ -84,6 +83,17 @@ class GlobalState:
         }
 
         self.currently_pressed_keys: Set[Key] = set()
+
+    def choose_keymap(self, name: str):
+        if name in self.all_keymaps().keys():
+            self.keymap_is_chosen = True
+            self.keymap = self.all_keymaps()[name]
+        else:
+            raise ValueError("No keymap called {}!".format(name))
+        return self.keymap
+
+    def all_keymaps(self) -> Dict[str, str]:
+        return self.optionsJson.get('keymaps')
 
     def enforce_linux_x11_dependencies(self):
 
@@ -129,11 +139,22 @@ Stack trace:"
     def total_keys_pressed(self) -> int:
         return len(self.key_log)
 
-    def add_message(self, m: str):
-        self.message_log.append(m)
+    def add_message(self, m: str, i=0):
+        # ensure log is large enough
+        while i >= len(self.message_array_log):
+            self.message_array_log.append(list())
 
-    def get_message(self, i=-1) -> str:
-        return self.message_log[i]
+        self.message_array_log[i].append(m)
+
+    def blank_message_log(self):
+        for i in range(0, len(self.message_array_log)):
+            self.add_message("",i)
+
+    def get_message(self, j=-1, i=0) -> str:
+        return self.message_array_log[i][j]
+
+    def get_message_log(self, i=0) -> List[str]:
+        return self.message_array_log[i]
 
 
 OPTIONS_FILE = resource_path(OPTIONS_FILE_NAME, prefer_adjacent_dir=True)
@@ -243,16 +264,6 @@ def window_always_on_top_x11(xdotool_search=__file__):
     print(stderr)
 
 
-# if they want a non existent game
-if GLOBAL_STATE.optionsJson['current_keymap'] not in GLOBAL_STATE.optionsJson['keymaps'].keys():
-    raise ValueError("""You have specified a game that is not configured!\n
-    You want: {}\n
-    Valid games: {}""".format(
-        GLOBAL_STATE.optionsJson['current_keymap'],
-        ','.join(list(GLOBAL_STATE.optionsJson['keymaps'].keys()))
-    ))
-
-
 class KeyEvent:
     def __init__(self) -> None:
         raise Exception("lol todo :p")
@@ -260,6 +271,31 @@ class KeyEvent:
 
 def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
     state.press_key(_key)
+
+    if not state.keymap_is_chosen:
+        print("Keymap is not chosen yet! Asking them to choose...")
+
+        state.add_message("[{:^10s}] Choose a keymap:".format(str(state.get_key())))
+        all_keymap_names = list(state.all_keymaps().keys())
+
+        i = 0
+        for keymapname in all_keymap_names:
+            state.add_message("[{}]: {}".format(i, keymapname), i + 1)
+            i += 1
+
+        if not is_modifier_key(state.get_key()):
+            try:
+                user_wants_n = int(state.get_key().char)
+                if (user_wants_n >= 0) and (user_wants_n <= len(all_keymap_names)):
+                    # they select n
+                    state.choose_keymap(all_keymap_names[user_wants_n])
+
+                    # clear other message logs
+                    state.blank_message_log()
+
+            except ValueError:
+                return True
+
 
     msg = ""
     if not is_modifier_key(state.get_key()):
@@ -341,6 +377,10 @@ if __name__ == '__main__':
 
     # main game loop
     while GLOBAL_STATE.running:
+        window_width, window_height = DISPLAYSURFACE.get_size()
+
+        # set bg color
+        DISPLAYSURFACE.fill(GLOBAL_STATE.optionsJson['background_color'])
 
         # handle game events
         for event in pygame.event.get():
@@ -348,17 +388,21 @@ if __name__ == '__main__':
                 pygame.quit()
                 sys.exit()
 
-        text = FONT.render(
-            GLOBAL_STATE.get_message(), True, GLOBAL_STATE.optionsJson['text_color'],
-            GLOBAL_STATE.optionsJson['background_color'])
-        textRect = text.get_rect()
+        # for all message logs,
+        for i in range(0, len(GLOBAL_STATE.message_array_log)):
+            messageLog = GLOBAL_STATE.message_array_log[i]
 
-        window_width, window_height = DISPLAYSURFACE.get_size()
+            text = FONT.render(
+                messageLog[-1], True, GLOBAL_STATE.optionsJson['text_color'],
+                GLOBAL_STATE.optionsJson['background_color'])
+            textRect = text.get_rect()
 
-        if GLOBAL_STATE.optionsJson['center_text']:
-            textRect.center = (window_width // 2, window_height // 2)
+            if GLOBAL_STATE.optionsJson['center_text']:  # TODO Why is this not centered perfectly? idk lol
+                textRect.center = (window_width // 2, 0)
 
-        DISPLAYSURFACE.fill(GLOBAL_STATE.optionsJson['background_color'])
-        DISPLAYSURFACE.blit(text, textRect)
+            # move it down
+            textRect.y += (i * (FONT.get_linesize() + GLOBAL_STATE.optionsJson['font_margin']))
+
+            DISPLAYSURFACE.blit(text, textRect)
 
         pygame.display.update()

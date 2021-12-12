@@ -1,11 +1,18 @@
 { //json5 allows for comments :)
-    "current_keymap": "GG:S Henry Custom", //name must match a name in "keymaps" below
-    //TODO remove current_keymap, let user choose...
     "center_text": false,
+    "title": "This app is for goldfish who can't remember buttons. Are you a goldfish? :3c",
+    "default_messages":[
+        ["Welcome!"],
+        ["Feel free to resize the window to hide these lower lines."],
+        ["Also, press a non-numeric button to choose a keymap."],
+    ],
+    "font_type": "Consolas",
+    "font_size": 32,
+    "font_margin": 4,
     "window_always_on_top": true,
     "icon_path": "pelleds.jpg",
     "window_width": 700,
-    "window_height": 100,
+    "window_height": 300,
     "screen_width": 1920,
     "screen_height": 1080,
     "background_color": [ //R,G,B
@@ -18,8 +25,6 @@
         0,
         0
     ],
-    "font_type": "Consolas",
-    "font_size": 32,
     "keymaps": {
         "GG:S Default": {
             "W": "[↑]   Jump",
