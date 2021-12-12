@@ -1,3 +1,4 @@
 - allow user to choose what game they're playing at startup
 - capture CTRL/ALT/etc
 - Improve underlaying key display data structure (i.e. extract specific fields from `{"U": "[HS] (p) foo [bar] "}`
+  - make a parser? :thonking:
