@@ -1,6 +1,7 @@
 {
   //json5 allows for comments :)
   "center_text": false,
+  "quit_key": "esc", //i.e. can be ctrl_l etc
   "title": "This app is for goldfish who can't remember buttons. Are you a goldfish? :3c",
   "default_messages": [
     [

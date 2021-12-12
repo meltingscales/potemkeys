@@ -72,6 +72,7 @@ class GlobalState:
         self.keymap_is_chosen = False
         self.key_log: List[Key] = []
         self.message_array_log: List[List[str]] = self.optionsJson['default_messages']
+        self.quit_key = self.optionsJson['quit_key']
         self.repeats: int = 0
         self.title: str = \
             self.optionsJson.get('title')
@@ -101,8 +102,17 @@ class GlobalState:
     def current_keymap_chords_map(self) -> Dict[str, str]:
         return self.keymap.get('chords', dict())
 
+    def current_keymap_combinations_map(self) -> Dict[str, str]:
+        return self.keymap.get('combinations', dict())
+
     def current_keymap_mapped_keys(self) -> List[str]:
         return list(self.current_keymap_keys_map().keys())
+
+    def current_keymap_mapped_chords(self) -> List[str]:
+        return list(self.current_keymap_chords_map().keys())
+
+    def current_keymap_mapped_combinations(self) -> List[str]:
+        return list(self.current_keymap_combinations_map().keys())
 
     def enforce_linux_x11_dependencies(self):
 
@@ -124,11 +134,16 @@ class GlobalState:
     def is_key_pressed(self, k: Key):
         return k in self.currently_pressed_keys
 
+    def get_all_pressed_keys(self) -> Set[Key]:
+        return self.currently_pressed_keys
+
     def press_key(self, k: Key):
+        """Log that a key was pressed."""
         self.add_key(k)
         self.currently_pressed_keys.add(k)
 
     def release_key(self, k: Key):
+        """Log that a key was released."""
         try:
             self.currently_pressed_keys.remove(k)
         except KeyError as ke:
@@ -140,10 +155,15 @@ Stack trace:"
             print(ke)
 
     def add_key(self, k: Key):
+        """Log that a key was pressed."""
         self.key_log.append(k)
 
     def get_key(self, i=-1) -> Key:
+        """Get a key that was pressed. Defaults to most recent."""
         return self.key_log[i]
+
+    def clear_key_log(self) -> None:
+        self.key_log = list()
 
     def total_keys_pressed(self) -> int:
         return len(self.key_log)
@@ -302,10 +322,30 @@ def prompt_choose_keymap(state) -> None:
                 # clear other message logs
                 state.blank_message_log()
 
-                state.add_message("Current keymap:  {}".format(chosen_keymap_name), 4)
+                mi = 4
+
+                state.add_message("Current keymap:  {}".format(
+                    chosen_keymap_name
+                ), mi)
+                mi += 1
+
                 state.add_message("Valid keys:      {}".format(
                     ','.join(state.current_keymap_mapped_keys())
-                ), 5)
+                ), mi)
+                mi += 1
+
+                state.add_message("Valid chords:    {}".format(
+                    ','.join(state.current_keymap_mapped_chords())
+                ), mi)
+                mi += 1
+
+                state.add_message("Valid combos:    {}".format(
+                    ','.join(state.current_keymap_mapped_combinations())
+                ), mi)
+                mi += 1
+
+                # clear the key log, they've chosen
+                state.clear_key_log()
 
                 return
 
@@ -362,6 +402,19 @@ def process_key_chords(state: GlobalState, msg: str = "") -> str:
     for chord_str in state.current_keymap_chords_map():
         print("Testing {}".format(chord_str))
 
+        splitchord: List[str] = chord_str.split(' ')
+        splitchord = [s.upper() for s in splitchord]
+
+        chordlen = len(splitchord)
+
+        # too short
+        if chordlen > state.total_keys_pressed():
+            return ""
+
+        # go backwards through the chord and keymap
+        for i in range(len(splitchord), 0, -1):
+            print('looking for {}'.format(i))
+
     return msg + 'tbi'
 
 
@@ -386,11 +439,21 @@ def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
 def on_release(key, state=GLOBAL_STATE):
     state.release_key(key)
     print('{0} released'.format(key))
-    if key == Key.esc:
+    if should_quit(key, state):
         # Stop listener
         print("We want to quit!")
-        # GLOBAL_STATE.running = False
+        GLOBAL_STATE.running = False
         return False
+
+
+def should_quit(key, state):
+    try:
+        if key == Key.__getitem__(state.quit_key):  # TODO is this a security risk? __getitem__ with user input?
+            return True
+    except KeyError:  # Means no key called state.quit_key exists...
+        print("WARN:    quit_key '{}' is invalid".format(state.quit_key))
+
+    return False
 
 
 if __name__ == '__main__':
