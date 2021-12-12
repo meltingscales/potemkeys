@@ -296,8 +296,8 @@ def prompt_choose_keymap(state) -> None:
                 # clear other message logs
                 state.blank_message_log()
 
-                state.add_message(chosen_keymap_name, 4)
-                state.add_message("Valid keys: {}".format(
+                state.add_message("Current keymap:  {}".format(chosen_keymap_name), 4)
+                state.add_message("Valid keys:      {}".format(
                     ','.join(state.current_keymap_mapped_keys())
                 ), 5)
 
