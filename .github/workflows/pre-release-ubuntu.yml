@@ -28,5 +28,5 @@ jobs:
           title: "Development Build Ubuntu"
           files: |
             dist/*
-            options.jsonc
+             FGfGwKoptions.jsonc
         id: "automatic_releases_ubuntu"

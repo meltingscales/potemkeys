@@ -1,5 +1,5 @@
 { //json5 allows for comments :)
-    "current_keymap": "MELTY BLOOD: TYPE LUMINA Default", //name must match a name in "keymaps" below
+    "current_keymap": "GG:S Henry Custom", //name must match a name in "keymaps" below
     //TODO remove current_keymap, let user choose...
     "center_text": false,
     "window_always_on_top": true,

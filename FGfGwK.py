@@ -2,30 +2,46 @@
 
 # links that make me want to `git commit -m 'fortnite battle royale'`
 # https://stackoverflow.com/questions/25381589/pygame-set-window-on-top-without-changing-its-position
-import time
-from pprint import pprint
-from typing import List, Set
-from pynput.keyboard import Key, Listener
-from pygame.locals import *
-import pynput
-import pygame
-import json5
+
 import os
 import subprocess
 import sys
-from shutil import which
 import urllib.request
+from shutil import which
+from typing import List, Set
 
-# These have to be hardcoded in case options.jsonc doesn't exist...
-OPTIONS_FILE_NAME = 'options.jsonc'
+import json5
+import pygame
+import pynput
+from pygame.locals import *
+from pynput.keyboard import Key, Listener
+
+# These have to be hardcoded in case FGfGwKoptions.jsonc doesn't exist...
+OPTIONS_FILE_NAME = 'FGfGwKoptions.jsonc'
 GIT_URL = 'https://github.com/HenryFBP/FGfGwK'
-CONFIG_URL = GIT_URL + "/raw/master/options.jsonc"
+CONFIG_URL = "{0}/raw/master/{1}".format(GIT_URL, OPTIONS_FILE_NAME)
+
+""" Get absolute path to resource, works for dev and for PyInstaller """
 
 
-def resource_path(relative_path):
-    """ Get absolute path to resource, works for dev and for PyInstaller """
-    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
-    return os.path.abspath(os.path.join(base_path, relative_path))
+def resource_path(relative_path, prefer_adjacent_dir=False):
+    external_exe_file_dir = os.path.dirname(os.path.abspath(__file__))
+    current_file_dir = os.getcwd()
+
+    msg = ""
+    if prefer_adjacent_dir:
+        base_path = current_file_dir
+        msg += "Not bundled in exe: "
+    else:
+        # _MEIPASS is a special env var set by pyinstaller.
+        base_path = getattr(sys, '_MEIPASS', external_exe_file_dir)
+        msg += "Bundled in exe:     "
+
+    retval = os.path.abspath(os.path.join(base_path, relative_path))
+    msg += retval
+    print(msg)
+
+    return retval
 
 
 def is_windows():
@@ -94,7 +110,15 @@ class GlobalState:
         self.currently_pressed_keys.add(k)
 
     def release_key(self, k: Key):
-        self.currently_pressed_keys.remove(k)
+        try:
+            self.currently_pressed_keys.remove(k)
+        except KeyError as ke:
+            print(
+                """ERROR: Probably a threading issue ;_;"
+Failed to 'release' this key because it was already released: {}
+Stack trace:"
+""".format(k))
+            print(ke)
 
     def add_key(self, k: Key):
         self.key_log.append(k)
@@ -112,7 +136,13 @@ class GlobalState:
         return self.message_log[i]
 
 
-OPTIONS_FILE = resource_path(OPTIONS_FILE_NAME)
+OPTIONS_FILE = resource_path(OPTIONS_FILE_NAME, prefer_adjacent_dir=True)
+
+if not os.path.exists(OPTIONS_FILE):
+    # Try within the EXE if it doesn't exist outside...
+    OPTIONS_FILE = resource_path(
+        OPTIONS_FILE_NAME,
+        prefer_adjacent_dir=False)
 
 if not os.path.exists(OPTIONS_FILE):
     print("You don't have an options file. Downloading from '{}' into '{}'.".format(
@@ -133,10 +163,9 @@ global GLOBAL_STATE
 
 with open(OPTIONS_FILE, encoding='utf-8') as fh:
     jsonobj = json5.load(fh)
-    # lol yes we are fucking doing this shitty programming practice     >:3c
+    # lol yes we are doing this shitty fucking programming practice     >:3c global state!
+    # noinspection PyUnresolvedReferences,PyRedeclaration
     GLOBAL_STATE = GlobalState(options=jsonobj)
-    print("Using file:")
-    print(OPTIONS_FILE)
 
 GLOBAL_STATE.enforce_linux_x11_dependencies()
 

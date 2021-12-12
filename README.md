@@ -47,7 +47,7 @@ See <https://github.com/HenryFBP/FGfGwK/releases> and download the provided exe/
 
 ## Config
 
-Edit [`options.jsonc`](/options.jsonc).
+Edit [`FGfGwKoptions.jsonc`](/FGfGwKoptions.jsonc).
 
 You can make keymaps for literally any game that uses keyboard, by cloning the items under `keymaps`.
 
