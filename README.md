@@ -8,7 +8,9 @@
 
 [![forthebadge](https://forthebadge.com/images/badges/compatibility-club-penguin.svg)](https://forthebadge.com)
 
-![A picture of the application.](/window.png)
+![A picture of the application.](/screenshot1.png)
+
+![Another picture of the application.](/screenshot2.png)
 
 ## What is this?
 
