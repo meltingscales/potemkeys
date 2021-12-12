@@ -3,6 +3,7 @@
     //TODO remove current_keymap, let user choose...
     "center_text": false,
     "window_always_on_top": true,
+    "icon_path": "pelleds.jpg",
     "window_width": 700,
     "window_height": 100,
     "screen_width": 1920,

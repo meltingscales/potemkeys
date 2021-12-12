@@ -6,8 +6,8 @@ block_cipher = None
 
 # from https://stackoverflow.com/questions/7674790/bundling-data-files-with-pyinstaller-onefile
 added_files = [
-    ('options.jsonc', 'options.jsonc'),
-    ("pelleds.jpg", "pelleds.jpg")
+    ('options.jsonc', './'),
+    ('pelleds.jpg', './'),
 ]
 
 a = Analysis(['FGfGwK.py'],
