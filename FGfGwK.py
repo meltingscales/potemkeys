@@ -93,13 +93,16 @@ class GlobalState:
         return self.keymap
 
     def all_keymaps(self) -> Dict[str, str]:
-        return self.optionsJson.get('keymaps')
+        return self.optionsJson.get('keymaps', dict())
 
-    def current_keymap_invididual_keys(self) -> Dict[str, str]:
-        return self.keymap['keys']
+    def current_keymap_keys_map(self) -> Dict[str, str]:
+        return self.keymap.get('keys', dict())
+
+    def current_keymap_chords_map(self) -> Dict[str, str]:
+        return self.keymap.get('chords', dict())
 
     def current_keymap_mapped_keys(self) -> List[str]:
-        return list(self.current_keymap_invididual_keys().keys())
+        return list(self.current_keymap_keys_map().keys())
 
     def enforce_linux_x11_dependencies(self):
 
@@ -313,6 +316,55 @@ def prompt_choose_keymap(state) -> None:
     return
 
 
+def process_mashing(state: GlobalState) -> str:
+    """Return a status string if mashing is detected."""
+    if state.total_keys_pressed() >= 2:
+        # if they've pressed at least 2 keys
+
+        prev_key = state.get_key(-2)
+
+        if prev_key == state.get_key():
+            # they mashin', show it
+            state.repeats += 1
+            return f' (x{state.repeats})'
+        else:
+            # not mashin', reset
+            state.repeats = 1
+
+    return ""
+
+
+def process_key_press(state: GlobalState, msg: str = "") -> str:
+    if not is_modifier_key(state.get_key()):
+        key_char = state.get_key().char
+        normalized_key_char = key_char.upper()
+
+        print('alphanumeric key {0} pressed'.format(key_char))
+        msg += "{}".format(key_char)
+
+        if normalized_key_char in GLOBAL_STATE.current_keymap_mapped_keys():
+            msg += ' = {:2s}'.format(
+                GLOBAL_STATE.current_keymap_keys_map()[normalized_key_char])
+        else:
+            msg += ' = ?'
+
+        # print("pressed {} keys".format(state.total_keys_pressed()))
+
+        msg += process_mashing(state)
+
+    else:
+        print('special key {0} pressed'.format(state.get_key()))
+
+    return msg
+
+
+def process_key_chords(state: GlobalState, msg: str = "") -> str:
+    for chord_str in state.current_keymap_chords_map():
+        print("Testing {}".format(chord_str))
+
+    return msg + 'tbi'
+
+
 def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
     state.press_key(_key)
 
@@ -321,39 +373,13 @@ def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
         prompt_choose_keymap(state)
         return True
 
-    msg = ""
-    if not is_modifier_key(state.get_key()):
-        key_char = state.get_key().char
-        normalized_key_char = key_char.upper()
-
-        print('alphanumeric key {0} pressed'.format(key_char))
-        msg = "{}".format(key_char)
-
-        if normalized_key_char in GLOBAL_STATE.current_keymap_mapped_keys():
-            msg += ' = {:2s}'.format(
-                GLOBAL_STATE.current_keymap_invididual_keys()[normalized_key_char])
-        else:
-            msg += ' = ?'
-
-        print("pressed {} keys".format(state.total_keys_pressed()))
-
-        if state.total_keys_pressed() >= 2:
-            # if they've pressed at least 2 keys
-
-            prev_key = state.get_key(-2)
-
-            if prev_key == state.get_key():
-                # they mashin', show it
-                state.repeats += 1
-                msg += f' (x{state.repeats})'
-            else:
-                # not mashin', reset
-                state.repeats = 1
-
-    else:
-        print('special key {0} pressed'.format(state.get_key()))
-
+    msg = process_key_press(state)
     state.add_message(msg)
+
+    # handle chords
+    chordmsg = process_key_chords(state) + " (chord display)"
+    if chordmsg:
+        state.add_message(chordmsg, 1)
 
 
 # noinspection PyUnusedLocal
