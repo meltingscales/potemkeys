@@ -23,7 +23,7 @@ Works on Windows 11, and tested on Ubuntu.
 
 ## This tool sucks, it doesn't do X!
 
-See [./TODO.md](./TODO.md). Or fork this repo and add it yourself, and make a Pull Request, maybe I will add it.
+See [./TODO.md](./TODO.md). Or fork this repo and add it yourself, and make a Pull Request, I'll probably accept your changes.
 
 ## How do I use it?
 
