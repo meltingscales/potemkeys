@@ -1,7 +1,7 @@
 {
   //json5 allows for comments :)
   "center_text": false,
-  "quit_key": "esc", //i.e. can be ctrl_l etc
+  "quit_key": "esc", //i.e. can be ctrl_l etc... Anything from this list. https://github.com/moses-palmer/pynput/blob/master/lib/pynput/keyboard/_win32.py#L108
   "title": "This app is for goldfish who can't remember buttons. Are you a goldfish? :3c",
   "default_messages": [
     [
