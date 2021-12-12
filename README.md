@@ -21,6 +21,10 @@ and I wanted to see my inputs, so I wasted 6 hours writing this tool.
 
 Works on Windows 11, and tested on Ubuntu.
 
+## This tool sucks, it doesn't do X!
+
+See [./TODO.md](./TODO.md). Or fork this repo and add it yourself, and make a Pull Request, maybe I will add it.
+
 ## How do I use it?
 
 See <https://github.com/HenryFBP/FGfGwK/releases> and download the provided exe/binary file.
