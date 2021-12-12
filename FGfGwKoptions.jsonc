@@ -38,7 +38,7 @@
             "K": "[HS]  HSlash",
             "O": "[D]   Dust"
         },
-        "GG:S Henry Custom": { //same as default, just E/R are RC/PB
+        "GG:S Henry Custom (E+R=RC,PB)": { //same as default, just E/R are RC/PB
             "W": "[↑]   Jump",
             "A": "[←]   Left",
             "S": "[↓]   Crouch",
