@@ -39,6 +39,11 @@ See <https://github.com/HenryFBP/FGfGwK/releases> and download the provided exe/
 
     ***Play your game in borderless/windowed mode*** and see the inputs get transformed and shown to you.
 
+### Testing exe generation
+
+    ./scripts/generate_exe[.cmd|.sh]
+    ./dist/FGfGwK[.exe|.app]
+
 ## Config
 
 Edit [`options.jsonc`](/options.jsonc).
