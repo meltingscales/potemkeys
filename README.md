@@ -33,10 +33,8 @@ If you put `FGfGwKoptions.jsonc` in the same folder as the EXE file, it will pre
 
     ```
     ./scripts/setup[.cmd|.sh]
-    pipenv run python FGfFwK.py
+    ./scripts/start[.cmd|.sh]
     ```
-
-    Or, just run `./scripts/start.cmd` or `./scripts/start.sh`.
 
 4.  The window should stay on top.
 
