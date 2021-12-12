@@ -22,6 +22,8 @@ Works on Windows 11, and tested on Ubuntu.
 ## How do I use it?
 
 See <https://github.com/HenryFBP/FGfGwK/releases> and download the provided exe/binary file.
+ 
+If you put `FGfGwKoptions.jsonc` in the same folder as the EXE file, it will prefer that over its temporary directory.
 
 ##  Development
 
