@@ -84,7 +84,11 @@
         {
           "Kara Cancel Potemkin Buster (left facing)": {
             "inputs": "A 0.1 A S 0.1 S D 0.1 D 0.1 A 0.1 J 0.05 U",
-            "trigger": "ALT-D" //what key to press to trigger the keyboard input?
+            //what key combo to press to trigger the keyboard input?
+            "trigger": {
+              "type": "combination",
+              "sequence": "ALT D"
+            },
           }
         }
       ]
