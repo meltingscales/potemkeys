@@ -117,6 +117,11 @@ class GlobalState:
     def current_keymap_mapped_combinations(self) -> List[str]:
         return list(self.current_keymap_combinations_map().keys())
 
+    def chordResult_to_message(self, chordResult: List[KeyCode]) -> str:
+        key: str = ' '.join(x.char.upper() for x in chordResult)
+
+        return self.current_keymap_chords_map()[key]
+
     def enforce_linux_x11_dependencies(self):
 
         if not_windows():
@@ -461,19 +466,21 @@ def process_key_chords(state: GlobalState) -> List[List[KeyCode]]:
     return results
 
 
-def format_chord_results(chordResults: List[List[KeyCode]]) -> str:
+def format_chord_results(state: GlobalState, chordResults: List[List[KeyCode]]) -> str:
     chordmsg = ""
 
     for i in range(0, len(chordResults)):
-        chord: List[KeyCode] = chordResults[i]
+        chordResult: List[KeyCode] = chordResults[i]
         keycode: KeyCode
 
-        for j in range(0, len(chord)):
-            keycode = chord[j]
+        for j in range(0, len(chordResult)):
+            keycode = chordResult[j]
             chordmsg += keycode.char
 
-            if j < (len(chord) - 1):
+            if j < (len(chordResult) - 1):
                 chordmsg += "-"
+
+        chordmsg += " [{0}]".format(state.chordResult_to_message(chordResult))
 
         if i < (len(chordResults) - 1):
             chordmsg += ','
@@ -495,7 +502,7 @@ def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
     # handle chords
     matching_chords = process_key_chords(state)
 
-    chordmsg = format_chord_results(matching_chords)
+    chordmsg = format_chord_results(state, matching_chords)
 
     if chordmsg:
         state.add_message("Chord: " + chordmsg, 1)
