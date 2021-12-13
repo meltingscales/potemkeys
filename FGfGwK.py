@@ -4,6 +4,7 @@
 # https://stackoverflow.com/questions/25381589/pygame-set-window-on-top-without-changing-its-position
 
 import os
+import pprint
 import subprocess
 import sys
 import urllib.request
@@ -68,7 +69,7 @@ def is_modifier_key(k: Key):
 class GlobalState:
     def __init__(self, options: dict) -> None:
         self.optionsJson: dict = options
-        self.keymap: dict = None
+        self.keymap: Dict[str, Dict[str, str]] = None
         self.keymap_is_chosen = False
         self.key_log: List[Key] = []
         self.message_array_log: List[List[str]] = self.optionsJson['default_messages']
@@ -91,6 +92,9 @@ class GlobalState:
             self.keymap = self.all_keymaps()[name]
         else:
             raise ValueError("No keymap called {}!".format(name))
+        return self.keymap
+
+    def current_keymap(self) -> Dict[str, Dict[str, str]]:
         return self.keymap
 
     def all_keymaps(self) -> Dict[str, str]:
@@ -398,9 +402,11 @@ def process_key_press(state: GlobalState, msg: str = "") -> str:
     return msg
 
 
-def process_key_chords(state: GlobalState, msg: str = "") -> str:
+def process_key_chords(state: GlobalState) -> List[List[Key]]:
+    results: List[List[Key]] = []
+
+    # for all chords patterns,
     for chord_str in state.current_keymap_chords_map():
-        print("Testing {}".format(chord_str))
 
         splitchord: List[str] = chord_str.split(' ')
         splitchord = [s.upper() for s in splitchord]
@@ -409,13 +415,43 @@ def process_key_chords(state: GlobalState, msg: str = "") -> str:
 
         # too short
         if chordlen > state.total_keys_pressed():
-            return ""
+            break  # on to next chord
 
-        # go backwards through the chord and keymap
-        for i in range(len(splitchord), 0, -1):
+        print("Testing {}".format(chord_str))
+
+        matching_keys: List[Key] = []
+        # for all keys in the chord,
+        for i in range(len(splitchord) - 1, -1, -1):
+            reversed_idx = (-1 * i)  # TODO this is -1 sometimes, which is wrong... fix tHE MATH!!!!! REEEE
+            print('reversed_idx={}'.format(reversed_idx))
+            print('i=           {}'.format(i))
+
+            currentKey = state.get_key(reversed_idx)
+            current_chord_member = splitchord[i]
+            currentKeyCharCode = None
+            if not is_modifier_key(currentKey):
+                currentKeyCharCode = currentKey.char.upper()
+            else:
+                break  # on to next chord... TODO, NYI for modifiers...
             print('looking for {}'.format(i))
 
-    return msg + 'tbi'
+            print('current_chord_member={}'.format(current_chord_member))
+            print('current_key_pressed= {}'.format(currentKeyCharCode))
+
+            if not (current_chord_member == currentKeyCharCode):
+                break  # on to next chord... Not a full chord
+            else:
+                matching_keys.append(currentKey)
+
+            if i == 0:
+                print("WOW! WE found a CHORD -- {}".format(','.join(
+                    [k.char for k in matching_keys]
+                )))
+                matching_keys.reverse()  # because they were constructed backwards...
+                results.append(matching_keys)
+                break  # not necessary but more readable
+
+    return results
 
 
 def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
@@ -427,10 +463,11 @@ def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
         return True
 
     msg = process_key_press(state)
-    state.add_message(msg)
+    state.add_message(msg, 0)
 
     # handle chords
-    chordmsg = process_key_chords(state) + " (chord display)"
+    matching_chords = process_key_chords(state)
+    chordmsg = pprint.pformat(matching_chords) + " (chord display test)"
     if chordmsg:
         state.add_message(chordmsg, 1)
 

@@ -2,4 +2,4 @@
 - capture CTRL/ALT/etc
 - Improve underlaying key display data structure (i.e. extract specific fields from `{"U": "[HS] (p) foo [bar] "}`
   - make a parser? :thonking:
-- allow users to perform macro inputs
+- allow users to perform macro inputs (i.e. press F1 to perform kara cancel pot buster or something)
