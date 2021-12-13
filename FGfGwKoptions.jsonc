@@ -78,9 +78,10 @@
       },
       "combinations": {
         //key combos, you need to HOLD CTRL and then press X
-        "CTRL X": "Cut (excel :P)",
-        "S K": "[2H]  Crouching Heavy Slash",
-        "S P": "[2D]  Crouching Dust"
+        //TODO NYI
+        "CTRL-X": "Cut (excel :P)",
+        "S-K": "[2H]  Crouching Heavy Slash",
+        "S-P": "[2D]  Crouching Dust"
       },
       "macros": [
         //these let you spoof keyboard inputs. TODO Not yet implemented.
