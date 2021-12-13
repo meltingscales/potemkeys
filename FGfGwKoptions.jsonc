@@ -73,6 +73,9 @@
       "chords": {
         //for testing key "chords", just taps
         "A S S": "wow, you tapped A S S... :3c",
+        "A A": "dash/backdash",
+        "D D": "dash/backdash",
+        "S S": "not a real chord :p",
       },
       "combinations": {
         //key combos, you need to HOLD CTRL and then press X

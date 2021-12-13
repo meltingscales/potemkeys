@@ -4,7 +4,6 @@
 # https://stackoverflow.com/questions/25381589/pygame-set-window-on-top-without-changing-its-position
 
 import os
-import pprint
 import subprocess
 import sys
 import urllib.request
@@ -15,7 +14,7 @@ import json5
 import pygame
 import pynput
 from pygame.locals import *
-from pynput.keyboard import Key, Listener
+from pynput.keyboard import Key, Listener, KeyCode
 
 # These have to be hardcoded in case FGfGwKoptions.jsonc doesn't exist...
 OPTIONS_FILE_NAME = 'FGfGwKoptions.jsonc'
@@ -169,7 +168,7 @@ Stack trace:"
     def clear_key_log(self) -> None:
         self.key_log = list()
 
-    def total_keys_pressed(self) -> int:
+    def key_log_length(self) -> int:
         return len(self.key_log)
 
     def add_message(self, m: str, i=0):
@@ -362,7 +361,7 @@ def prompt_choose_keymap(state) -> None:
 
 def process_mashing(state: GlobalState) -> str:
     """Return a status string if mashing is detected."""
-    if state.total_keys_pressed() >= 2:
+    if state.key_log_length() >= 2:
         # if they've pressed at least 2 keys
 
         prev_key = state.get_key(-2)
@@ -402,8 +401,8 @@ def process_key_press(state: GlobalState, msg: str = "") -> str:
     return msg
 
 
-def process_key_chords(state: GlobalState) -> List[List[Key]]:
-    results: List[List[Key]] = []
+def process_key_chords(state: GlobalState) -> List[List[KeyCode]]:
+    results: List[List[KeyCode]] = []
 
     # for all chords patterns,
     for chord_str in state.current_keymap_chords_map():
@@ -414,44 +413,72 @@ def process_key_chords(state: GlobalState) -> List[List[Key]]:
         chordlen = len(splitchord)
 
         # too short
-        if chordlen > state.total_keys_pressed():
+        if chordlen > state.key_log_length():
             break  # on to next chord
 
-        print("Testing {}".format(chord_str))
+        key_log_slice = []
+
+        for i in range(state.key_log_length() - 1, -1, -1):
+            key_log_slice.append(state.get_key(i))
+            # print("i={},key={}".format(i, key_log_slice[-1]))
+            if len(key_log_slice) >= chordlen:
+                break
+
+        key_log_slice.reverse()
+
+        # print("Looking for {} aka {}".format(chord_str,splitchord))
+        # print("Inside of {}".format(key_log_slice))
 
         matching_keys: List[Key] = []
         # for all keys in the chord,
-        for i in range(len(splitchord) - 1, -1, -1):
-            reversed_idx = (-1 * i)  # TODO this is -1 sometimes, which is wrong... fix tHE MATH!!!!! REEEE
-            print('reversed_idx={}'.format(reversed_idx))
-            print('i=           {}'.format(i))
+        for i in range(0, len(splitchord)):
+            # print('i=           {}'.format(i))
 
-            currentKey = state.get_key(reversed_idx)
+            currentKey = key_log_slice[i]
             current_chord_member = splitchord[i]
-            currentKeyCharCode = None
+            currentKeyCharCode: str = None
             if not is_modifier_key(currentKey):
                 currentKeyCharCode = currentKey.char.upper()
             else:
                 break  # on to next chord... TODO, NYI for modifiers...
-            print('looking for {}'.format(i))
+            # print('looking for {}'.format(i))
+            #
+            # print('current_chord_member={}'.format(current_chord_member))
+            # print('current_key_pressed= {}'.format(currentKeyCharCode))
 
-            print('current_chord_member={}'.format(current_chord_member))
-            print('current_key_pressed= {}'.format(currentKeyCharCode))
-
-            if not (current_chord_member == currentKeyCharCode):
+            if not (current_chord_member.upper() == currentKeyCharCode.upper()):
                 break  # on to next chord... Not a full chord
             else:
                 matching_keys.append(currentKey)
 
-            if i == 0:
-                print("WOW! WE found a CHORD -- {}".format(','.join(
-                    [k.char for k in matching_keys]
-                )))
-                matching_keys.reverse()  # because they were constructed backwards...
+            if i == (len(splitchord) - 1):
+                # if we're at the end of the chord,
+
                 results.append(matching_keys)
                 break  # not necessary but more readable
 
+    # print("Returning {}".format(results))
     return results
+
+
+def format_chord_results(chordResults: List[List[KeyCode]]) -> str:
+    chordmsg = ""
+
+    for i in range(0, len(chordResults)):
+        chord: List[KeyCode] = chordResults[i]
+        keycode: KeyCode
+
+        for j in range(0, len(chord)):
+            keycode = chord[j]
+            chordmsg += keycode.char
+
+            if j < (len(chord) - 1):
+                chordmsg += "-"
+
+        if i < (len(chordResults) - 1):
+            chordmsg += ','
+
+    return chordmsg
 
 
 def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
@@ -467,9 +494,13 @@ def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
 
     # handle chords
     matching_chords = process_key_chords(state)
-    chordmsg = pprint.pformat(matching_chords) + " (chord display test)"
+
+    chordmsg = format_chord_results(matching_chords)
+
     if chordmsg:
-        state.add_message(chordmsg, 1)
+        state.add_message("Chord: " + chordmsg, 1)
+    else:  # blank if no chord
+        state.add_message("", 1)
 
 
 # noinspection PyUnusedLocal
