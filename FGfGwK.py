@@ -8,7 +8,10 @@ import subprocess
 import sys
 import urllib.request
 from shutil import which
-from typing import List, Set, Dict
+from typing import List, Set, Dict, Union
+
+import mergedeep
+from mergedeep import merge
 
 import json5
 import pygame
@@ -21,10 +24,9 @@ OPTIONS_FILE_NAME = 'FGfGwKoptions.jsonc'
 GIT_URL = 'https://github.com/HenryFBP/FGfGwK'
 CONFIG_URL = "{0}/raw/master/{1}".format(GIT_URL, OPTIONS_FILE_NAME)
 
-""" Get absolute path to resource, works for dev and for PyInstaller """
-
 
 def resource_path(relative_path, prefer_adjacent_dir=False):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
     external_exe_file_dir = os.path.dirname(os.path.abspath(__file__))
     current_file_dir = os.getcwd()
 
@@ -85,10 +87,32 @@ class GlobalState:
 
         self.currently_pressed_keys: Set[Key] = set()
 
+        self.process_keymap_inherits()
+
+    def process_keymap_inherits(self):
+        """Processing "inherit" value for keymaps/other attributes..."""
+        name: str
+        keymap: Dict[str, str]
+        for name, keymap in self.get_all_keymaps().items():
+            if 'inherit' in keymap.keys():
+
+                inheritFrom: str = keymap['inherit']
+
+                print("[i] Processing keymap inherit for '{}' from '{}'".format(name, inheritFrom))
+
+                if inheritFrom in self.get_all_keymaps():
+                    merge(
+                        self.get_all_keymaps()[name],
+                        self.get_all_keymaps()[inheritFrom],
+                        strategy=mergedeep.Strategy.TYPESAFE_ADDITIVE
+                    )
+                else:
+                    raise KeyError("You have specified a keymap that does not exist: {}".format(inheritFrom))
+
     def choose_keymap(self, name: str):
-        if name in self.all_keymaps().keys():
+        if name in self.get_all_keymaps().keys():
             self.keymap_is_chosen = True
-            self.keymap = self.all_keymaps()[name]
+            self.keymap = self.get_all_keymaps()[name]
         else:
             raise ValueError("No keymap called {}!".format(name))
         return self.keymap
@@ -96,8 +120,13 @@ class GlobalState:
     def current_keymap(self) -> Dict[str, Dict[str, str]]:
         return self.keymap
 
-    def all_keymaps(self) -> Dict[str, str]:
+    def get_all_keymaps(self) -> Dict[str, Union[dict, str]]:
         return self.optionsJson.get('keymaps', dict())
+
+    def set_all_keymaps(self, d: dict) -> Dict[str, str]:
+        self.optionsJson['keymaps'] = d
+
+        return self.get_all_keymaps()
 
     def current_keymap_keys_map(self) -> Dict[str, str]:
         return self.keymap.get('keys', dict())
@@ -311,7 +340,7 @@ def prompt_choose_keymap(state) -> None:
     print("Keymap is not chosen yet! Asking them to choose...")
 
     state.add_message("[{:^10s}] Choose a keymap:".format(str(state.get_key())))
-    all_keymap_names = list(state.all_keymaps().keys())
+    all_keymap_names = list(state.get_all_keymaps().keys())
 
     i = 0
     for keymapname in all_keymap_names:

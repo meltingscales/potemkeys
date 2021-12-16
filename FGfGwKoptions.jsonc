@@ -51,24 +51,6 @@
         "J": "[K]   Kick",
         "K": "[HS]  HSlash",
         "O": "[D]   Dust"
-      }
-    },
-    "GG:S HenryFBP Custom (E+R=RC,PB)": {
-      "keys": {
-        //individual keys
-        "W": "[↑]   Jump",
-        "A": "[←]   Left",
-        "S": "[↓]   Crouch",
-        "D": "[→]   Right",
-        //
-        "U": "[P]   Punch",
-        "I": "[S]   Slash",
-        "J": "[K]   Kick",
-        "K": "[H]   HSlash",
-        "O": "[D]   Dust",
-        // my custom keys below
-        "E": "[RC]  Roman Cancel",
-        "R": "[PB]  Psych Burst"
       },
       "chords": {
         //for testing key "chords", just taps
@@ -96,6 +78,14 @@
           }
         }
       ]
+    },
+    "GG:S HenryFBP Custom (E+R=RC,PB)": {
+      "inherit": "GG:S Default",
+      "keys": {
+        // my custom keys below
+        "E": "[RC]  Roman Cancel",
+        "R": "[PB]  Psych Burst"
+      }
     },
     "Tekken 7 Default": {
       "keys": {
