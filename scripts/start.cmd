@@ -1,4 +1,4 @@
-pipenv run python FGfGwK.py
+pipenv run python -m FGfGwK
 
 echo "Done."
 

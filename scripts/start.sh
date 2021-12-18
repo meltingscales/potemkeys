@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-pipenv run python FGfFwK.py
+pipenv run python -m FGfGwK
 
 echo "Done."

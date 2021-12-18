@@ -14,7 +14,7 @@ added_files = [
     ('README.md', './'),
 ]
 
-a = Analysis(['FGfGwK.py'],
+a = Analysis(['FGfGwK/__main__.py'],
              pathex=[],
              binaries=[],
              datas=added_files,
