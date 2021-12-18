@@ -1,5 +1,11 @@
 # FGfGwK: Fighting Games for Goldfish with Keyboards
 
+## TL;DR Download!
+
+### [Windows, click here.](https://github.com/HenryFBP/FGfGwK/releases/download/latest-windows/FGfGwK.exe)
+
+### [Linux, click here.](https://github.com/HenryFBP/FGfGwK/releases/download/latest-ubuntu/FGfGwK) (must run `sudo apt-get install -y xdotool wmctrl`!)
+
 [![forthebadge](https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](https://forthebadge.com)
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com)
