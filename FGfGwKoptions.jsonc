@@ -39,6 +39,15 @@
     0
   ],
   "keymaps": {
+    "DEAD OR ALIVE 6": {
+      "keys": {
+        "W": "[↑]   Jump",
+        "A": "[←]   Left",
+        "S": "[↓]   Crouch",
+        "D": "[→]   Right",
+        //
+      }
+    }
     "GG:S Default": {
       "keys": {
         "W": "[↑]   Jump",
