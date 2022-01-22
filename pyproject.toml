@@ -1,12 +1,15 @@
 [tool.poetry]
 name = "FGfGwK"
-version = "1.0.1"
+version = "1.0.2"
 description = "Fighting games for goldfish with keyboards >:3c"
 authors = ["henryfbp <HenryFBP@gmail.com>"]
+readme = "README.md"
+homepage = "https://github.com/henryfbp/FGfGwK"
+keywords = ["pygame", "fighting-game", "tekken", "guilty-gear-strive"]
 include = ["FGfGwK/*"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.6"
 pywin32-ctypes = { version = "*", markers = "sys_platform == 'win32'" }
 python3-xlib = { version = "*", markers = "sys_platform != 'win32'" }
 json5 = "^0.9.6"

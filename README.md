@@ -6,11 +6,14 @@
 
 ### [Linux, click here.](https://github.com/HenryFBP/FGfGwK/releases/download/latest-ubuntu/FGfGwK) (must run `sudo apt-get install -y xdotool wmctrl`!)
 
+### PyPI
+
+-   <https://pypi.org/project/fgfgwk/>
+
 ### Using pip
 
     pip install --upgrade FGfGwK
     python -m FGfGwK
-
 
 [![forthebadge](https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](https://forthebadge.com)
 
@@ -63,6 +66,10 @@ If you want to know where the temp file is, look at the console output when the 
 ### Build WHL
 
     poetry build
+
+#### Test built WHL
+
+    pip install .\dist\FGfGwK-whatever-version-1.2.3.4.5-py3-none-any.whl --force-reinstall
 
 ### Deploy to PyPI
 
