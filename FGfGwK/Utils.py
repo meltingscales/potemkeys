@@ -4,6 +4,8 @@ import sys
 
 import pygame
 
+from FGfGwK import Config
+
 
 def is_windows():
     return 'win' in sys.platform
@@ -74,7 +76,9 @@ def window_always_on_top_x11(xdotool_search=__file__):
 
     if stdout.strip() == '':
         raise Exception(
-            "Error, could not find a window ID for {0}".format(xdotool_search))
+            f"Error, could not find a window ID for {xdotool_search}. Please create an issue at "
+            f"{Config.GIT_ISSUES_URL}"
+        )
 
     # noinspection PyUnusedLocal
     windowid = None
