@@ -6,6 +6,10 @@
 
 ### [Linux, click here.](https://github.com/HenryFBP/FGfGwK/releases/download/latest-ubuntu/FGfGwK) (must run `sudo apt-get install -y xdotool wmctrl`!)
 
+### PyPI
+
+-   <https://pypi.org/project/fgfgwk/>
+
 ### Using pip
 
     pip install --upgrade FGfGwK
