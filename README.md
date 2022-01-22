@@ -6,6 +6,12 @@
 
 ### [Linux, click here.](https://github.com/HenryFBP/FGfGwK/releases/download/latest-ubuntu/FGfGwK) (must run `sudo apt-get install -y xdotool wmctrl`!)
 
+### Using pip
+
+    pip install FGfGwK
+    python -m FGfGwK
+
+
 [![forthebadge](https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](https://forthebadge.com)
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com)
@@ -17,11 +23,6 @@
 ![A picture of the application.](/media/screenshot1.png)
 
 ![Another picture of the application.](/media/screenshot2.png)
-
-### Using pip
-
-    pip install FGfGwK
-    python -m FGfGwK
 
 ## What is this?
 
@@ -58,6 +59,10 @@ If you want to know where the temp file is, look at the console output when the 
 4.  The window should stay on top.
 
     ***Play your game in borderless/windowed mode*** and see the inputs get transformed and shown to you.
+
+### Build WHL
+
+    poetry build
 
 ### Deploy to PyPI
 

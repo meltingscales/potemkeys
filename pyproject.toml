@@ -1,9 +1,9 @@
 [tool.poetry]
 name = "FGfGwK"
-version = "1.0.0-beta"
+version = "1.0.1"
 description = "Fighting games for goldfish with keyboards >:3c"
 authors = ["henryfbp <HenryFBP@gmail.com>"]
-include = ["FGfGwKoptions.jsonc", "README.md", "LICENSE", "pelleds.jpg"]
+include = ["FGfGwK/*"]
 
 [tool.poetry.dependencies]
 python = "^3.8"

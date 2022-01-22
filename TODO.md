@@ -4,3 +4,4 @@
   - make a parser? :thonking:
 - allow users to perform macro inputs (i.e. press F1 to perform kara cancel pot buster or something)
 - https://python-poetry.org/
+  - https://python-poetry.org/docs/pyproject/#include-and-exclude

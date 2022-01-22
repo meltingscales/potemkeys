@@ -8,8 +8,8 @@ block_cipher = None
 
 # from https://stackoverflow.com/questions/7674790/bundling-data-files-with-pyinstaller-onefile
 added_files = [
-    ('FGfGwKoptions.jsonc', './'),
-    ('pelleds.jpg', './'),
+    ('FGfGwK/FGfGwKoptions.jsonc', './'),
+    ('FGfGwK/pelleds.jpg', './'),
     ('LICENSE', './'),
     ('README.md', './'),
 ]
