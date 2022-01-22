@@ -18,6 +18,11 @@
 
 ![Another picture of the application.](/media/screenshot2.png)
 
+### Using pip
+
+    pip install FGfGwK
+    python -m FGfGwK
+
 ## What is this?
 
 For those who can't remember {keyboard input => controller} mappings, and want to see them in-game.
@@ -53,6 +58,10 @@ If you want to know where the temp file is, look at the console output when the 
 4.  The window should stay on top.
 
     ***Play your game in borderless/windowed mode*** and see the inputs get transformed and shown to you.
+
+### Deploy to PyPI
+
+    poetry publish --build
 
 ### Testing exe generation
 
