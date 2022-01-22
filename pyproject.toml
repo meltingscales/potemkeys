@@ -1,8 +1,11 @@
 [tool.poetry]
 name = "FGfGwK"
-version = "1.0.1"
+version = "1.0.2"
 description = "Fighting games for goldfish with keyboards >:3c"
 authors = ["henryfbp <HenryFBP@gmail.com>"]
+readme = "README.md"
+homepage = "https://github.com/henryfbp/FGfGwK"
+keywords = ["pygame", "fighting-game", "tekken", "guilty-gear-strive"]
 include = ["FGfGwK/*"]
 
 [tool.poetry.dependencies]
