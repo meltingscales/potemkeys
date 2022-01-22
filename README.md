@@ -8,7 +8,7 @@
 
 ### Using pip
 
-    pip install FGfGwK
+    pip install --upgrade FGfGwK
     python -m FGfGwK
 
 

@@ -13,4 +13,4 @@ sudo apt-get install -y xdotool wmctrl
 
 poetry install
 
-python3 -m poetry install --dev
+python3 -m poetry install
