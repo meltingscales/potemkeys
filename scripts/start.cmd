@@ -1,4 +1,4 @@
-pipenv run python -m FGfGwK
+poetry run python -m FGfGwK
 
 echo "Done."
 

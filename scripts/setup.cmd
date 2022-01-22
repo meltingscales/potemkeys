@@ -1,5 +1,5 @@
-echo "Make sure pipenv exists..."
-WHERE pipenv
-IF %ERRORLEVEL% NEQ 0 python -m pip install pipenv
+echo "Make sure poetry exists..."
+WHERE poetry
+IF %ERRORLEVEL% NEQ 0 python -m pip install poetry
 
-python3 -m pipenv install --dev
+python3 -m poetry install --dev

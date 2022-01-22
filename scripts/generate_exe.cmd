@@ -1,1 +1,1 @@
-pipenv run pyinstaller ./FGfGwK.spec
+poetry run pyinstaller ./FGfGwK.spec

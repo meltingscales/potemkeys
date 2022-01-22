@@ -1,6 +1,6 @@
 import os
 import sys
-import urllib
+import urllib.request
 
 import json5
 import pygame
@@ -9,20 +9,31 @@ from pygame.constants import QUIT
 from pynput.keyboard import Listener
 
 from FGfGwK import Config
+from FGfGwK.GlobalState import GlobalState
 from FGfGwK.KeyEventUtils import process_key_combos, format_chord_results, process_key_chords, \
     process_key_press, prompt_choose_keymap, should_quit
-from FGfGwK.GlobalState import GlobalState
 from FGfGwK.Utils import resource_path, window_always_on_top_x11, window_always_on_top_win32, is_windows
 
 OPTIONS_FILE = resource_path(Config.OPTIONS_FILE_NAME, prefer_adjacent_dir=True)
 
 if not os.path.exists(OPTIONS_FILE):
+    print(f"Does not exist: {OPTIONS_FILE}")
+    print("Trying within the EXE file...")
+
     # Try within the EXE if it doesn't exist outside...
     OPTIONS_FILE = resource_path(
         Config.OPTIONS_FILE_NAME,
         prefer_adjacent_dir=False)
 
+# try above us...
 if not os.path.exists(OPTIONS_FILE):
+    print(f"Does not exist: {OPTIONS_FILE}")
+    print("Trying parent dir.")
+    OPTIONS_FILE = os.path.join('../', Config.OPTIONS_FILE_NAME)
+
+if not os.path.exists(OPTIONS_FILE):
+    print(f"Does not exist: {OPTIONS_FILE}")
+
     print("You don't have an options file. Downloading from '{}' into '{}'.".format(
         Config.CONFIG_URL, OPTIONS_FILE
     ))
@@ -40,6 +51,7 @@ if not os.path.exists(OPTIONS_FILE):
 global GLOBAL_STATE
 
 with open(OPTIONS_FILE, encoding='utf-8') as fh:
+    print(f"OPTIONS_FILE={OPTIONS_FILE}")
     jsonobj = json5.load(fh)
     # lol yes we are doing this shitty fucking programming practice     >:3c global state!
     # noinspection PyUnresolvedReferences,PyRedeclaration
