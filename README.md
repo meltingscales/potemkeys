@@ -11,7 +11,6 @@
     pip install --upgrade FGfGwK
     python -m FGfGwK
 
-
 [![forthebadge](https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](https://forthebadge.com)
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com)
@@ -63,6 +62,10 @@ If you want to know where the temp file is, look at the console output when the 
 ### Build WHL
 
     poetry build
+
+#### Test built WHL
+
+    pip install .\dist\FGfGwK-whatever-version-1.2.3.4.5-py3-none-any.whl --force-reinstall
 
 ### Deploy to PyPI
 
