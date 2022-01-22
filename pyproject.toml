@@ -7,15 +7,15 @@ include = ["FGfGwK/*"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pywin32-ctypes = { version = "*", platform = "windows" }
-python3-xlib = { version = "*", markers = "sys_platform != 'win32' " }
+pywin32-ctypes = { version = "*", markers = "sys_platform == 'win32'" }
+python3-xlib = { version = "*", markers = "sys_platform != 'win32'" }
 json5 = "^0.9.6"
 pygame = "^2.1.2"
 pynput = "^1.7.6"
 mergedeep = "^1.3.4"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "^6.2.5"
 pyinstaller = "*"
 
 [build-system]
