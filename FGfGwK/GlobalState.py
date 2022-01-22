@@ -1,3 +1,4 @@
+from pathlib import Path
 from shutil import which
 from typing import Dict, List, Set, Union
 
@@ -8,18 +9,29 @@ from FGfGwK.Utils import resource_path, not_windows
 
 
 class GlobalState:
-    def __init__(self, options: dict) -> None:
+    def __init__(self, options: dict, optionsJsonPath: Path) -> None:
+
         self.optionsJson: dict = options
+        self.optionsJsonPath: Path = optionsJsonPath
+
         self.keymap: Dict[str, Dict[str, str]] = None
         self.keymap_is_chosen = False
+
         self.key_log: List[Key] = []
+
         self.message_array_log: List[List[str]] = self.optionsJson['default_messages']
+        self.message_array_log.insert(0, ['Config path: {}'.format(self.optionsJsonPath)])
+
         self.quit_key = self.optionsJson['quit_key']
         self.repeats: int = 0
+
         self.title: str = \
             self.optionsJson.get('title')
+
         self.icon_path: str = resource_path(self.optionsJson.get('icon_path'))
+
         self.running: bool = True
+
         self.required_linux_tools = {
             'xdotool': 'apt install xdotool',
             'wmctrl': 'apt install wmctrl',
@@ -161,4 +173,3 @@ Stack trace:"
 
     def get_message_log(self, i=0) -> List[str]:
         return self.message_array_log[i]
-

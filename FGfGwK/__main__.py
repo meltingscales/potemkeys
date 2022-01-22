@@ -1,6 +1,7 @@
 import os
 import sys
 import urllib.request
+from pathlib import Path
 
 import json5
 import pygame
@@ -40,9 +41,10 @@ if not os.path.exists(OPTIONS_FILE):
     urllib.request.urlretrieve(Config.CONFIG_URL, OPTIONS_FILE)
 
     if not os.path.exists(OPTIONS_FILE):
-        message = "Failed to automatically download options file...\n" \
-                  "Please download it at {} and then place it in the same directory as the executable.\n > ".format(
-            Config.CONFIG_URL)
+        message = f"Failed to automatically download options file... \n" \
+                  f"Please download it at {Config.CONFIG_URL} and then " \
+                  f"place it in the same directory as the executable.\n" \
+                  f"  (enter to continue) "
         input(message)
         raise FileNotFoundError(message)
 
@@ -55,7 +57,7 @@ with open(OPTIONS_FILE, encoding='utf-8') as fh:
     jsonobj = json5.load(fh)
     # lol yes we are doing this shitty fucking programming practice     >:3c global state!
     # noinspection PyUnresolvedReferences,PyRedeclaration
-    GLOBAL_STATE = GlobalState(options=jsonobj)
+    GLOBAL_STATE = GlobalState(options=jsonobj, optionsJsonPath=Path(OPTIONS_FILE))
 
 GLOBAL_STATE.enforce_linux_x11_dependencies()
 
