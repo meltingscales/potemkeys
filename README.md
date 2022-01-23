@@ -6,6 +6,12 @@
 
 ### [Linux, click here.](https://github.com/HenryFBP/potemkeys/releases/download/latest-ubuntu/potemkeys) (must run `sudo apt-get install -y xdotool wmctrl`!)
 
+### Old name was FGfGwK
+
+This used to be called "FGfGwK", "Fighting games for Goldfish with Keyboards" (Can't remember button maps).
+
+Credit to @flexadecimal for the new name, "potemkeys" (Potemkin from Guilty Gear + "keys")
+
 ### PyPI
 
 -   <https://pypi.org/project/potemkeys/>
