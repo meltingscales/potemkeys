@@ -5,7 +5,7 @@ from typing import Dict, List, Set, Union
 from mergedeep import mergedeep, merge
 from pynput.keyboard import Key, KeyCode
 
-from FGfGwK.Utils import resource_path, not_windows
+from potemkeys.Utils import resource_path, not_windows
 
 
 class GlobalState:

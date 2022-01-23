@@ -1,19 +1,19 @@
-# FGfGwK: Fighting Games for Goldfish with Keyboards
+# Potemkeys: Previously "FGfGwK: Fighting Games for Goldfish with Keyboards"
 
 ## TL;DR Download!
 
-### [Windows, click here.](https://github.com/HenryFBP/FGfGwK/releases/download/latest-windows/FGfGwK.exe)
+### [Windows, click here.](https://github.com/HenryFBP/potemkeys/releases/download/latest-windows/potemkeys.exe)
 
-### [Linux, click here.](https://github.com/HenryFBP/FGfGwK/releases/download/latest-ubuntu/FGfGwK) (must run `sudo apt-get install -y xdotool wmctrl`!)
+### [Linux, click here.](https://github.com/HenryFBP/potemkeys/releases/download/latest-ubuntu/potemkeys) (must run `sudo apt-get install -y xdotool wmctrl`!)
 
 ### PyPI
 
--   <https://pypi.org/project/fgfgwk/>
+-   <https://pypi.org/project/potemkeys/>
 
 ### Using pip
 
-    pip install --upgrade FGfGwK
-    python -m FGfGwK
+    pip install --upgrade potemkeys
+    python -m potemkeys
 
 [![forthebadge](https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](https://forthebadge.com)
 
@@ -42,9 +42,9 @@ See [./TODO.md](./TODO.md). Or fork this repo and add it yourself, and make a Pu
 
 ## How do I use it?
 
-See <https://github.com/HenryFBP/FGfGwK/releases> and download the provided exe/binary file.
+See <https://github.com/HenryFBP/potemkeys/releases> and download the provided exe/binary file.
  
-If you put `FGfGwKoptions.jsonc` in the same folder as the EXE file, it will prefer that over its temporary directory.
+If you put `potemkeysoptions.jsonc` in the same folder as the EXE file, it will prefer that over its temporary directory.
 
 If you want to know where the temp file is, look at the console output when the .exe first starts up.
 
@@ -69,7 +69,7 @@ If you want to know where the temp file is, look at the console output when the 
 
 #### Test built WHL
 
-    pip install .\dist\FGfGwK-whatever-version-1.2.3.4.5-py3-none-any.whl --force-reinstall
+    pip install .\dist\potemkeys-whatever-version-1.2.3.4.5-py3-none-any.whl --force-reinstall
 
 ### Deploy to PyPI
 
@@ -78,11 +78,11 @@ If you want to know where the temp file is, look at the console output when the 
 ### Testing exe generation
 
     ./scripts/generate_exe[.cmd|.sh]
-    ./dist/FGfGwK[.exe|.app]
+    ./dist/potemkeys[.exe|.app]
 
 ## Config
 
-Edit [`FGfGwKoptions.jsonc`](/FGfGwKoptions.jsonc).
+Edit [`potemkeysoptions.jsonc`](/potemkeys/potemkeysoptions.jsonc).
 
 You can make keymaps for literally any game that uses keyboard, by cloning the items under `keymaps`.
 

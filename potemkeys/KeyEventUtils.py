@@ -7,7 +7,7 @@ from typing import List
 
 from pynput.keyboard import Key, KeyCode
 
-from FGfGwK.GlobalState import GlobalState
+from potemkeys.GlobalState import GlobalState
 
 
 def is_modifier_key(k: Key):

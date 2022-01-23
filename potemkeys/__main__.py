@@ -9,11 +9,11 @@ import pynput
 from pygame.constants import QUIT
 from pynput.keyboard import Listener
 
-from FGfGwK import Config
-from FGfGwK.GlobalState import GlobalState
-from FGfGwK.KeyEventUtils import process_key_combos, format_chord_results, process_key_chords, \
+from potemkeys import Config
+from potemkeys.GlobalState import GlobalState
+from potemkeys.KeyEventUtils import process_key_combos, format_chord_results, process_key_chords, \
     process_key_press, prompt_choose_keymap, should_quit
-from FGfGwK.Utils import resource_path, window_always_on_top_x11, window_always_on_top_win32, is_windows
+from potemkeys.Utils import resource_path, window_always_on_top_x11, window_always_on_top_win32, is_windows
 
 OPTIONS_FILE = resource_path(Config.OPTIONS_FILE_NAME, prefer_adjacent_dir=True)
 

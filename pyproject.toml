@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "FGfGwK"
-version = "1.0.2"
+name = "potemkeys"
+version = "1.0.3"
 description = "Fighting games for goldfish with keyboards >:3c"
 authors = ["henryfbp <HenryFBP@gmail.com>"]
 readme = "README.md"
-homepage = "https://github.com/henryfbp/FGfGwK"
+homepage = "https://github.com/henryfbp/potemkeys"
 keywords = ["pygame", "fighting-game", "tekken", "guilty-gear-strive"]
-include = ["FGfGwK/*"]
+include = ["potemkeys/*"]
 
 [tool.poetry.dependencies]
 python = "^3.6"

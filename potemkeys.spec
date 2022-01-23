@@ -1,5 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-# can run `pipenv run pyinstaller FGfGwK.spec` to generate exe.
+# can run `pipenv run pyinstaller potemkeys.spec` to generate exe.
 
 from PyInstaller.building.api import PYZ, EXE
 from PyInstaller.building.build_main import Analysis
@@ -8,13 +8,13 @@ block_cipher = None
 
 # from https://stackoverflow.com/questions/7674790/bundling-data-files-with-pyinstaller-onefile
 added_files = [
-    ('FGfGwK/FGfGwKoptions.jsonc', './'),
-    ('FGfGwK/pelleds.jpg', './'),
+    ('potemkeys/potemkeysoptions.jsonc', './'),
+    ('potemkeys/pelleds.jpg', './'),
     ('LICENSE', './'),
     ('README.md', './'),
 ]
 
-a = Analysis(['FGfGwK/__main__.py'],
+a = Analysis(['potemkeys/__main__.py'],
              pathex=[],
              binaries=[],
              datas=added_files,
@@ -36,7 +36,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='FGfGwK',
+          name='potemkeys',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,

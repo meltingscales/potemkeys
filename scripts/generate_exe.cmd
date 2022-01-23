@@ -1,1 +1,1 @@
-poetry run pyinstaller ./FGfGwK.spec
+poetry run pyinstaller ./potemkeys.spec

@@ -4,7 +4,7 @@ import sys
 
 import pygame
 
-from FGfGwK import Config
+from potemkeys import Config
 
 
 def is_windows():
