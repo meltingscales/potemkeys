@@ -10,7 +10,7 @@
 
 This used to be called "FGfGwK", "Fighting games for Goldfish with Keyboards" (Can't remember button maps).
 
-Credit to @flexadecimal for the new name, "potemkeys" (Potemkin from Guilty Gear + "keys")
+Credit to [@flexadecimal](https://github.com/flexadecimal) for the new name, "potemkeys" (Potemkin from Guilty Gear + "keys")
 
 ### PyPI
 
