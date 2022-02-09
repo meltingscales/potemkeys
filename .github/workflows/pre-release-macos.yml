@@ -16,8 +16,8 @@ jobs:
       - name: "Checkout source code"
         uses: "actions/checkout@v2.4.0"
 
-      - run: "./scripts/setup.cmd"
-      - run: "./scripts/generate_exe.cmd"
+      - run: "./scripts/setup.sh"
+      - run: "./scripts/generate_exe.sh"
       - run: "ls dist/"
 
       - uses: "marvinpinto/action-automatic-releases@latest"
