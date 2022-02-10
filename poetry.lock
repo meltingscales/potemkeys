@@ -182,7 +182,7 @@ hook_testing = ["pytest (>=2.7.3)", "execnet (>=1.5.0)", "psutil"]
 
 [[package]]
 name = "pyinstaller-hooks-contrib"
-version = "2021.5"
+version = "2022.0"
 description = "Community maintained hooks for PyInstaller"
 category = "dev"
 optional = false
@@ -205,7 +205,7 @@ six = "*"
 
 [[package]]
 name = "pyobjc-core"
-version = "8.1"
+version = "8.2"
 description = "Python<->ObjC Interoperability Module"
 category = "main"
 optional = false
@@ -213,39 +213,39 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "pyobjc-framework-applicationservices"
-version = "8.1"
+version = "8.2"
 description = "Wrappers for the framework ApplicationServices on macOS"
 category = "main"
 optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
-pyobjc-core = ">=8.1"
-pyobjc-framework-Cocoa = ">=8.1"
-pyobjc-framework-Quartz = ">=8.1"
+pyobjc-core = ">=8.2"
+pyobjc-framework-Cocoa = ">=8.2"
+pyobjc-framework-Quartz = ">=8.2"
 
 [[package]]
 name = "pyobjc-framework-cocoa"
-version = "8.1"
+version = "8.2"
 description = "Wrappers for the Cocoa frameworks on macOS"
 category = "main"
 optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
-pyobjc-core = ">=8.1"
+pyobjc-core = ">=8.2"
 
 [[package]]
 name = "pyobjc-framework-quartz"
-version = "8.1"
+version = "8.2"
 description = "Wrappers for the Quartz frameworks on macOS"
 category = "main"
 optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
-pyobjc-core = ">=8.1"
-pyobjc-framework-Cocoa = ">=8.1"
+pyobjc-core = ">=8.2"
+pyobjc-framework-Cocoa = ">=8.2"
 
 [[package]]
 name = "pyparsing"
@@ -346,7 +346,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "7af798f3e4a35107a176ac2472e8e70e2f162fa0c4b085c29949810815a7faae"
+content-hash = "53fc052862eda4f8cdbda1a3223119d5f61ce70889019a40602efa8d6774f356"
 
 [metadata.files]
 altgraph = [
@@ -476,8 +476,8 @@ pyinstaller = [
     {file = "pyinstaller-4.5.1.tar.gz", hash = "sha256:30733baaf8971902286a0ddf77e5499ac5f7bf8e7c39163e83d4f8c696ef265e"},
 ]
 pyinstaller-hooks-contrib = [
-    {file = "pyinstaller-hooks-contrib-2021.5.tar.gz", hash = "sha256:e47b382c209dd2f62ac2ef26cade49148e9a4702ec91958772b0270599f8c2a9"},
-    {file = "pyinstaller_hooks_contrib-2021.5-py2.py3-none-any.whl", hash = "sha256:e658281cbf90570d9bc6a06f4b8f64c28d1076c722f6fb80c02a863bcbb8e7cd"},
+    {file = "pyinstaller-hooks-contrib-2022.0.tar.gz", hash = "sha256:61b667f51b2525377fae30793f38fd9752a08032c72b209effabf707c840cc38"},
+    {file = "pyinstaller_hooks_contrib-2022.0-py2.py3-none-any.whl", hash = "sha256:29f0bd8fbb2ff6f2df60a0c147e5b5ad65ae5c1a982d90641a5f712de03fa161"},
 ]
 pynput = [
     {file = "pynput-1.7.6-py2.py3-none-any.whl", hash = "sha256:19861b2a0c430d646489852f89500e0c9332e295f2c020e7c2775e7046aa2e2f"},
@@ -485,36 +485,40 @@ pynput = [
     {file = "pynput-1.7.6.tar.gz", hash = "sha256:3a5726546da54116b687785d38b1db56997ce1d28e53e8d22fc656d8b92e533c"},
 ]
 pyobjc-core = [
-    {file = "pyobjc-core-8.1.tar.gz", hash = "sha256:920914a1a4cd4f8a54babe93f0b4e4cd93b51d11ae38d8ef17f5edb603b7a949"},
-    {file = "pyobjc_core-8.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:ddd9b964df292fa0bbd0d0694befe4c524977780e3f11221ac7e8683d5e9590f"},
-    {file = "pyobjc_core-8.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:b6662805d288cd1bfd257565ddc07541d0162b3167af15e39f7a654b94f6667b"},
-    {file = "pyobjc_core-8.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:43f251881fe36dcb9ca9f7946ab13ddb4aa2499bde3c8bf2dc8144b5fe884629"},
-    {file = "pyobjc_core-8.1-cp38-cp38-macosx_11_0_universal2.whl", hash = "sha256:781cfa7a3f72ce7213b4c341b5c552cd63b6664b3b444a23fcb1d5fdd417aa8b"},
-    {file = "pyobjc_core-8.1-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:951e716ad30bea52190f5e82604ee2c7f3dc6c04722cf0a3311ad7e4e6af5134"},
+    {file = "pyobjc-core-8.2.tar.gz", hash = "sha256:6afb8ee1dd0647cbfaaf99906eca3b43ce045b27e3d4510462d04e7e5361c89b"},
+    {file = "pyobjc_core-8.2-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:311e45556c3afa8831713b89017e0204562f51f35661d76c07ffe04985f44e1d"},
+    {file = "pyobjc_core-8.2-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:711f361e83382e405e4273ff085178b0cf730901ccf6801f834e7037e50278f9"},
+    {file = "pyobjc_core-8.2-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:bdd2e2960ec73214bcfe2d86bb4ca94f5f5119db86d129fa32d3c003b6532c50"},
+    {file = "pyobjc_core-8.2-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:b879f91fc614c399aafa1d08cf5e279c267510e904bad5c336c3a6064c0eb3aa"},
+    {file = "pyobjc_core-8.2-cp38-cp38-macosx_11_0_universal2.whl", hash = "sha256:b4ef4bdb99a330f5e15cc6273098964276fccbc432453cdba3c2963292bc066c"},
+    {file = "pyobjc_core-8.2-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:fd8e5be0955790ff8f9d17a0f356b6eb7eb1ce4995e0c94355c462dd52d22d6d"},
 ]
 pyobjc-framework-applicationservices = [
-    {file = "pyobjc-framework-ApplicationServices-8.1.tar.gz", hash = "sha256:01b8378cd27bbc2bad449600a5ff05060cd4f2098eb6b7bc85f0f95baad721b6"},
-    {file = "pyobjc_framework_ApplicationServices-8.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:7e34d4b4f034e7500bcb11f1290d4d99f737dfb8057a73a0a7b6090d48886543"},
-    {file = "pyobjc_framework_ApplicationServices-8.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:c35da5ab2851fff21950c73a1abb19f9e925f75190bb03404b12b1a0c959a013"},
-    {file = "pyobjc_framework_ApplicationServices-8.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:d608b400e8a41a0aeef08e59af66c1aeb626d2a09ae33c66ebf24f69773c08c9"},
-    {file = "pyobjc_framework_ApplicationServices-8.1-cp38-cp38-macosx_11_0_universal2.whl", hash = "sha256:4d31fde8409f4b705fa152ef68f2e7577013e6e1d79c2e659346941942b6ed39"},
-    {file = "pyobjc_framework_ApplicationServices-8.1-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:3eb1f24f5b3c03a8adf7339f4d70677a8c3223914e802fa4736009cc29f8920b"},
+    {file = "pyobjc-framework-ApplicationServices-8.2.tar.gz", hash = "sha256:f901b2ebb278b7d00033b45cf9ee9d43f651e096ff4c4defa261509238138da8"},
+    {file = "pyobjc_framework_ApplicationServices-8.2-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:b5be1757a8df944a58449c628ed68fc76dd746fcd1e96ebb6db0f734e94cdfc8"},
+    {file = "pyobjc_framework_ApplicationServices-8.2-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:32657c4b89983a98fbe831a14884954710719e763197968a20ac07e1daa21f1e"},
+    {file = "pyobjc_framework_ApplicationServices-8.2-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:6ce2c9701590f752a75151b2fe1e462e7a7ad67dec3119a796711ea93ea01031"},
+    {file = "pyobjc_framework_ApplicationServices-8.2-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:28124bc892045222305cf8953b163495bf662c401e54f48905dafb1104d9c1d1"},
+    {file = "pyobjc_framework_ApplicationServices-8.2-cp38-cp38-macosx_11_0_universal2.whl", hash = "sha256:d5c60d66c6ed2569cb042a6c14dd5b9f4d01e182a464b893cd6002ce445b4ddf"},
+    {file = "pyobjc_framework_ApplicationServices-8.2-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:e1727fccc1d48922fa28a4cebf4a6d287d633f451cb03779968df60de8cb1bd0"},
 ]
 pyobjc-framework-cocoa = [
-    {file = "pyobjc-framework-Cocoa-8.1.tar.gz", hash = "sha256:9de42dc3e0911d6e30cf41bb4baf9aaf2723a27053f7edbd8ad7d758cf41b81d"},
-    {file = "pyobjc_framework_Cocoa-8.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:b588a3ed9adcdbfafcbfa77bbd72844afb8d987a70cce7a4f3a35a9474271a11"},
-    {file = "pyobjc_framework_Cocoa-8.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:626f6d084a537b365c0786674036643695e7829ebaf7889aa9b327f3b897a800"},
-    {file = "pyobjc_framework_Cocoa-8.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:8075f6cf8cac804d9ed05355c68a8a0cd3ce31a310469279c6c7e49dad47b010"},
-    {file = "pyobjc_framework_Cocoa-8.1-cp38-cp38-macosx_11_0_universal2.whl", hash = "sha256:9e47a2709b8458422752efccaa89f4b52cc8e01345ec71c43c713a891f084bb6"},
-    {file = "pyobjc_framework_Cocoa-8.1-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:0b0aee74f6c32103338e3735f308052f4cc534c25762130303638aaa6d62d851"},
+    {file = "pyobjc-framework-Cocoa-8.2.tar.gz", hash = "sha256:f0901998e2f18415ef6d1f8a12b083f69fc93bd56b3e88040002e3c09bd8c304"},
+    {file = "pyobjc_framework_Cocoa-8.2-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:5af73f150e242542735e0663bb5504f88aabaec2a54c60e856cfca3ff6dd9712"},
+    {file = "pyobjc_framework_Cocoa-8.2-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:d1de3763ee01850c311da74de5c82c85ec199120e85ab45acaf203accc37a470"},
+    {file = "pyobjc_framework_Cocoa-8.2-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:86d69bf667f99f3c43184d8830567195fff94c675fe7f60f899dd90553d9b265"},
+    {file = "pyobjc_framework_Cocoa-8.2-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:9dbadb22826392c48b00087359f66579f8404a4f4f77498f31f9869c54bb0fa9"},
+    {file = "pyobjc_framework_Cocoa-8.2-cp38-cp38-macosx_11_0_universal2.whl", hash = "sha256:7adf8b57da1c1292c24375b8e74b6dd45f99a4d3c10ba925a9b38f63a97ba782"},
+    {file = "pyobjc_framework_Cocoa-8.2-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:bc8279c8c1544087d46a7e99324f093029df89b8c527c5da2a682bad4cb3197e"},
 ]
 pyobjc-framework-quartz = [
-    {file = "pyobjc-framework-Quartz-8.1.tar.gz", hash = "sha256:4994d9d99e74384f24031084a7b7711082e9dd46253399c8fdec4746c4a2a11b"},
-    {file = "pyobjc_framework_Quartz-8.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:e310dc0cee4796c5b249a07229bc04f796d586e182ee520a963fe6e93efcbfe8"},
-    {file = "pyobjc_framework_Quartz-8.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:0464eca74eda6623db37c41edeb1d01327988f9b1cfbcb28a94c37e117c5cf93"},
-    {file = "pyobjc_framework_Quartz-8.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:656e692fe7ba3e411f86aabed790af80a4f967b676d1bc10de21432ba3626eb0"},
-    {file = "pyobjc_framework_Quartz-8.1-cp38-cp38-macosx_11_0_universal2.whl", hash = "sha256:1598578fdf8841a86957710b2c6c1832e35778f5a7a4359c924cd6b2562aab8a"},
-    {file = "pyobjc_framework_Quartz-8.1-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:e1e36960ff7cb6df68450fcee82d06cf3bd7add9a58b7cb006f8103d4b86e8e8"},
+    {file = "pyobjc-framework-Quartz-8.2.tar.gz", hash = "sha256:219d8797235bf071723f8b0f30a681de0b12875e2d04ae902a3a269f72de0b66"},
+    {file = "pyobjc_framework_Quartz-8.2-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:e5ab3117201a494b11bb1b80febf5dd288111a196b35731815b656ae30ee6ce3"},
+    {file = "pyobjc_framework_Quartz-8.2-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:4941b3039ab7bcf89cb4255c381358de2383c1ab45c9e00c3b64655f271a3b32"},
+    {file = "pyobjc_framework_Quartz-8.2-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:ab75a50dea84ec794641522d9f035fc6c19ec4eb37a56c9186b9943575fbc7ab"},
+    {file = "pyobjc_framework_Quartz-8.2-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:8cb687b20ebfc467034868b38945b573d1c50f237e379cf86c4f557c9766b759"},
+    {file = "pyobjc_framework_Quartz-8.2-cp38-cp38-macosx_11_0_universal2.whl", hash = "sha256:8b5c3ca1fef900fa66aafe82fff07bc352c60ea7dceed2bb9b5b1db0957b4fea"},
+    {file = "pyobjc_framework_Quartz-8.2-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:7bca7e649da77056348d71032def44e345043319d71b0c592197888d92e3eec1"},
 ]
 pyparsing = [
     {file = "pyparsing-3.0.7-py3-none-any.whl", hash = "sha256:a6c06a88f252e6c322f65faf8f418b16213b51bdfaece0524c1c1bc30c63c484"},
