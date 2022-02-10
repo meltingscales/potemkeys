@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-poetry run python -m potemkeys
+poetry run python3 -m potemkeys
 
 echo "Done."
