@@ -48,6 +48,23 @@
         //
       }
     },
+    "GG:S Hitbox": { //from https://www.hitboxarcade.com/blogs/hit-box/hit-box-button-layout
+      "keys": {
+        "A": "[←]   Left",
+        "S": "[↓]   Crouch",
+        "D": "[→]   Right",
+        "V": "[↑]   Jump",
+        //
+        "H": "[P]   Punch",
+        "U": "[S]   Slash",
+        "N": "[K]   Kick",
+        "J": "[HS]  HSlash",
+        "I": "[D]   Dust",
+        //custom keys for RC/PB
+        "X": "[PB]  Psych Burst",
+        "B": "[RC]  Roman Cancel",
+      },
+    },
     "GG:S Default": {
       "keys": {
         "W": "[↑]   Jump",
