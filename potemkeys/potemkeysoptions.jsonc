@@ -61,7 +61,7 @@
         "J": "[HS]  HSlash",
         "I": "[D]   Dust",
         //custom keys for RC/PB
-        "X": "[PB]  Psych Burst",
+        "R": "[PB]  Psych Burst",
         "B": "[RC]  Roman Cancel",
       },
     },
