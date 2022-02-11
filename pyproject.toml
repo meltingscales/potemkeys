@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "potemkeys"
-version = "1.0.3"
+version = "1.0.4"
 description = "Fighting games for goldfish with keyboards >:3c"
 authors = ["henryfbp <HenryFBP@gmail.com>"]
 readme = "README.md"
