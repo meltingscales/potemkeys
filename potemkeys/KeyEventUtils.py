@@ -18,8 +18,6 @@ def is_modifier_key(k: Key):
         return True
 
 
-
-
 class KeyEvent:
     def __init__(self) -> None:
         raise Exception("lol todo :p")
@@ -29,7 +27,8 @@ def prompt_choose_keymap(state) -> None:
     """Returns true if a user picks a keymap successfully."""
     print("Keymap is not chosen yet! Asking them to choose...")
 
-    state.add_message("[{:^10s}] Choose a keymap:".format(str(state.get_key())))
+    state.add_message(
+        "[{:^10s}] Choose a keymap:".format(str(state.get_key())))
     all_keymap_names = list(state.get_all_keymaps().keys())
 
     i = 0
@@ -51,11 +50,6 @@ def prompt_choose_keymap(state) -> None:
 
                 mi = 4
 
-                state.add_message("Current keymap:  {}".format(
-                    chosen_keymap_name
-                ), mi)
-                mi += 1
-
                 state.add_message("Valid keys:      {}".format(
                     ','.join(state.current_keymap_mapped_keys())
                 ), mi)
@@ -68,6 +62,11 @@ def prompt_choose_keymap(state) -> None:
 
                 state.add_message("Valid combos:    {}".format(
                     ','.join(state.current_keymap_mapped_combinations())
+                ), mi)
+                mi += 1
+
+                state.add_message("Current keymap:  {}".format(
+                    chosen_keymap_name
                 ), mi)
                 mi += 1
 
@@ -211,13 +210,12 @@ def process_key_combos(state: GlobalState):
     pass
 
 
-
 def should_quit(key, state):
     try:
-        if key == Key.__getitem__(state.quit_key):  # TODO is this a security risk? __getitem__ with user input?
+        # TODO is this a security risk? __getitem__ with user input?
+        if key == Key.__getitem__(state.quit_key):
             return True
     except KeyError:  # Means no key called state.quit_key exists...
         print("WARN:    quit_key '{}' is invalid".format(state.quit_key))
 
     return False
-
