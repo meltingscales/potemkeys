@@ -1,6 +1,6 @@
 [project]
 name = "potemkeys"
-version = "1.0.4"
+version = "1.0.5"
 description = "Fighting games for goldfish with keyboards >:3c"
 authors = [{name = "henryfbp", email = "HenryFBP@gmail.com"}]
 readme = "README.md"
