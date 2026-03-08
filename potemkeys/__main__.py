@@ -12,7 +12,7 @@ from pynput.keyboard import Listener
 from potemkeys import Config
 from potemkeys.GlobalState import GlobalState
 from potemkeys.KeyEventUtils import process_key_combos, format_chord_results, process_key_chords, \
-    process_key_press, prompt_choose_keymap, should_quit
+    process_key_press, prompt_choose_keymap, display_keymap_menu, should_quit
 from potemkeys.Utils import resource_path, window_always_on_top_x11, window_always_on_top_win32, is_windows
 
 OPTIONS_FILE = resource_path(Config.OPTIONS_FILE_NAME, prefer_adjacent_dir=True)
@@ -60,6 +60,9 @@ with open(OPTIONS_FILE, encoding='utf-8') as fh:
     GLOBAL_STATE = GlobalState(options=jsonobj, optionsJsonPath=Path(OPTIONS_FILE))
 
 GLOBAL_STATE.enforce_linux_x11_dependencies()
+
+# Show keymap selection menu immediately at startup
+display_keymap_menu(GLOBAL_STATE)
 
 
 # TODO: How long is this method taking? Probably CPU intensive...

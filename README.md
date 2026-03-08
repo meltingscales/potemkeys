@@ -56,7 +56,7 @@ If you want to know where the temp file is, look at the console output when the 
 
 ##  Development
 
-1.  Install Python version 3.whatever
+1.  Install [uv](https://docs.astral.sh/uv/getting-started/installation/)
 2.  Clone this repo
 3.  In the repo's folder, run:
 
@@ -71,7 +71,7 @@ If you want to know where the temp file is, look at the console output when the 
 
 ### Build WHL
 
-    poetry build
+    uv build
 
 #### Test built WHL
 
@@ -79,7 +79,7 @@ If you want to know where the temp file is, look at the console output when the 
 
 ### Deploy to PyPI
 
-    poetry publish --build
+    uv publish
 
 ### Testing exe generation
 

@@ -1,4 +1,4 @@
-poetry run python3 -m potemkeys
+uv run python3 -m potemkeys
 
 echo "Done."
 

@@ -23,18 +23,21 @@ class KeyEvent:
         raise Exception("lol todo :p")
 
 
+def display_keymap_menu(state) -> None:
+    """Populate the message log with the keymap selection menu."""
+    all_keymap_names = list(state.get_all_keymaps().keys())
+    state.add_message("Choose a keymap by pressing its number:", 0)
+    for i, keymapname in enumerate(all_keymap_names):
+        state.add_message("[{}]: {}".format(i, keymapname), i + 1)
+
+
 def prompt_choose_keymap(state) -> None:
-    """Returns true if a user picks a keymap successfully."""
+    """Try to select a keymap based on the current keypress; refresh the menu display."""
     print("Keymap is not chosen yet! Asking them to choose...")
 
-    state.add_message(
-        "[{:^10s}] Choose a keymap:".format(str(state.get_key())))
     all_keymap_names = list(state.get_all_keymaps().keys())
 
-    i = 0
-    for keymapname in all_keymap_names:
-        state.add_message("[{}]: {}".format(i, keymapname), i + 1)
-        i += 1
+    display_keymap_menu(state)
 
     if not is_modifier_key(state.get_key()):
         try:

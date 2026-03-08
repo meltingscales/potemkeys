@@ -1,1 +1,1 @@
-poetry run pyinstaller ./potemkeys.spec
+uv run pyinstaller ./potemkeys.spec

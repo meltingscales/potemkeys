@@ -10,12 +10,11 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
   platform='darwin'
 fi
 
-echo "Make sure poetry exists..."
+echo "Make sure uv exists..."
 
-which poetry
-# if exit code is nonzero, it is not a command.
-if [ "$?" -eq "1" ]; then
-  python3 -m pip install poetry
+if ! which uv > /dev/null 2>&1; then
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+  source "$HOME/.local/bin/env"
 fi
 
 if [[ $platform == 'linux' ]]; then
@@ -25,6 +24,4 @@ else
   echo "Not Linux, maybe OSX? Cannot install xdotool or wmctrl. Skipping."
 fi
 
-poetry install
-
-python3 -m poetry install
+uv sync --group dev

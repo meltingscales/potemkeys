@@ -1,5 +1,7 @@
-echo "Make sure poetry exists..."
-WHERE poetry
-IF %ERRORLEVEL% NEQ 0 python3 -m pip install poetry
+echo "Make sure uv exists..."
+WHERE uv
+IF %ERRORLEVEL% NEQ 0 (
+    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+)
 
-python3 -m poetry install
+uv sync --group dev

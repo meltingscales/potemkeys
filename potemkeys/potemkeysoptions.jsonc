@@ -6,13 +6,10 @@
   "title": "This app is for goldfish who can't remember buttons. Are you a goldfish? :3c",
   "default_messages": [
     [
-      "Welcome!"
+      "Welcome! Press a number key to select a keymap."
     ],
     [
       "Feel free to resize the window to hide these lower lines."
-    ],
-    [
-      "Also, press a non-numeric button to choose a keymap."
     ],
     [
       "By default, 'esc' key will quit."
