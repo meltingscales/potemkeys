@@ -11,8 +11,8 @@ from pynput.keyboard import Listener
 
 from potemkeys import Config
 from potemkeys.GlobalState import GlobalState
-from potemkeys.KeyEventUtils import process_key_combos, format_chord_results, process_key_chords, \
-    process_key_press, prompt_choose_keymap, display_keymap_menu, should_quit
+from potemkeys.KeyEventUtils import process_key_combos, format_combo_results, format_chord_results, \
+    process_key_chords, process_key_press, process_macros, prompt_choose_keymap, display_keymap_menu, should_quit
 from potemkeys.Utils import resource_path, window_always_on_top_x11, window_always_on_top_win32, is_windows
 
 OPTIONS_FILE = resource_path(Config.OPTIONS_FILE_NAME, prefer_adjacent_dir=True)
@@ -89,8 +89,20 @@ def on_press(_key: pynput.keyboard.Key, injected: bool = False):
     else:  # blank if no chord
         state.add_message("", 1)
 
-    # TODO handle key combos
+    # handle key combos
     matching_key_combos = process_key_combos(state)
+    combomsg = format_combo_results(matching_key_combos)
+    if combomsg:
+        state.add_message("Combo: " + combomsg, 2)
+    else:
+        state.add_message("", 2)
+
+    # handle macros
+    triggered_macros = process_macros(state)
+    if triggered_macros:
+        state.add_message("Macro: " + ', '.join(triggered_macros), 3)
+    else:
+        state.add_message("", 3)
 
 
 # noinspection PyUnusedLocal

@@ -97,8 +97,12 @@ class GlobalState:
     def current_keymap_mapped_combinations(self) -> List[str]:
         return list(self.current_keymap_combinations_map().keys())
 
+    def current_keymap_macros(self) -> list:
+        return self.keymap.get('macros', [])
+
     def chordResult_to_message(self, chordResult: List[KeyCode]) -> str:
-        key: str = ' '.join(x.char.upper() for x in chordResult)
+        from potemkeys.KeyEventUtils import get_key_str
+        key: str = ' '.join(get_key_str(x) for x in chordResult)
 
         return self.current_keymap_chords_map()[key]
 

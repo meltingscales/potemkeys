@@ -1,7 +1,6 @@
-- allow user to choose what game they're playing at startup
-- capture CTRL/ALT/etc
-- Improve underlaying key display data structure (i.e. extract specific fields from `{"U": "[HS] (p) foo [bar] "}`
-  - make a parser? :thonking:
-- allow users to perform macro inputs (i.e. press F1 to perform kara cancel pot buster or something)
-- https://python-poetry.org/
-  - https://python-poetry.org/docs/pyproject/#include-and-exclude
+- [x] allow user to choose what game they're playing at startup
+- [x] capture CTRL/ALT/etc
+- [x] Improve underlaying key display data structure (i.e. extract specific fields from `{"U": "[HS] (p) foo [bar] "}`)
+  - `parse_key_display()` in KeyEventUtils.py parses notation/modifier/description/category
+- [x] allow users to perform macro inputs (i.e. press F1 to perform kara cancel pot buster or something)
+- [x] https://python-poetry.org/ -> migrated to uv
