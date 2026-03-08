@@ -59,50 +59,9 @@ def window_always_on_top_win32(pygameinstance: pygame, x: int = 100, y: int = 20
     )
 
 
-def window_always_on_top_x11(xdotool_search=__file__):
-    print("searching with xdotool for class " + xdotool_search)
-
-    process = subprocess.Popen(
-        ['xdotool', 'search', '--class', xdotool_search],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE
-    )
-    stdout, stderr = process.communicate()
-    stdout = stdout.decode('utf-8')
-    stderr = stderr.decode('utf-8')
-
-    print(stdout)
-    print(stderr)
-
-    if stdout.strip() == '':
-        raise Exception(
-            f"Error, could not find a window ID for {xdotool_search}. Please create an issue at "
-            f"{Config.GIT_ISSUES_URL}"
-        )
-
-    # noinspection PyUnusedLocal
-    windowid = None
-    try:
-        windowid = int(stdout.strip())
-    except ValueError:
-        raise Exception(
-            "Error, was returned '{0}' from xdotool instead of an int!".format(stdout))
-
-    # do something with windowid...
-    print("Found window with ID {0}. Going to use wmctrl to make it on top.".format(
-        windowid))
-
-    # show info
-    process = subprocess.Popen(
-        ['xprop', '-id', str(windowid)],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE
-    )
-    stdout, stderr = process.communicate()
-    stdout = stdout.decode('utf-8')
-    stderr = stderr.decode('utf-8')
-    print(stdout)
-    print(stderr)
+def window_always_on_top_x11(pygameinstance: pygame):
+    windowid = pygameinstance.display.get_wm_info()['window']
+    print("Found window with ID {0}. Going to use wmctrl to make it on top.".format(windowid))
 
     process = subprocess.Popen(
         ['wmctrl', '-i', '-r', str(windowid), '-b', 'add,above'],
@@ -110,7 +69,5 @@ def window_always_on_top_x11(xdotool_search=__file__):
         stderr=subprocess.PIPE
     )
     stdout, stderr = process.communicate()
-    stdout = stdout.decode('utf-8')
-    stderr = stderr.decode('utf-8')
-    print(stdout)
-    print(stderr)
+    print(stdout.decode('utf-8'))
+    print(stderr.decode('utf-8'))

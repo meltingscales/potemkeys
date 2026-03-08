@@ -67,7 +67,8 @@ display_keymap_menu(GLOBAL_STATE)
 
 # TODO: How long is this method taking? Probably CPU intensive...
 #   We should come up with a parser for keypresses to avoid all these for loops.
-def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
+def on_press(_key: pynput.keyboard.Key, injected: bool = False):
+    state = GLOBAL_STATE
     state.press_key(_key)
 
     # halt if they haven't chosen a keymap
@@ -93,13 +94,14 @@ def on_press(_key: pynput.keyboard.Key, state: GlobalState = GLOBAL_STATE):
 
 
 # noinspection PyUnusedLocal
-def on_release(key, state=GLOBAL_STATE):
+def on_release(key, injected: bool = False):
+    state = GLOBAL_STATE
     state.release_key(key)
     print('{0} released'.format(key))
-    if should_quit(key, state):
+    if should_quit(key, GLOBAL_STATE):
         # Stop listener
         print("We want to quit!")
-        GLOBAL_STATE.running = False
+        state.running = False
         return False
 
 
@@ -133,7 +135,7 @@ if __name__ == '__main__':
                 y=int((screen_height / 2) - (window_height / 2))
             )
         else:
-            window_always_on_top_x11()
+            window_always_on_top_x11(pygame)
 
     # main game loop
     while GLOBAL_STATE.running:

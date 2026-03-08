@@ -19,7 +19,7 @@ fi
 
 if [[ $platform == 'linux' ]]; then
   echo "Making sure required tools are installed."
-  sudo apt-get install -y xdotool wmctrl
+  sudo apt-get install -y wmctrl
 else
   echo "Not Linux, maybe OSX? Cannot install xdotool or wmctrl. Skipping."
 fi

@@ -33,7 +33,6 @@ class GlobalState:
         self.running: bool = True
 
         self.required_linux_tools = {
-            'xdotool': 'apt install xdotool',
             'wmctrl': 'apt install wmctrl',
         }
 

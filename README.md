@@ -4,7 +4,7 @@
 
 ### [Windows, click here.](https://github.com/HenryFBP/potemkeys/releases/download/latest-windows/potemkeys.exe)
 
-### [Linux, click here.](https://github.com/HenryFBP/potemkeys/releases/download/latest-ubuntu/potemkeys) (must run `sudo apt-get install -y xdotool wmctrl`!)
+### [Linux, click here.](https://github.com/HenryFBP/potemkeys/releases/download/latest-ubuntu/potemkeys) (must run `sudo apt-get install -y wmctrl`!)
 
 ### Old name was FGfGwK
 
