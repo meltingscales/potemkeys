@@ -5,7 +5,7 @@ description = "Fighting games for goldfish with keyboards >:3c"
 authors = [{name = "henryfbp", email = "HenryFBP@gmail.com"}]
 readme = "README.md"
 keywords = ["pygame", "fighting-game", "tekken", "guilty-gear-strive"]
-requires-python = ">=3.8"
+requires-python = ">=3.8,<3.14"
 dependencies = [
     "json5>=0.9.6",
     "pygame>=2.1.2",

@@ -20,8 +20,9 @@ fi
 if [[ $platform == 'linux' ]]; then
   echo "Making sure required tools are installed."
   sudo apt-get install -y wmctrl
-else
-  echo "Not Linux, maybe OSX? Cannot install xdotool or wmctrl. Skipping."
+elif [[ $platform == 'darwin' ]]; then
+  echo "Making sure SDL2 is installed for pygame."
+  brew install sdl2 sdl2_image sdl2_mixer sdl2_ttf
 fi
 
 uv sync --group dev
