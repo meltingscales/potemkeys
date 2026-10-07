@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
-
-uv run python3 -m potemkeys
-
-echo "Done."
+set -euo pipefail
+uv run python -m potemkeys "$@"

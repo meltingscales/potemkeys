@@ -1,0 +1,55 @@
+name: build
+
+on:
+  push:
+    branches: ["master"]
+    tags-ignore: ["*"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --group dev
+      - run: uv run pytest
+
+  release:
+    needs: test
+    if: github.event_name == 'push'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            tag: latest-ubuntu
+            title: Development Build Ubuntu
+          - os: windows-latest
+            tag: latest-windows
+            title: Development Build Windows
+          - os: macos-latest
+            tag: latest-macos
+            title: Development Build macOS
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --group dev
+      - run: uv run pyinstaller potemkeys.spec
+      - run: ls dist/
+      # Move the rolling tag so the release page points at this commit.
+      - shell: bash
+        run: |
+          git tag -f "${{ matrix.tag }}"
+          git push -f origin "${{ matrix.tag }}"
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ matrix.tag }}
+          name: ${{ matrix.title }}
+          prerelease: true
+          files: |
+            dist/*
+            potemkeys/potemkeysoptions.jsonc

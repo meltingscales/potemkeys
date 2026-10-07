@@ -1,5 +1,3 @@
-uv run python3 -m potemkeys
-
-echo "Done."
-
+@echo off
+uv run python -m potemkeys %*
 PAUSE

@@ -1,40 +1,43 @@
 {
-  //json5 allows for comments :)
-  "center_text": false,
-  "quit_key": "esc",
-  //i.e. can be ctrl_l etc... Anything from this list -- https://github.com/moses-palmer/pynput/blob/master/lib/pynput/keyboard/_win32.py#L108
-  "title": "This app is for goldfish who can't remember buttons. Are you a goldfish? :3c",
-  "default_messages": [
-    [
-      "Welcome! Press a number key to select a keymap."
-    ],
-    [
-      "Feel free to resize the window to hide these lower lines."
-    ],
-    [
-      "By default, 'esc' key will quit."
-    ]
-  ],
-  "font_type": "Consolas",
-  "font_size": 24,
+  // potemkeys options. JSON5: comments and trailing commas are fine.
+  // Put a copy of this file next to the executable (or in the folder you run from) to override the bundled one.
+
+  "title": "potemkeys - button map for goldfish :3c",
+
+  // Key names: single characters ("A", ";"), modifiers ("CTRL", "SHIFT", "ALT"),
+  // or pynput Key names in caps ("ESC", "F1", "SPACE", "ENTER", "UP").
+  "quit_key": "ESC",
+  "menu_key": "F1",
+  // Start in this keymap instead of showing the menu. Also: `potemkeys --keymap "GG:S Default"`.
+  "default_keymap": null,
+
+  // Bundled font (has the arrow glyphs on every OS). Set to null to use font_type instead.
+  "font_file": "DejaVuSansMono.ttf",
+  // System font fallback, comma-separated; first installed wins.
+  "font_type": "dejavusansmono,consolas,menlo,monaco",
+  "font_size": 22,
   "font_margin": 4,
-  "window_always_on_top": true,
-  "icon_path": "pelleds.jpg",
   "window_width": 1000,
-  "window_height": 400,
-  "screen_width": 1920,
-  "screen_height": 1080,
-  "background_color": [
-    //R,G,B
-    20,
-    20,
-    20
-  ],
-  "text_color": [
-    255,
-    0,
-    0
-  ],
+  "window_height": 420,
+  "window_always_on_top": true,
+  "center_text": false,
+  "icon_path": "pelleds.jpg",
+
+  // R, G, B
+  "background_color": [20, 20, 20],
+  "text_color": [255, 0, 0],
+  "dim_color": [110, 110, 110],        // cheat sheet
+  "highlight_color": [255, 230, 0],    // held keys in the cheat sheet
+
+  // Show every key of the current keymap below the input lines, lighting up held keys.
+  "show_cheat_sheet": true,
+  // How many recent inputs to show on the "Input:" line.
+  "input_history_length": 10,
+  // Two taps count as a chord (e.g. "A A" = dash) only if this close together.
+  "chord_window_ms": 400,
+
+  // Keymap value format: "[notation] (modifier) description [category]".
+  // Only the description is required; "[notation]" is what shows in the input history.
   "keymaps": {
     "DEAD OR ALIVE 6": {
       "keys": {
@@ -42,10 +45,9 @@
         "A": "[←]   Left",
         "S": "[↓]   Crouch",
         "D": "[→]   Right",
-        //
       }
     },
-    "GG:S Hitbox": { //from https://www.hitboxarcade.com/blogs/hit-box/hit-box-button-layout
+    "GG:S Hitbox": { // from https://www.hitboxarcade.com/blogs/hit-box/hit-box-button-layout
       "keys": {
         "A": "[←]   Left",
         "S": "[↓]   Crouch",
@@ -57,7 +59,7 @@
         "N": "[K]   Kick",
         "J": "[HS]  HSlash",
         "I": "[D]   Dust",
-        //custom keys for RC/PB
+        // custom keys for RC/PB
         "R": "[PB]  Psych Burst",
         "B": "[RC]  Roman Cancel",
       },
@@ -75,37 +77,32 @@
         "K": "[HS]  HSlash",
         "O": "[D]   Dust"
       },
+      // Chords: keys tapped in sequence, within chord_window_ms of each other.
       "chords": {
-        //for testing key "chords", just taps
         "A A": "dash/backdash",
         "D D": "dash/backdash",
         "S W": "super jump"
       },
+      // Combinations: HOLD everything before the last key, then press the last key.
       "combinations": {
-        //key combos, you need to HOLD CTRL and then press X
-        //TODO NYI
-        "CTRL-X": "Cut (excel :P)",
         "S-K": "[2H]  Crouching Heavy Slash",
-        "S-P": "[2D]  Crouching Dust"
+        "S-O": "[2D]  Crouching Dust"
       },
+      // Macros spoof keyboard input when their trigger combination is pressed.
+      // inputs: space-separated keys and delays in seconds; "S+J" presses keys together.
       "macros": [
-        //these let you spoof keyboard inputs. TODO Not yet implemented.
         {
           "Kara Cancel Potemkin Buster (left facing)": {
             "inputs": "A 0.1 A S 0.1 S D 0.1 D 0.1 A 0.1 J 0.05 U",
-            //what key combo to press to trigger the keyboard input?
-            "trigger": {
-              "type": "combination",
-              "sequence": "ALT D"
-            },
+            "trigger": { "type": "combination", "sequence": "ALT D" },
           }
         }
       ]
     },
     "GG:S HenryFBP Custom (E+R=RC,PB)": {
+      // Copies everything from the named keymap, then applies the entries below.
       "inherit": "GG:S Default",
       "keys": {
-        // my custom keys below
         "E": "[RC]  Roman Cancel",
         "R": "[PB]  Psych Burst"
       }
@@ -128,32 +125,31 @@
         "C": "[LS]  L Stick Press",
         "N": "[RS]  R Stick Press",
         //
-        "U": "[1](X)    Left Punch",
-        "I": "[2](Y)    Right Punch",
-        "J": "[3](A)    Left Kick",
-        "K": "[4](B)    Right Kick"
+        "U": "[1] (X) Left Punch",
+        "I": "[2] (Y) Right Punch",
+        "J": "[3] (A) Left Kick",
+        "K": "[4] (B) Right Kick"
       }
     },
     "MELTY BLOOD: TYPE LUMINA Default": {
       "keys": {
-        "W": "[↑]       Jump",
-        "A": "[←]       Left",
-        "S": "[↓]       Crouch",
-        "D": "[→]       Right",
+        "W": "[↑]   Jump",
+        "A": "[←]   Left",
+        "S": "[↓]   Crouch",
+        "D": "[→]   Right",
         //
-        "U": "[A]   (x)     Weak",
-        "I": "[B]   (y)     Medium",
-        "O": "[C]   (b)     Strong",
-        "J": "[D]   (a)     Shield",
+        "U": "[A]   (x)  Weak",
+        "I": "[B]   (y)  Medium",
+        "O": "[C]   (b)  Strong",
+        "J": "[D]   (a)  Shield",
         //
-        ";": "[BC]  (RB)    B+C",
-        "L": "[AD]  (LB)    A+D",
-        ":": "[AB]  (RT)    A+B",
-        "K": "[ABC] (LT)    A+B+C",
+        ";": "[BC]  (RB) B+C",
+        "L": "[AD]  (LB) A+D",
+        ":": "[AB]  (RT) A+B",
+        "K": "[ABC] (LT) A+B+C",
         //
         "T": "Start",
         "R": "Restart"
-        //
       }
     }
   }

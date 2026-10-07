@@ -3,8 +3,8 @@ default: run
 setup:
     ./scripts/setup.sh
 
-run:
-    uv run python3 -m potemkeys
+run *ARGS:
+    uv run python -m potemkeys {{ARGS}}
 
 test:
     uv run pytest
@@ -19,4 +19,5 @@ publish:
     uv publish
 
 clean:
-    rm -rf dist/ build/ __pycache__ .pytest_cache
+    rm -rf dist/ build/ .pytest_cache
+    find . -name __pycache__ -type d -prune -exec rm -rf {} +

@@ -1,5 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-# can run `pipenv run pyinstaller potemkeys.spec` to generate exe.
+# Build with: uv run pyinstaller potemkeys.spec
 
 from PyInstaller.building.api import PYZ, EXE
 from PyInstaller.building.build_main import Analysis
@@ -10,6 +10,7 @@ block_cipher = None
 added_files = [
     ('potemkeys/potemkeysoptions.jsonc', './'),
     ('potemkeys/pelleds.jpg', './'),
+    ('potemkeys/DejaVuSansMono.ttf', './'),
     ('LICENSE', './'),
     ('README.md', './'),
 ]

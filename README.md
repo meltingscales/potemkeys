@@ -1,109 +1,82 @@
-# Potemkeys: Previously "FGfGwK: Fighting Games for Goldfish with Keyboards"
+# potemkeys
 
-## TL;DR Download!
+On-screen keyboard-to-controller button map for fighting games, for goldfish who can't
+remember which key is Heavy Slash. Stays on top of your (borderless/windowed) game and shows:
 
-### [Windows, click here.](https://github.com/HenryFBP/potemkeys/releases/download/latest-windows/potemkeys.exe)
+- the key you just pressed and what it maps to, plus a strip of your recent inputs
+- chords (`A A` = dash), combinations (hold `S`, press `K` = `2H`) and macros
+- a cheat sheet of the whole keymap, with held keys lit up
 
-### [Linux, click here.](https://github.com/HenryFBP/potemkeys/releases/download/latest-ubuntu/potemkeys) (must run `sudo apt-get install -y wmctrl`!)
+![Playing](/media/screenshot1.png)
 
-### Old name was FGfGwK
+![Keymap menu](/media/screenshot2.png)
 
-This used to be called "FGfGwK", "Fighting games for Goldfish with Keyboards" (Can't remember button maps).
+Name: Potemkin (Guilty Gear) + keys. Formerly "FGfGwK: Fighting Games for Goldfish with Keyboards".
 
-Name is inspired by Potemkin from Guilty Gear Strive - "potemkeys" (Potemkin from Guilty Gear + "keys")
+## Download
 
-### PyPI
+- [Windows](https://github.com/HenryFBP/potemkeys/releases/download/latest-windows/potemkeys.exe)
+- [Linux](https://github.com/HenryFBP/potemkeys/releases/download/latest-ubuntu/potemkeys)
+- [macOS](https://github.com/HenryFBP/potemkeys/releases/download/latest-macos/potemkeys)
+- PyPI: `pip install --upgrade potemkeys` then `potemkeys` (or `python -m potemkeys`)
 
--   <https://pypi.org/project/potemkeys/>
+All builds: <https://github.com/HenryFBP/potemkeys/releases>
 
-### Using pip
+## Usage
 
-    pip install --upgrade potemkeys
-    python -m potemkeys
+1. Run it. Pick a keymap by pressing its number/letter.
+2. Play your game in borderless or windowed mode. The window stays on top.
+3. `F1` goes back to the keymap menu, `ESC` quits (both configurable).
 
-[![forthebadge](https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](https://forthebadge.com)
+```
+potemkeys --keymap "GG:S Default"   # skip the menu
+potemkeys --list-keymaps
+potemkeys --config path/to/potemkeysoptions.jsonc
+```
 
-[![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com)
-
-[![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)
-
-[![forthebadge](https://forthebadge.com/images/badges/compatibility-club-penguin.svg)](https://forthebadge.com)
-
-![A picture of the application.](/media/screenshot1.png)
-
-![Another picture of the application.](/media/screenshot2.png)
-
-## What is this?
-
-For those who can't remember {keyboard input => controller} mappings, and want to see them in-game.
-
-Created because TEKKEN doesn't show input conversions in multiplayer matches, and neither does Guilty Gear: Strive, 
-and I wanted to see my inputs, so I wasted 6 hours writing this tool.
-
-Works on Windows 11, and tested on Ubuntu.
-
-## This tool sucks, it doesn't do X!
-
-See [./TODO.md](./TODO.md). Or fork this repo and add it yourself, and make a Pull Request, I'll probably accept your changes.
-
-## How do I use it?
-
-See <https://github.com/HenryFBP/potemkeys/releases> and download the provided exe/binary file.
- 
-If you put `potemkeysoptions.jsonc` in the same folder as the EXE file, it will prefer that over its temporary directory.
-
-If you want to know where the temp file is, look at the console output when the .exe first starts up.
-
-##  Development
-
-1.  Install [uv](https://docs.astral.sh/uv/getting-started/installation/)
-2.  Clone this repo
-3.  In the repo's folder, run:
-
-    ```
-    ./scripts/setup[.cmd|.sh]
-    ./scripts/start[.cmd|.sh]
-    ```
-
-4.  The window should stay on top.
-
-    ***Play your game in borderless/windowed mode*** and see the inputs get transformed and shown to you.
-
-### Build WHL
-
-    uv build
-
-#### Test built WHL
-
-    pip install .\dist\potemkeys-whatever-version-1.2.3.4.5-py3-none-any.whl --force-reinstall
-
-### Deploy to PyPI
-
-    uv publish
-
-### Testing exe generation
-
-    ./scripts/generate_exe[.cmd|.sh]
-    ./dist/potemkeys[.exe|.app]
+Linux note: on Wayland sessions neither SDL nor anything else can force always-on-top; run under
+XWayland or pin the window from your compositor.
 
 ## Config
 
-Edit [`potemkeysoptions.jsonc`](/potemkeys/potemkeysoptions.jsonc).
+Everything lives in [`potemkeysoptions.jsonc`](/potemkeys/potemkeysoptions.jsonc) (JSON5, comments allowed).
+The app looks for it in the current directory, then next to the executable, then falls back to the bundled copy.
+Drop a copy next to the `.exe` to customize.
 
-You can make keymaps for literally any game that uses keyboard, by cloning the items under `keymaps`.
+A keymap:
 
-If you make one and want to see it included in the "official" branch of this tool, just fork this repo and make a PR.
+```jsonc
+"GG:S Default": {
+  "keys": {
+    "A": "[←]   Left",
+    "K": "[HS]  HSlash",          // "[notation] (modifier) description [category]"
+  },
+  "chords": { "A A": "dash" },                       // taps in sequence, within chord_window_ms
+  "combinations": { "S-K": "[2H] Crouching HS" },    // hold S, press K
+  "macros": [
+    { "Buster": { "inputs": "A 0.1 A S+J", "trigger": "ALT D" } }  // keys, delays in seconds, S+J together
+  ]
+},
+"My GG:S": { "inherit": "GG:S Default", "keys": { "E": "[RC] Roman Cancel" } }
+```
+
+Key names are single characters (`A`, `;`) or pynput key names in caps (`CTRL`, `ALT`, `F1`, `SPACE`).
+Made a keymap for another game? Open a PR.
+
+## Development
+
+```
+./scripts/setup.sh      # installs uv, syncs deps   (setup.cmd on Windows)
+just run                # or: uv run python -m potemkeys
+just test
+just exe                # PyInstaller build into dist/
+uv build && uv publish  # PyPI
+```
+
+Code layout: `keymap.py` (keymap model + matching), `engine.py` (input state, display lines),
+`keys.py` (pynput adapter + macro playback), `app.py` (pygame window), `config.py` (options file).
+Everything except `keys.py`/`app.py` is pure Python and unit tested.
 
 ## License
 
 No license, DWYW, I'm not your dad.
-
-Just make sure to link/PR, or just fork it if I die or something :P
-
-## VIRUSES????
-
-https://www.reddit.com/r/learnpython/comments/e99bhe/why_does_pyinstaller_trigger_windows_defender
-
-### REEEEEEEEEEEEEEE
-
-https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/ms537361(v=vs.85)?redirectedfrom=MSDN
